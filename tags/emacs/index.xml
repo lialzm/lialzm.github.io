@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>emacs on lialzm的博客</title>
+    <link>https://lialzm.github.io/tags/emacs/</link>
+    <description>Recent content in emacs on lialzm的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 05 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用emacs&#43;hugo写博客</title>
+      <link>https://lialzm.github.io/post/hugo%E5%92%8Cemacs%E7%BB%93%E5%90%88/</link>
+      <pubDate>Tue, 05 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/hugo%E5%92%8Cemacs%E7%BB%93%E5%90%88/</guid>
+      <description>以前一直使用的是hexo,但是随着开始使用emacs,就想使用org mode来管理博客,正好emacs有个ox-hugo的插件可以比较方便的</description>
+    </item>
+    
+  </channel>
+</rss>

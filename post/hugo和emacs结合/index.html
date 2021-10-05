@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>使用hexo在github上搭建博客 - lialzm的博客</title>
+  <title>使用emacs&#43;hugo写博客 - lialzm的博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="lialzm" /><meta name="description" content="安装 1 2 hexo init npm install hexo-deployer-git --save 安装hexo-cli 1 npm install -g hexo-cli 安装教程 常用命令 hexo的命令都需要在部署hexo的文件夹下执行 1 2 3 4 5 hexo new &amp;lt;title&amp;gt; #创建文件" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="lialzm" /><meta name="description" content="以前一直使用的是hexo,但是随着开始使用emacs,就想使用org mode来管理博客,正好emacs有个ox-hugo的插件可以比较方便的" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
-<link rel="canonical" href="https://lialzm.github.io/post/hexo%E4%BD%BF%E7%94%A8%E7%BB%8F%E9%AA%8C/" />
+<link rel="canonical" href="https://lialzm.github.io/post/hugo%E5%92%8Cemacs%E7%BB%93%E5%90%88/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,20 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="使用hexo在github上搭建博客" />
-<meta property="og:description" content="安装 1 2 hexo init npm install hexo-deployer-git --save 安装hexo-cli 1 npm install -g hexo-cli 安装教程 常用命令 hexo的命令都需要在部署hexo的文件夹下执行 1 2 3 4 5 hexo new &lt;title&gt; #创建文件" />
+<meta property="og:title" content="使用emacs&#43;hugo写博客" />
+<meta property="og:description" content="以前一直使用的是hexo,但是随着开始使用emacs,就想使用org mode来管理博客,正好emacs有个ox-hugo的插件可以比较方便的" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lialzm.github.io/post/hexo%E4%BD%BF%E7%94%A8%E7%BB%8F%E9%AA%8C/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://lialzm.github.io/post/hugo%E5%92%8Cemacs%E7%BB%93%E5%90%88/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-10-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-10-05T20:41:50+08:00" />
+<meta property="article:modified_time" content="2021-10-05T21:13:32+08:00" />
 
-<meta itemprop="name" content="使用hexo在github上搭建博客">
-<meta itemprop="description" content="安装 1 2 hexo init npm install hexo-deployer-git --save 安装hexo-cli 1 npm install -g hexo-cli 安装教程 常用命令 hexo的命令都需要在部署hexo的文件夹下执行 1 2 3 4 5 hexo new &lt;title&gt; #创建文件"><meta itemprop="datePublished" content="2021-10-05T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-10-05T20:41:50+08:00" />
-<meta itemprop="wordCount" content="372">
+<meta itemprop="name" content="使用emacs&#43;hugo写博客">
+<meta itemprop="description" content="以前一直使用的是hexo,但是随着开始使用emacs,就想使用org mode来管理博客,正好emacs有个ox-hugo的插件可以比较方便的"><meta itemprop="datePublished" content="2021-10-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-10-05T21:13:32+08:00" />
+<meta itemprop="wordCount" content="720">
 <meta itemprop="keywords" content="开发工具," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="使用hexo在github上搭建博客"/>
-<meta name="twitter:description" content="安装 1 2 hexo init npm install hexo-deployer-git --save 安装hexo-cli 1 npm install -g hexo-cli 安装教程 常用命令 hexo的命令都需要在部署hexo的文件夹下执行 1 2 3 4 5 hexo new &lt;title&gt; #创建文件"/>
+<meta name="twitter:title" content="使用emacs&#43;hugo写博客"/>
+<meta name="twitter:description" content="以前一直使用的是hexo,但是随着开始使用emacs,就想使用org mode来管理博客,正好emacs有个ox-hugo的插件可以比较方便的"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -125,7 +125,7 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">使用hexo在github上搭建博客</h1>
+      <h1 class="post-title">使用emacs&#43;hugo写博客</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2021-10-05 </span>
@@ -141,15 +141,10 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#安装">安装</a></li>
-        <li><a href="#常用命令">常用命令</a></li>
-        <li><a href="#配置域名">配置域名</a></li>
-        <li><a href="#配置主题">配置主题</a></li>
-        <li><a href="#配置域名">配置域名</a></li>
-        <li><a href="#github和coding分流">github和coding分流</a></li>
-        <li><a href="#seo优化">seo优化</a></li>
-        <li><a href="#重装">重装</a></li>
-        <li><a href="#异常排查">异常排查</a></li>
+        <li><a href="#相关工具介绍">相关工具介绍</a></li>
+        <li><a href="#hugo相关配置">hugo相关配置</a></li>
+        <li><a href="#emacs相关配置">emacs相关配置</a></li>
+        <li><a href="#github相关配置">github相关配置</a></li>
         <li><a href="#参考资料">参考资料</a></li>
       </ul>
     </li>
@@ -158,29 +153,33 @@
   </div>
 </div>
     <div class="post-content">
-      <h2 id="安装">安装</h2>
+      <p>以前一直使用的是hexo,但是随着开始使用emacs,就想使用org mode来管理博客,正好emacs有个ox-hugo的插件可以比较方便的和hugo结合</p>
+<h2 id="相关工具介绍">相关工具介绍</h2>
+<p>hugo: Hugo是由Go语言实现的静态网站生成器</p>
+<p>ox-hugo: emacs插件,用于将org导出为hugo可以识别的md文件</p>
+<p><a href="https://github.com/kaushalmodi/ox-hugo">https://github.com/kaushalmodi/ox-hugo</a></p>
+<p>easy-hugo: 用于管理 Hugo 的 Emacs  major mode</p>
+<p><a href="https://github.com/masasam/emacs-easy-hugo">https://github.com/masasam/emacs-easy-hugo</a></p>
+<h2 id="hugo相关配置">hugo相关配置</h2>
+<ul>
+<li>
+<p>安装hugo
+hugo的安装比较简单,可以参考官网的示例,直接下载二进制既可
+<a href="https://www.gohugo.org/">Hugo中文文档</a></p>
+</li>
+<li>
+<p>创建博客目录</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">    hexo init
-    npm install hexo-deployer-git --save
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">    # 博客项目的名字为myblog
+    hugo new site myblog
 </code></pre></td></tr></table>
 </div>
-</div><p>安装hexo-cli</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">    npm install -g hexo-cli
-</code></pre></td></tr></table>
-</div>
-</div><p><a href="https://www.jianshu.com/p/84a8384be1ae">安装教程</a></p>
-<h2 id="常用命令">常用命令</h2>
-<p>hexo的命令都需要在部署hexo的文件夹下执行</p>
+</div><p>目录结构如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -188,31 +187,151 @@
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">    hexo new &lt;title&gt; <span class="c1">#创建文件</span>
-    hexo g <span class="c1">#编译为静态文件</span>
-    hexo d <span class="c1"># 部署</span>
-    hexo d -g <span class="c1">#编译并部署</span>
-    hexo s <span class="c1">#启动本地预览模式(实时变更内容)</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> ├── archetypes
+ │   └── default.md
+ ├── config.toml         # 博客站点的配置文件
+ ├── content             # 博客文章所在目录
+ ├── data
+ ├── layouts             # 网站布局
+ ├── static              # 一些静态内容
+ └── themes              # 博客主题
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="配置域名">配置域名</h2>
-<p>在public目录创建CNAME文件并写入域名,然后执行 <code>hexo d</code></p>
-<h2 id="配置主题">配置主题</h2>
-<p>配置百度统计 <a href="https://www.jianshu.com/p/6eb068a68b17">https://www.jianshu.com/p/6eb068a68b17</a></p>
-<h2 id="配置域名">配置域名</h2>
-<p><a href="https://www.jianshu.com/p/cea41e5c9b2a">【10】个性化博客&mdash;&mdash;域名绑定 -简书</a></p>
-<h2 id="github和coding分流">github和coding分流</h2>
-<p><a href="http://www.franktly.com/2016/07/05/Hexo%E5%90%8C%E6%97%B6%E9%83%A8%E7%BD%B2%E5%9C%A8Coding%E5%92%8CGitHub%E4%B8%8A%E5%B9%B6%E4%BD%BF%E7%94%A8DNSPod%E5%88%86%E6%B5%81/">http://www.franktly.com/2016/07/05/Hexo%E5%90%8C%E6%97%B6%E9%83%A8%E7%BD%B2%E5%9C%A8Coding%E5%92%8CGitHub%E4%B8%8A%E5%B9%B6%E4%BD%BF%E7%94%A8DNSPod%E5%88%86%E6%B5%81/</a></p>
-<h2 id="seo优化">seo优化</h2>
-<p>提交到谷歌(Search Console),校验方法使用*HTML标记*</p>
-<h2 id="重装">重装</h2>
-<p>只要用原电脑的scaffolds, source, themes 和 \_config.yml替换新生成的文件</p>
-<h2 id="异常排查">异常排查</h2>
-<p>使用<a href="http://www.yamllint.com/">http://www.yamllint.com/</a> 校验yaml 格式是否正确</p>
+</div></li>
+<li>
+<p>创建一个测试文章</p>
+<p>hugo new post/my-first-post.md</p>
+</li>
+<li>
+<p>运行本地预览</p>
+<p>hugo server</p>
+<p>浏览器里打开： <a href="http://localhost:1313">http://localhost:1313</a></p>
+</li>
+<li>
+<p>设置主题</p>
+<p>git clone <a href="https://github.com/olOwOlo/hugo-theme-even">https://github.com/olOwOlo/hugo-theme-even</a> themes/even</p>
+<p>cp themes/even/exampleSite/config.toml .</p>
+</li>
+</ul>
+<h2 id="emacs相关配置">emacs相关配置</h2>
+<ul>
+<li>
+<p>安装相关插件后配置变量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">    (setq org-hugo-base-dir &#34;~/blog&#34;)
+    (setq easy-hugo-basedir &#34;~/blog/&#34;)
+    (setq easy-hugo-postdir &#34;content/post&#34;)
+    (setq org-hugo-section &#34;post&#34;)
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<!--listend-->
+<ul>
+<li>
+<p>尝试在emacs里导出org</p>
+<p>使用 <code>org-export-hugo-to-md</code> 命令,可以看到post目录下面新生成了一个md文件</p>
+</li>
+</ul>
+<h2 id="github相关配置">github相关配置</h2>
+<p>在github下面创建一个名称为 <code>&lt;帐号名称&gt;.github.io</code> 的仓库</p>
+<p>在本地blog文件夹下面的public目录设置关联</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">  git init .
+  git remote add origin &lt;git地址&gt;
+  git add .
+  git push
+</code></pre></td></tr></table>
+</div>
+</div><p>使用浏览器打开 <code>&lt;帐号名称&gt;.github.io</code> 是否成功</p>
+<ul>
+<li>
+<p>在blog目录下面创建deploy.sh脚本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">    #!/bin/sh
+
+    # If a command fails then the deploy stops
+    set -e
+
+    printf &#34;\033[0;32mDeploying updates to GitHub...\033[0m\n&#34;
+
+    # Build the project.
+    hugo -D
+
+    # Go To Public folder
+    cd public
+
+    # Add changes to git.
+    git add .
+
+    # Commit changes.
+    msg=&#34;rebuilding site $(date)&#34;
+    if [ -n &#34;$*&#34; ]; then
+            msg=&#34;$*&#34;
+    fi
+    git commit -m &#34;$msg&#34;
+
+    # Push source and build repos.
+    git push
+
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>使用easy-hugo发布</p>
+<p>命令 <code>easy-hugo-github-deploy</code></p>
+</li>
+</ul>
 <h2 id="参考资料">参考资料</h2>
-<p><a href="http://tengj.top/2016/03/14/hexo6seo/">hexo干货系列：（六）hexo提交搜索引擎（百度+谷歌）| 嘟嘟独立博客</a></p>
+<p><a href="https://www.xianmin.org/post/ox-hugo/#%E8%87%AA%E9%97%AE%E8%87%AA%E7%AD%94">博客写作流程之工具篇： emacs, orgmode, hugo &amp; ox-hugo - 贤民的比特记忆</a></p>
 
     </div>
 
@@ -236,13 +355,9 @@
           <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/hugo%E5%92%8Cemacs%E7%BB%93%E5%90%88/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">使用emacs&#43;hugo写博客</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/">
-            <span class="next-text nav-default">数据仓库概念介绍</span>
+        
+        <a class="next" href="/post/hexo%E4%BD%BF%E7%94%A8%E7%BB%8F%E9%AA%8C/">
+            <span class="next-text nav-default">使用hexo在github上搭建博客</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

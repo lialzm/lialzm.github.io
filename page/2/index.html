@@ -122,6 +122,25 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java%E5%A6%82%E4%BD%95%E6%8E%92%E6%9F%A5%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA/">java如何排查内存溢出</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-06-08 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      OOM前排查 使用jmap导出当前堆dump进行离线分析 测试代码 1 2 3 4 5 6 7 8 9 10 11 12 public class MyTest { private static List&lt;String&gt; list=new ArrayList&lt;&gt;(); public static void main(String[] args) throws InterruptedException { for (int i=0;i&lt;1000;i++){ list.add(&#34;111&#34;); } TimeUnit.SECONDS.sleep(60); } } 实时
+    </div>
+    <div class="read-more">
+      <a href="/post/java%E5%A6%82%E4%BD%95%E6%8E%92%E6%9F%A5%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/java%E5%B9%B6%E5%8F%91synchronized%E5%85%B3%E9%94%AE%E5%AD%97/">java并发(Synchronized关键字)</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2018-05-19 </span>
@@ -192,25 +211,6 @@
     </div>
     <div class="read-more">
       <a href="/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">线程的基本使用</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-04-06 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      线程的创建 java创建线程有两种方法​​ 创建Thread的子类 public class MyThread extends Thread { public void run(){ System.out.println(&quot;MyThread running&quot;); } } ​MyThread myThread = new MyThread(); myTread.start(); 实现Runnable接口
-    </div>
-    <div class="read-more">
-      <a href="/post/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

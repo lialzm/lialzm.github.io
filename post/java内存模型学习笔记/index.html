@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java内存模型学习笔记 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="olOwOlo" /><meta name="description" content="什么是JMM JMM(java内存模型)源于物理机器CPU架构的内存模型，最初用于解决MP(多处理器架构)系统中的缓存一致性问题 JMM可以分为" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://lialzm.github.io/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java内存模型学习笔记" />
+<meta property="og:description" content="什么是JMM JMM(java内存模型)源于物理机器CPU架构的内存模型，最初用于解决MP(多处理器架构)系统中的缓存一致性问题 JMM可以分为" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lialzm.github.io/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-04-06T22:30:00+00:00" />
+<meta property="article:modified_time" content="2018-04-06T22:30:00+00:00" />
+
+<meta itemprop="name" content="Java内存模型学习笔记">
+<meta itemprop="description" content="什么是JMM JMM(java内存模型)源于物理机器CPU架构的内存模型，最初用于解决MP(多处理器架构)系统中的缓存一致性问题 JMM可以分为"><meta itemprop="datePublished" content="2018-04-06T22:30:00+00:00" />
+<meta itemprop="dateModified" content="2018-04-06T22:30:00+00:00" />
+<meta itemprop="wordCount" content="2879">
+<meta itemprop="keywords" content="java,并发," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java内存模型学习笔记"/>
+<meta name="twitter:description" content="什么是JMM JMM(java内存模型)源于物理机器CPU架构的内存模型，最初用于解决MP(多处理器架构)系统中的缓存一致性问题 JMM可以分为"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java内存模型学习笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-04-06 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#什么是jmm">什么是JMM</a></li>
+        <li><a href="#物理内存架构">物理内存架构</a></li>
+        <li><a href="#jmm和jvm内存模型的关系">JMM和JVM内存模型的关系</a></li>
+        <li><a href="#内存间交互操作">内存间交互操作</a></li>
+        <li><a href="#重排序">重排序</a>
+          <ul>
+            <li><a href="#编译期重排序">编译期重排序</a></li>
+            <li><a href="#运行时重排序">运行时重排序</a></li>
+            <li><a href="#as-if-serial语义">as-if-serial语义</a></li>
+            <li><a href="#happens-before先行发生法则">happens-before(先行发生)法则</a></li>
+          </ul>
+        </li>
+        <li><a href="#可见性问题和有序性问题">可见性问题和有序性问题</a>
+          <ul>
+            <li><a href="#重排序和多线程">重排序和多线程</a></li>
+            <li><a href="#多线程可见性问题">多线程可见性问题</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="什么是jmm">什么是JMM</h2>
+<blockquote>
+<p>JMM(java内存模型)源于物理机器CPU架构的内存模型，最初用于解决MP(多处理器架构)系统中的缓存一致性问题</p>
+</blockquote>
+<p>JMM可以分为工作内存和主内存</p>
+<p>JMM规定了所有的变量(此处变量特指实例变量,静态变量等，但不包括局部变量和函数参数，因为这两种是线程私有)都存储在主内存中，此处的主内存仅仅是虚拟机内存的一部分，而虚拟机内存也仅仅是计算机物理内存的一部分（为虚拟机进程分配的那一部分）
+每条线程还有自己的工作内存，<strong>线程的工作内存中保存了被该线程使用到的变量的主内存副本拷贝。线程对变量的所有操作（读取、赋值），都必须在工作内存中进行，而不能直接读写主内存中的变量,这是造成线程安全的主要原因</strong>。不同线程之间也无法直接访问对方工作内存中的变量，线程间变量值的传递均需要通过主内存来完成，线程、主内存、工作内存三者之间的交互关系如下图</p>
+<h2 id="物理内存架构">物理内存架构</h2>
+<p><img src="http://7fvicu.com1.z0.glb.clouddn.com/1522741028664.png" alt="内存架构"></p>
+<p>Java内存模型和硬件内存体系结构是不同的。 硬件内存体系结构不区分线程堆栈和堆。 在硬件上，线程堆栈和堆都位于主内存中。 部分线程堆栈和堆有时可能存在于CPU高速缓存和内部CPU寄存器中</p>
+<h2 id="jmm和jvm内存模型的关系">JMM和JVM内存模型的关系</h2>
+<p>关系不大,是两个概念,JMM用于解决MP(多处理器架构)系统中的缓存一致性问题，
+而JVM为了屏蔽各个硬件平台和操作系统对内存访问机制的差异化，提出了JMM的概念。</p>
+<p>在java内存模型中，有方法区，堆等概念，比如只要放实例对象的地方就叫堆
+而在JMM中，所有变量都放在主内存中
+他们都是虚构的，都对应了<strong>物理内存架构</strong>中的某一部分</p>
+<h2 id="内存间交互操作">内存间交互操作</h2>
+<ul>
+<li>锁定(lock):作用于主内存变量，把一个变量标识为一条线程独占状态。</li>
+<li>解锁(unlock):作用于主内存变量，把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定。</li>
+<li>读取(read):一个变量值从主内存传输到线程的工作内存中</li>
+<li>载入(load):将从主内存得到的变量值放到工作内存的变量副本中</li>
+<li>使用(use):把工作内存中的一个变量值传递给执行引擎，每当虚拟机遇到一个需要使用变量的值的字节码指令时将会执行这个操作</li>
+<li>赋值(assign):它把一个从执行引擎接收到的值赋值给工作内存的变量，每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作</li>
+<li>存储(store):作用于工作内存的变量，把工作内存中的一个变量的值传送到主内存中，以便随后的write的操作</li>
+<li>写入(write):作用于主内存的变量，它把store操作从工作内存中一个变量的值传送到主内存的变量中</li>
+</ul>
+<p><img src="http://7fvicu.com1.z0.glb.clouddn.com/2018-03-23-033431.png" alt="交互关系"></p>
+<h2 id="重排序">重排序</h2>
+<p>通常我们假设程序的执行是按照编码顺序依次执行,这种模型被称作顺序一致性模型,但是现代多处理器架构没有使用这个模型,而是引入了重排序的概念</p>
+<p>什么是重排序?</p>
+<p>重排序通常是编译器或运行时环境为了优化程序性能而采取的对指令进行重新排序执行的一种手段。</p>
+<p>重排序分为两类：编译期重排序和运行期重排序(包括指令级并行的重排序和内存系统重排序)，分别对应编译时和运行时环境。</p>
+<p>主要规则</p>
+<table>
+<thead>
+<tr>
+<th>能否重排序</th>
+<th>第二个操作</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一个操作</td>
+<td>Normal Load,Normal Store</td>
+<td>Volatile load,MonitorEnter</td>
+<td>Volatile store,MonitorExit</td>
+</tr>
+<tr>
+<td>Normal Load,Normal Store</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td>Volatile load,MonitorEnter</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>Volatile store,MonitorExit</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Normal Load指令包括：对非volatile字段的读取，getfield，getstatic和array load；</li>
+<li>Normal Store指令包括：对非volatile字段的存储，putfield，putstatic和array store；</li>
+<li>Volatile load指令包括：对多线程环境的volatile变量的读取，getfield，getstatic；</li>
+<li>Volatile store指令包括：对多线程环境的volatile变量的存储，putfield，putstatic；</li>
+<li>MonitorEnters指令（包括进入同步块synchronized方法）是用于多线程环境的锁对象；</li>
+<li>MonitorExits指令（包括离开同步块synchronized方法）是用于多线程环境的锁对象</li>
+</ul>
+<h3 id="编译期重排序">编译期重排序</h3>
+<p>编译期重排序的典型就是通过调整指令顺序，在不改变程序语义的前提下，尽可能减少<a href="https://zh.wikipedia.org/wiki/%E5%AF%84%E5%AD%98%E5%99%A8">寄存器</a>的读取、存储次数，充分复用寄存器的存储值</p>
+<h3 id="运行时重排序">运行时重排序</h3>
+<p>现代CPU几乎都采用流水线机制加快指令的处理速度，一般来说，一条指令需要若干个CPU时钟周期处理，而通过流水线并行执行，可以在同等的时钟周期内执行若干条指令，具体做法简单地说就是把指令分为不同的执行周期，例如读取、寻址、解析、执行等步骤，并放在不同的元件中处理，同时在执行单元EU中，功能单元被分为不同的元件，例如加法元件、乘法元件、加载元件、存储元件等，可以进一步实现不同的计算并行执行。</p>
+<h3 id="as-if-serial语义">as-if-serial语义</h3>
+<p>as-if-serial语义的意思是，所有的操作均可以为了优化而被重排序，但是你必须要保证重排序后<strong>执行的结果不能被改变</strong>，编译器、runtime、处理器都必须遵守as-if-serial语义。注意as-if-serial只保证单线程环境，多线程环境下无效。</p>
+<h3 id="happens-before先行发生法则">happens-before(先行发生)法则</h3>
+<ol>
+<li>程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作；</li>
+<li>锁定规则：一个unLock操作先行发生于后面对同一个锁的lock操作；</li>
+<li>volatile变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作；</li>
+<li>传递规则：如果操作A先行发生于操作B，而操作B又先行发生于操作C，则可以得出操作A先行发生于操作C；</li>
+<li>线程启动规则：Thread对象的start()方法先行发生于此线程的每个一个动作；</li>
+<li>线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生；</li>
+<li>线程终结规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值手段检测到线程已经终止执行；</li>
+<li>对象终结规则：一个对象的初始化完成先行发生于他的finalize()方法的开始；</li>
+</ol>
+<p>happens-before的前后两个操作不会被重排序且后者对前者的内存可见</p>
+<p>as-if-serial语义和happens-before法则可以概括成:</p>
+<ol>
+<li>在单线程环境下不能改变程序运行的结果</li>
+<li>存在数据依赖关系的不允许重排序</li>
+</ol>
+<h2 id="可见性问题和有序性问题">可见性问题和有序性问题</h2>
+<p>可见性问题是对变量做了修改,而另一个线程不知道</p>
+<p>有序性问题是代码执行顺序发生改变导致获取到的值异常,变量的值可能并没有做修改操作</p>
+<h3 id="重排序和多线程">重排序和多线程</h3>
+<p>一个例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java">
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RecordExample2</span> <span class="o">{</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">writer</span><span class="o">(){</span>
+         <span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">0</span> <span class="o">/</span> <span class="n">0</span><span class="o">;</span>    
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;x = &#34;</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>该例子在多线程中可能不会输出预想的结果</p>
+<p>代码可能被重排序成了,<code>0/0</code>在<code>x=2</code>之前执行</p>
+<h3 id="多线程可见性问题">多线程可见性问题</h3>
+<p>一个经典的例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java">
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RecordExample2</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * A线程执行
+</span><span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">writer</span><span class="o">(){</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>                  <span class="c1">// 1
+</span><span class="c1"></span>        <span class="n">flag</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>            <span class="c1">// 2
+</span><span class="c1"></span>    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * B线程执行
+</span><span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">read</span><span class="o">(){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">flag</span><span class="o">){</span>                  <span class="c1">// 3
+</span><span class="c1"></span>           <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">a</span><span class="o">;</span>          <span class="c1">// 4
+</span><span class="c1"></span>        <span class="o">}</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>线程B不一定可以看到flag的值被修改了,因为不满足happens-before法则</p>
+<p>参考资料</p>
+<p><a href="http://ifeve.com/jvm-reordering/">JVM的重排序</a></p>
+<p><a href="http://ifeve.com/jmm-cookbook-reorderings/">jmm-cookbook</a></p>
+<p><a href="https://blog.csdn.net/chenssy/article/details/56003920">【死磕Java并发】&mdash;&ndash;Java内存模型之重排序</a></p>
+<p><a href="http://ifeve.com/easy-happens-before/">happens-before俗解</a></p>
+<p><a href="https://tech.meituan.com/java-memory-reordering.html">Java内存访问重排序的研究</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">olOwOlo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-04-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          <a href="/tags/%E5%B9%B6%E5%8F%91/">并发</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/java%E4%B8%AD%E7%9A%84%E9%94%81/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">java中的锁-显性锁</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+            <span class="next-text nav-default">线程的基本使用</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://lialzm.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>olOwOlo</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>并发 on Even - A super concise theme for Hugo</title>
+    <link>https://lialzm.github.io/tags/%E5%B9%B6%E5%8F%91/</link>
+    <description>Recent content in 并发 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 19 May 2018 22:30:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/tags/%E5%B9%B6%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>java并发(Synchronized关键字)</title>
+      <link>https://lialzm.github.io/post/java%E5%B9%B6%E5%8F%91synchronized%E5%85%B3%E9%94%AE%E5%AD%97/</link>
+      <pubDate>Sat, 19 May 2018 22:30:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/java%E5%B9%B6%E5%8F%91synchronized%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
+      <description>java中的同步块使用synchronized标记,所有同步在一个对象上的同步块在同时只能被一个线程进入并执行,可保证其内部的共享变量实现多</description>
+    </item>
+    
+    <item>
+      <title>java中的锁-显性锁</title>
+      <link>https://lialzm.github.io/post/java%E4%B8%AD%E7%9A%84%E9%94%81/</link>
+      <pubDate>Fri, 06 Apr 2018 22:30:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/java%E4%B8%AD%E7%9A%84%E9%94%81/</guid>
+      <description>定义 锁(Lock)和synchronized同步块一样，是一种线程同步机制 Lock 接口及其主要实现类都位于java.util.concurrent</description>
+    </item>
+    
+    <item>
+      <title>Java内存模型学习笔记</title>
+      <link>https://lialzm.github.io/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Fri, 06 Apr 2018 22:30:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>什么是JMM JMM(java内存模型)源于物理机器CPU架构的内存模型，最初用于解决MP(多处理器架构)系统中的缓存一致性问题 JMM可以分为</description>
+    </item>
+    
+    <item>
+      <title>线程的基本使用</title>
+      <link>https://lialzm.github.io/post/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 06 Apr 2018 22:30:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>线程的创建 java创建线程有两种方法​​ 创建Thread的子类 public class MyThread extends Thread { public void run(){ System.out.println(&amp;quot;MyThread running&amp;quot;); } } ​MyThread myThread = new MyThread(); myTread.start(); 实现Runnable接口</description>
+    </item>
+    
+  </channel>
+</rss>

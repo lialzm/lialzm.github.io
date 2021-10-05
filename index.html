@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -26,9 +26,9 @@
 <meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/" />
-  <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="Even - A super concise theme for Hugo" />
-  <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="Even - A super concise theme for Hugo" />
+<link rel="canonical" href="https://lialzm.github.io/" />
+  <link href="https://lialzm.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Even - A super concise theme for Hugo" />
+  <link href="https://lialzm.github.io/index.xml" rel="feed" type="application/rss+xml" title="Even - A super concise theme for Hugo" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -44,7 +44,7 @@
 <meta property="og:title" content="Even - A super concise theme for Hugo" />
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://localhost:1313/" />
+<meta property="og:url" content="https://lialzm.github.io/" />
 
 <meta itemprop="name" content="Even - A super concise theme for Hugo">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
@@ -120,11 +120,109 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/elasticsearch%E5%BB%BA%E6%A8%A1/">Elasticsearch建模</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-07-17 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      什么是数据建模 数据建模是一个用于定义和分析在组织的信息系统的范围内支持商业流程所需的数据要求的过程 数据类型 在索引的时候,如果字段第一次出现会
+    </div>
+    <div class="read-more">
+      <a href="/post/elasticsearch%E5%BB%BA%E6%A8%A1/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/log4j%E9%85%8D%E7%BD%AE%E7%BB%8F%E9%AA%8C/">log4j配置经验</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-07-06 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      log4j配置 根日志 log4j.rootLogger 格式 log4j.rootLogger = [ level ] , loggerName1 , loggerName2 第一个参数表示默认级别 日志级别从高到低分别为: FATAL,ERROR,WARN,INFO,DEBUG 一般线上使用INFO级别 log4j可以为不同的 Appender
+    </div>
+    <div class="read-more">
+      <a href="/post/log4j%E9%85%8D%E7%BD%AE%E7%BB%8F%E9%AA%8C/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java%E5%A6%82%E4%BD%95%E6%8E%92%E6%9F%A5%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA/">java如何排查内存溢出</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-06-08 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      OOM前排查 使用jmap导出当前堆dump进行离线分析 测试代码 1 2 3 4 5 6 7 8 9 10 11 12 public class MyTest { private static List&lt;String&gt; list=new ArrayList&lt;&gt;(); public static void main(String[] args) throws InterruptedException { for (int i=0;i&lt;1000;i++){ list.add(&#34;111&#34;); } TimeUnit.SECONDS.sleep(60); } } 实时
+    </div>
+    <div class="read-more">
+      <a href="/post/java%E5%A6%82%E4%BD%95%E6%8E%92%E6%9F%A5%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java%E5%B9%B6%E5%8F%91synchronized%E5%85%B3%E9%94%AE%E5%AD%97/">java并发(Synchronized关键字)</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-05-19 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      java中的同步块使用synchronized标记,所有同步在一个对象上的同步块在同时只能被一个线程进入并执行,可保证其内部的共享变量实现多
+    </div>
+    <div class="read-more">
+      <a href="/post/java%E5%B9%B6%E5%8F%91synchronized%E5%85%B3%E9%94%AE%E5%AD%97/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">&lt;&lt;如何阅读一本书&gt;&gt;读书笔记</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-04-06 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      早在2013年,这本书就被我加入到待读列表但是直到前段时间才开始读,拖延癌😅 概述 这本书是一本工具书,主要是教人如何阅读一本书(非资讯类),并
+    </div>
+    <div class="read-more">
+      <a href="/post/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     </section>
   
   <nav class="pagination">
     
-    
+    <a class="next" href="/page/2/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
   </nav>
         </div>
         
@@ -134,31 +232,16 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
-      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
-      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
-      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
-      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
-      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
-      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
-      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
-      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
-      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
-      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
-      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
-      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
-      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
-      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
-      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
-  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="https://lialzm.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
   <span class="power-by">
-    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    Theme - 
+    主题 - 
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 

@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Even - A super concise theme for Hugo</title>
-    <link>https://lialzm.github.io/</link>
-    <description>Recent content on Even - A super concise theme for Hugo</description>
+    <title>java on Even - A super concise theme for Hugo</title>
+    <link>https://lialzm.github.io/tags/java/</link>
+    <description>Recent content in java on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 17 Jul 2018 11:46:20 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Elasticsearch建模</title>
-      <link>https://lialzm.github.io/post/elasticsearch%E5%BB%BA%E6%A8%A1/</link>
-      <pubDate>Tue, 17 Jul 2018 11:46:20 +0000</pubDate>
-      
-      <guid>https://lialzm.github.io/post/elasticsearch%E5%BB%BA%E6%A8%A1/</guid>
-      <description>什么是数据建模 数据建模是一个用于定义和分析在组织的信息系统的范围内支持商业流程所需的数据要求的过程 数据类型 在索引的时候,如果字段第一次出现会</description>
-    </item>
-    
+    <lastBuildDate>Fri, 06 Jul 2018 14:59:43 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>log4j配置经验</title>
       <link>https://lialzm.github.io/post/log4j%E9%85%8D%E7%BD%AE%E7%BB%8F%E9%AA%8C/</link>
@@ -44,15 +35,6 @@
     </item>
     
     <item>
-      <title>&lt;&lt;如何阅读一本书&gt;&gt;读书笔记</title>
-      <link>https://lialzm.github.io/post/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Fri, 06 Apr 2018 22:30:00 +0000</pubDate>
-      
-      <guid>https://lialzm.github.io/post/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
-      <description>早在2013年,这本书就被我加入到待读列表但是直到前段时间才开始读,拖延癌😅 概述 这本书是一本工具书,主要是教人如何阅读一本书(非资讯类),并</description>
-    </item>
-    
-    <item>
       <title>java中的锁-显性锁</title>
       <link>https://lialzm.github.io/post/java%E4%B8%AD%E7%9A%84%E9%94%81/</link>
       <pubDate>Fri, 06 Apr 2018 22:30:00 +0000</pubDate>
@@ -77,33 +59,6 @@
       
       <guid>https://lialzm.github.io/post/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
       <description>线程的创建 java创建线程有两种方法​​ 创建Thread的子类 public class MyThread extends Thread { public void run(){ System.out.println(&amp;quot;MyThread running&amp;quot;); } } ​MyThread myThread = new MyThread(); myTread.start(); 实现Runnable接口</description>
-    </item>
-    
-    <item>
-      <title>如何使用各种图形去分析源码</title>
-      <link>https://lialzm.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E5%9B%BE%E5%BD%A2%E5%8E%BB%E5%88%86%E6%9E%90%E6%BA%90%E7%A0%81/</link>
-      <pubDate>Wed, 21 Mar 2018 16:08:25 +0000</pubDate>
-      
-      <guid>https://lialzm.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E5%9B%BE%E5%BD%A2%E5%8E%BB%E5%88%86%E6%9E%90%E6%BA%90%E7%A0%81/</guid>
-      <description>为什么要画图 直观 人脑的容量有限,使用图来抽象复杂的过程 流程图 使用markdown画流程图 语法规则: 定义变量 变量名=&amp;gt;操作: 名称 常用操作</description>
-    </item>
-    
-    <item>
-      <title>spring源码解析-开篇</title>
-      <link>https://lialzm.github.io/post/spring%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-%E5%BC%80%E7%AF%87/</link>
-      <pubDate>Mon, 19 Mar 2018 17:51:58 +0000</pubDate>
-      
-      <guid>https://lialzm.github.io/post/spring%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-%E5%BC%80%E7%AF%87/</guid>
-      <description>做javaweb接触最多的框架莫过于spring了,随着对框架使用的逐渐熟练要再上一层的话,必须了解框架底层的实现原理,乃至自己做一个框架 s</description>
-    </item>
-    
-    <item>
-      <title>数据仓库概念介绍</title>
-      <link>https://lialzm.github.io/post/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://lialzm.github.io/post/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/</guid>
-      <description>为什么需要数据仓库 如果直接从业务数据库取数据会有如下几个问题 结构复杂 数据杂乱（不同的数据库针对相同的业务可能会有不同的命名，处理方式） 理解困</description>
     </item>
     
   </channel>

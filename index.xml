@@ -6,7 +6,16 @@
     <description>Recent content on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 05 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何阅读一本书读书笔记</title>
+      <link>https://lialzm.github.io/post/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/</link>
+      <pubDate>Wed, 06 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/</guid>
+      <description>早在2013年,这本书就被我加入到待读列表但是直到前段时间才开始读,拖延癌😅 概述 这本书是一本工具书,主要是教人如何阅读一本书(非资讯类),并</description>
+    </item>
+    
     <item>
       <title>使用emacs&#43;hugo写博客</title>
       <link>https://lialzm.github.io/post/hugo%E5%92%8Cemacs%E7%BB%93%E5%90%88/</link>
@@ -71,15 +80,6 @@
     </item>
     
     <item>
-      <title>&lt;&lt;如何阅读一本书&gt;&gt;读书笔记</title>
-      <link>https://lialzm.github.io/post/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Fri, 06 Apr 2018 22:30:00 +0000</pubDate>
-      
-      <guid>https://lialzm.github.io/post/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
-      <description>早在2013年,这本书就被我加入到待读列表但是直到前段时间才开始读,拖延癌😅 概述 这本书是一本工具书,主要是教人如何阅读一本书(非资讯类),并</description>
-    </item>
-    
-    <item>
       <title>java中的锁-显性锁</title>
       <link>https://lialzm.github.io/post/java%E4%B8%AD%E7%9A%84%E9%94%81/</link>
       <pubDate>Fri, 06 Apr 2018 22:30:00 +0000</pubDate>
@@ -122,6 +122,15 @@
       
       <guid>https://lialzm.github.io/post/spring%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-%E5%BC%80%E7%AF%87/</guid>
       <description>做javaweb接触最多的框架莫过于spring了,随着对框架使用的逐渐熟练要再上一层的话,必须了解框架底层的实现原理,乃至自己做一个框架 s</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://lialzm.github.io/post/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
+      <description></description>
     </item>
     
   </channel>

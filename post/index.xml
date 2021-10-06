@@ -8,6 +8,15 @@
     <language>en</language>
     <lastBuildDate>Wed, 06 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>docker入门</title>
+      <link>https://lialzm.github.io/post/docker%E5%85%A5%E5%9D%91-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Wed, 06 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/docker%E5%85%A5%E5%9D%91-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AE%89%E8%A3%85/</guid>
+      <description>准备工作 安装ubuntu 从ubuntu官网下载ubuntu16.04.2(服务器版)安装包,安装到虚拟机中,这里一直下一步就行了,唯一需要注</description>
+    </item>
+    
+    <item>
       <title>如何阅读一本书读书笔记</title>
       <link>https://lialzm.github.io/post/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/</link>
       <pubDate>Wed, 06 Oct 2021 00:00:00 +0000</pubDate>

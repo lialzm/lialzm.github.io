@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>nomad管理可变镜像 - lialzm的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="lialzm" /><meta name="description" content="问题 以前一直使用的是docker-compose,现在切换到nomad,遇到的问题 原流程: build镜像后,使用docker kill 掉原有容器,并" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+<meta name="google-site-verification" content="FIIaKlY_x-KycUQdEiprgoRI4KDltuH0LL5oAWTp__o" />
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://lialzm.github.io/post/nomad%E7%AE%A1%E7%90%86%E5%8F%AF%E5%8F%98%E9%95%9C%E5%83%8F/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="nomad管理可变镜像" />
+<meta property="og:description" content="问题 以前一直使用的是docker-compose,现在切换到nomad,遇到的问题 原流程: build镜像后,使用docker kill 掉原有容器,并" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lialzm.github.io/post/nomad%E7%AE%A1%E7%90%86%E5%8F%AF%E5%8F%98%E9%95%9C%E5%83%8F/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-10-10T14:41:35+08:00" />
+
+<meta itemprop="name" content="nomad管理可变镜像">
+<meta itemprop="description" content="问题 以前一直使用的是docker-compose,现在切换到nomad,遇到的问题 原流程: build镜像后,使用docker kill 掉原有容器,并"><meta itemprop="datePublished" content="2021-10-10T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-10-10T14:41:35+08:00" />
+<meta itemprop="wordCount" content="409">
+<meta itemprop="keywords" content="nomad," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="nomad管理可变镜像"/>
+<meta name="twitter:description" content="问题 以前一直使用的是docker-compose,现在切换到nomad,遇到的问题 原流程: build镜像后,使用docker kill 掉原有容器,并"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">lialzm的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">lialzm的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">nomad管理可变镜像</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-10-10 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#问题">问题</a></li>
+        <li><a href="#解决方案">解决方案</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="问题">问题</h2>
+<p>以前一直使用的是docker-compose,现在切换到nomad,遇到的问题</p>
+<p>原流程: build镜像后,使用docker kill 掉原有容器,并重新pull容器,然后再运行</p>
+<p>切换到nomad后,必须要修改镜像tag才可以实现对容器的更新,但是这样会导致容器仓库有很多镜像</p>
+<h2 id="解决方案">解决方案</h2>
+<p>参考了
+<a href="https://github.com/angrycub/nomad%5Fexample%5Fjobs/blob/main/HCL2/always%5Fchange/README.md">https://github.com/angrycub/nomad%5Fexample%5Fjobs/blob/main/HCL2/always%5Fchange/README.md</a> 并优化了下</p>
+<p>上面提供了两个方案,都各自有点问题,使用uuid的话每次都会重新部署,但是一个job里可能有很多task,每次都全量更新会导致速度很慢,方案2传递版本的话需要一个东西专门管理版本号</p>
+<p>所以我将两个方案结合了下,做到可以指定更新某个task</p>
+<p><a id="code-snippet--deploy.hcl"></a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">job</span> <span class="s2">&#34;test&#34;</span> {
+<span class="n">  datacenters</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;dc1&#34;</span><span class="p">]</span>
+
+
+<span class="n">  type</span> <span class="o">=</span> <span class="s2">&#34;service&#34;</span>
+
+
+  <span class="k">group</span> <span class="s2">&#34;app&#34;</span> {
+
+
+    <span class="k">task</span> <span class="s2">&#34;app1&#34;</span> {
+<span class="n">      driver</span> <span class="o">=</span> <span class="s2">&#34;docker&#34;</span>
+
+        <span class="k">meta</span> {
+<span class="n">          run_index</span> <span class="o">=</span><span class="n"> &#34;${var.run_index</span><span class="o">==</span><span class="s2">&#34;app1&#34;}&#34;?&#34;${uuidv4()}&#34;:&#34;1&#34;</span>
+        }
+
+      <span class="k">config</span> {
+<span class="n">        image</span> <span class="o">=</span> <span class="s2">&#34;你的镜像地址&#34;</span>
+<span class="n">        image_pull_timeout</span><span class="o">=</span><span class="s2">&#34;15m&#34;</span>
+<span class="n">        force_pull</span><span class="o">=</span><span class="s2">&#34;true&#34;</span>
+      }
+
+    }
+
+ <span class="k">task</span> <span class="s2">&#34;app2&#34;</span> {
+<span class="n">      driver</span> <span class="o">=</span> <span class="s2">&#34;docker&#34;</span>
+        <span class="k">meta</span> {
+<span class="n">          run_index</span> <span class="o">=</span><span class="n"> &#34;${var.run_index</span><span class="o">==</span><span class="s2">&#34;app2&#34;}&#34;?&#34;${uuidv4()}&#34;:&#34;1&#34;</span>
+        }
+      <span class="k">config</span> {
+<span class="n">        image</span> <span class="o">=</span> <span class="s2">&#34;你的镜像地址&#34;</span>
+<span class="n">        image_pull_timeout</span><span class="o">=</span><span class="s2">&#34;15m&#34;</span>
+<span class="n">        force_pull</span><span class="o">=</span><span class="s2">&#34;true&#34;</span>
+      }
+
+    }
+  }
+}
+
+<span class="k">variable</span> <span class="s2">&#34;run_index&#34;</span> {
+<span class="n">  type</span> <span class="o">=</span> <span class="k">string</span>
+<span class="n">  default</span><span class="o">=</span><span class="s2">&#34;1&#34;</span>
+
+}
+
+</code></pre></td></tr></table>
+</div>
+</div><p>部署命令 <code>nomad run -var run_index=app1 ./deploy.hcl</code></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">lialzm</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-10-10
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nomad/">nomad</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/docker%E5%85%A5%E5%9D%91-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AE%89%E8%A3%85/">
+            <span class="next-text nav-default">docker入门</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://lialzm.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>lialzm</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "en".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

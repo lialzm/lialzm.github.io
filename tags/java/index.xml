@@ -52,14 +52,5 @@
       <description>什么是JMM JMM(java内存模型)源于物理机器CPU架构的内存模型，最初用于解决MP(多处理器架构)系统中的缓存一致性问题 JMM可以分为</description>
     </item>
     
-    <item>
-      <title>线程的基本使用</title>
-      <link>https://lialzm.github.io/post/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Fri, 06 Apr 2018 22:30:00 +0000</pubDate>
-      
-      <guid>https://lialzm.github.io/post/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
-      <description>线程的创建 java创建线程有两种方法​​ 创建Thread的子类 public class MyThread extends Thread { public void run(){ System.out.println(&amp;quot;MyThread running&amp;quot;); } } ​MyThread myThread = new MyThread(); myTread.start(); 实现Runnable接口</description>
-    </item>
-    
   </channel>
 </rss>

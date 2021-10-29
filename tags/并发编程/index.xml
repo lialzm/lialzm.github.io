@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>并发编程 on lialzm的博客</title>
+    <link>https://lialzm.github.io/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</link>
+    <description>Recent content in 并发编程 on lialzm的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 29 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>java线程的使用</title>
+      <link>https://lialzm.github.io/post/java%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 29 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/java%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>线程的创建 java创建线程有两种方法 创建Thread的子类 1 2 3 4 5 6 7 public class MyThread extends Thread { public void run(){ System.out.println(&amp;#34;MyThread running&amp;#34;); } } ​MyThread myThread = new MyThread(); myTread.start(); 实现Runna</description>
+    </item>
+    
+  </channel>
+</rss>

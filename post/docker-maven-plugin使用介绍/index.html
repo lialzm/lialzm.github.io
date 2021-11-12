@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>nomad管理可变镜像 - lialzm的博客</title>
+  <title>docker-maven-plugin使用介绍 - lialzm的博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="lialzm" /><meta name="description" content="问题 以前一直使用的是docker-compose,现在切换到nomad,遇到的问题 原流程: build镜像后,使用docker kill 掉原有容器,并" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="lialzm" /><meta name="description" content="介绍 使用maven命令将项目构建为docker镜像 优点 可以使用maven的变量 可以和maven指令结合提高部署效率 GitHub - spotify/docker-maven-plugin: INACTIVE: A maven plugin for Docker 配置 1 2" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
-<link rel="canonical" href="https://lialzm.github.io/post/nomad%E7%AE%A1%E7%90%86%E5%8F%AF%E5%8F%98%E9%95%9C%E5%83%8F/" />
+<link rel="canonical" href="https://lialzm.github.io/post/docker-maven-plugin%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,20 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="nomad管理可变镜像" />
-<meta property="og:description" content="问题 以前一直使用的是docker-compose,现在切换到nomad,遇到的问题 原流程: build镜像后,使用docker kill 掉原有容器,并" />
+<meta property="og:title" content="docker-maven-plugin使用介绍" />
+<meta property="og:description" content="介绍 使用maven命令将项目构建为docker镜像 优点 可以使用maven的变量 可以和maven指令结合提高部署效率 GitHub - spotify/docker-maven-plugin: INACTIVE: A maven plugin for Docker 配置 1 2" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lialzm.github.io/post/nomad%E7%AE%A1%E7%90%86%E5%8F%AF%E5%8F%98%E9%95%9C%E5%83%8F/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-10-10T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-10-10T14:41:35+08:00" />
+<meta property="og:url" content="https://lialzm.github.io/post/docker-maven-plugin%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-11-12T22:04:03+08:00" />
 
-<meta itemprop="name" content="nomad管理可变镜像">
-<meta itemprop="description" content="问题 以前一直使用的是docker-compose,现在切换到nomad,遇到的问题 原流程: build镜像后,使用docker kill 掉原有容器,并"><meta itemprop="datePublished" content="2021-10-10T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-10-10T14:41:35+08:00" />
-<meta itemprop="wordCount" content="409">
-<meta itemprop="keywords" content="nomad," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="nomad管理可变镜像"/>
-<meta name="twitter:description" content="问题 以前一直使用的是docker-compose,现在切换到nomad,遇到的问题 原流程: build镜像后,使用docker kill 掉原有容器,并"/>
+<meta itemprop="name" content="docker-maven-plugin使用介绍">
+<meta itemprop="description" content="介绍 使用maven命令将项目构建为docker镜像 优点 可以使用maven的变量 可以和maven指令结合提高部署效率 GitHub - spotify/docker-maven-plugin: INACTIVE: A maven plugin for Docker 配置 1 2"><meta itemprop="datePublished" content="2021-11-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-11-12T22:04:03+08:00" />
+<meta itemprop="wordCount" content="465">
+<meta itemprop="keywords" content="docker,maven," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="docker-maven-plugin使用介绍"/>
+<meta name="twitter:description" content="介绍 使用maven命令将项目构建为docker镜像 优点 可以使用maven的变量 可以和maven指令结合提高部署效率 GitHub - spotify/docker-maven-plugin: INACTIVE: A maven plugin for Docker 配置 1 2"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -125,10 +125,10 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">nomad管理可变镜像</h1>
+      <h1 class="post-title">docker-maven-plugin使用介绍</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-10-10 </span>
+        <span class="post-time"> 2021-11-12 </span>
         
         
       </div>
@@ -141,30 +141,26 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#问题">问题</a></li>
-        <li><a href="#解决方案">解决方案</a></li>
+        <li><a href="#介绍">介绍</a></li>
+        <li><a href="#配置">配置</a></li>
+        <li><a href="#常用命令">常用命令</a></li>
+        <li><a href="#常见异常">常见异常</a></li>
       </ul>
     </li>
   </ul>
 </nav>
   </div>
 </div>
-  <div class="post-outdated">
-    <div class="hint">
-      <p>【注意】最后更新于 <span class="timeago" datetime="2021-10-10T14:41:35" title="October 10, 2021">October 10, 2021</span>，文中内容可能已过时，请谨慎使用。</p>
-    </div>
-  </div>
     <div class="post-content">
-      <h2 id="问题">问题</h2>
-<p>以前一直使用的是docker-compose,现在切换到nomad,遇到的问题</p>
-<p>原流程: build镜像后,使用docker kill 掉原有容器,并重新pull容器,然后再运行</p>
-<p>切换到nomad后,必须要修改镜像tag才可以实现对容器的更新,但是这样会导致容器仓库有很多镜像</p>
-<h2 id="解决方案">解决方案</h2>
-<p>参考了
-<a href="https://github.com/angrycub/nomad%5Fexample%5Fjobs/blob/main/HCL2/always%5Fchange/README.md">https://github.com/angrycub/nomad%5Fexample%5Fjobs/blob/main/HCL2/always%5Fchange/README.md</a> 并优化了下</p>
-<p>上面提供了两个方案,都各自有点问题,使用uuid的话每次都会重新部署,但是一个job里可能有很多task,每次都全量更新会导致速度很慢,方案2传递版本的话需要一个东西专门管理版本号</p>
-<p>所以我将两个方案结合了下,做到可以指定更新某个task</p>
-<p><a id="code-snippet--deploy.hcl"></a></p>
+      <h2 id="介绍">介绍</h2>
+<p>使用maven命令将项目构建为docker镜像</p>
+<p>优点</p>
+<ol>
+<li>可以使用maven的变量</li>
+<li>可以和maven指令结合提高部署效率</li>
+</ol>
+<p><a href="https://github.com/spotify/docker-maven-plugin">GitHub - spotify/docker-maven-plugin: INACTIVE: A maven plugin for Docker</a></p>
+<h2 id="配置">配置</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -201,69 +197,77 @@
 </span><span class="lnt">32
 </span><span class="lnt">33
 </span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="k">job</span> <span class="s2">&#34;test&#34;</span> {
-<span class="n">  datacenters</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;dc1&#34;</span><span class="p">]</span>
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">      &lt;build&gt;
+              &lt;finalName&gt;${project.name}-v${project.version}&lt;/finalName&gt;
+      &lt;plugins&gt;
+      &lt;plugin&gt;
+                      &lt;groupId&gt;com.spotify&lt;/groupId&gt;
+                      &lt;artifactId&gt;docker-maven-plugin&lt;/artifactId&gt;
+                      &lt;version&gt;1.1.1&lt;/version&gt;
+                      &lt;configuration&gt;
+                          &lt;!--镜像名称--&gt;
+                          &lt;imageName&gt;仓库地址/${project.name}:v${project.version}&lt;/imageName&gt;
+                          &lt;!--依赖镜像--&gt;
+                          &lt;baseImage&gt;openjdk:8u252-jre&lt;/baseImage&gt;
+                          &lt;workdir&gt;/code&lt;/workdir&gt;
+                          &lt;!--编译完后自动将镜像推送到仓库--&gt;
+                          &lt;pushImage&gt;true&lt;/pushImage&gt;
 
-
-<span class="n">  type</span> <span class="o">=</span> <span class="s2">&#34;service&#34;</span>
-
-
-  <span class="k">group</span> <span class="s2">&#34;app&#34;</span> {
-
-
-    <span class="k">task</span> <span class="s2">&#34;app1&#34;</span> {
-<span class="n">      driver</span> <span class="o">=</span> <span class="s2">&#34;docker&#34;</span>
-
-        <span class="k">meta</span> {
-<span class="n">          run_index</span> <span class="o">=</span><span class="n"> &#34;${var.run_index</span><span class="o">==</span><span class="s2">&#34;app1&#34;}&#34;?&#34;${uuidv4()}&#34;:&#34;1&#34;</span>
-        }
-
-      <span class="k">config</span> {
-<span class="n">        image</span> <span class="o">=</span> <span class="s2">&#34;你的镜像地址&#34;</span>
-<span class="n">        image_pull_timeout</span><span class="o">=</span><span class="s2">&#34;15m&#34;</span>
-<span class="n">        force_pull</span><span class="o">=</span><span class="s2">&#34;true&#34;</span>
-      }
-
-    }
-
- <span class="k">task</span> <span class="s2">&#34;app2&#34;</span> {
-<span class="n">      driver</span> <span class="o">=</span> <span class="s2">&#34;docker&#34;</span>
-        <span class="k">meta</span> {
-<span class="n">          run_index</span> <span class="o">=</span><span class="n"> &#34;${var.run_index</span><span class="o">==</span><span class="s2">&#34;app2&#34;}&#34;?&#34;${uuidv4()}&#34;:&#34;1&#34;</span>
-        }
-      <span class="k">config</span> {
-<span class="n">        image</span> <span class="o">=</span> <span class="s2">&#34;你的镜像地址&#34;</span>
-<span class="n">        image_pull_timeout</span><span class="o">=</span><span class="s2">&#34;15m&#34;</span>
-<span class="n">        force_pull</span><span class="o">=</span><span class="s2">&#34;true&#34;</span>
-      }
-
-    }
-  }
-}
-
-<span class="k">variable</span> <span class="s2">&#34;run_index&#34;</span> {
-<span class="n">  type</span> <span class="o">=</span> <span class="k">string</span>
-<span class="n">  default</span><span class="o">=</span><span class="s2">&#34;1&#34;</span>
-
-}
-
+                          &lt;runs&gt;
+                              &lt;!--设置时区--&gt;
+                              &lt;run&gt;
+                              /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;amp;&amp;amp; echo &#39;Asia/Shanghai&#39; &gt;/etc/timezone
+                              &lt;/run&gt;
+                          &lt;/runs&gt;
+                          &lt;!-- 这里是复制 jar 包到 docker 容器指定目录配置 --&gt;
+                          &lt;resources&gt;
+                            &lt;resource&gt;
+                                &lt;directory&gt;${project.build.directory}&lt;/directory&gt;
+                                &lt;targetPath&gt;/code&lt;/targetPath&gt;
+                                &lt;include&gt;${project.build.finalName}.jar&lt;/include&gt;
+                            &lt;/resource&gt;
+                          &lt;/resources&gt;
+                      &lt;/configuration&gt;
+                  &lt;/plugin&gt;
+                  &lt;/plugins&gt;
+                  &lt;/build&gt;
 </code></pre></td></tr></table>
 </div>
-</div><p>部署命令 <code>nomad run -var run_index=app1 ./deploy.hcl</code></p>
+</div><p>使用mvn docker:build就可以看到 target文件下面生成了一个docker文件夹,里面有生成的dockerfile和复制进去的jar</p>
+<figure><img src="/ox-hugo/2021-11-12_21-36-58_screenshot.png"/>
+</figure>
+
+<h2 id="常用命令">常用命令</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">   # 构建镜像
+   mvn docker:build
+   # 将镜像推送到仓库
+   mvn docker:push
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="常见异常">常见异常</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">org.apache.http.impl.execchain.RetryExec execute
+I/O exception (java.io.IOException) caught when processing request to {}-&gt;unix://localhost:80: No such file or directory
+[ERROR] Failed to execute goal com.spotify:docker-maven-plugin:1.0.0:build (default-cli) on project mavenDemo: Exception caught: java.util.concurrent.ExecutionException: com.spotify.docker.client.shaded.javax.ws.rs.ProcessingException: java.io.IOException: No such file or directory -&gt; [Help 1]
+</code></pre></td></tr></table>
+</div>
+</div><p>原因是: docker没有启动</p>
 
     </div>
 
@@ -275,7 +279,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-10-10
+        2021-11-12
         
     </span>
   </p>
@@ -284,16 +288,13 @@
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/nomad/">nomad</a>
+          <a href="/tags/docker/">docker</a>
+          <a href="/tags/maven/">maven</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/java%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">java线程的使用</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BC%9A%E4%BD%BF%E7%94%A8%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%90%97/">
-            <span class="next-text nav-default">如何更好的使用搜索引擎</span>
+        
+        <a class="next" href="/post/java%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/">
+            <span class="next-text nav-default">java线程的使用</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

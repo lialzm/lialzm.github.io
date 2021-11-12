@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>maven on lialzm的博客</title>
+    <link>https://lialzm.github.io/tags/maven/</link>
+    <description>Recent content in maven on lialzm的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 12 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/tags/maven/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>docker-maven-plugin使用介绍</title>
+      <link>https://lialzm.github.io/post/docker-maven-plugin%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Fri, 12 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/docker-maven-plugin%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</guid>
+      <description>介绍 使用maven命令将项目构建为docker镜像 优点 可以使用maven的变量 可以和maven指令结合提高部署效率 GitHub - spotify/docker-maven-plugin: INACTIVE: A maven plugin for Docker 配置 1 2</description>
+    </item>
+    
+  </channel>
+</rss>

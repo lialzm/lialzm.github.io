@@ -44,12 +44,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lialzm.github.io/post/docker-maven-plugin%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-11-12T22:04:03+08:00" />
+<meta property="article:modified_time" content="2021-11-15T10:01:37+08:00" />
 
 <meta itemprop="name" content="docker-maven-plugin使用介绍">
 <meta itemprop="description" content="介绍 使用maven命令将项目构建为docker镜像 优点 可以使用maven的变量 可以和maven指令结合提高部署效率 GitHub - spotify/docker-maven-plugin: INACTIVE: A maven plugin for Docker 配置 1 2"><meta itemprop="datePublished" content="2021-11-12T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-11-12T22:04:03+08:00" />
-<meta itemprop="wordCount" content="465">
+<meta itemprop="dateModified" content="2021-11-15T10:01:37+08:00" />
+<meta itemprop="wordCount" content="515">
 <meta itemprop="keywords" content="docker,maven," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="docker-maven-plugin使用介绍"/>
 <meta name="twitter:description" content="介绍 使用maven命令将项目构建为docker镜像 优点 可以使用maven的变量 可以和maven指令结合提高部署效率 GitHub - spotify/docker-maven-plugin: INACTIVE: A maven plugin for Docker 配置 1 2"/>
@@ -197,9 +197,12 @@
 </span><span class="lnt">32
 </span><span class="lnt">33
 </span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">      &lt;build&gt;
+               &lt;!--指定生成的jar名称--&gt;
               &lt;finalName&gt;${project.name}-v${project.version}&lt;/finalName&gt;
       &lt;plugins&gt;
       &lt;plugin&gt;
@@ -207,10 +210,11 @@
                       &lt;artifactId&gt;docker-maven-plugin&lt;/artifactId&gt;
                       &lt;version&gt;1.1.1&lt;/version&gt;
                       &lt;configuration&gt;
-                          &lt;!--镜像名称--&gt;
+                          &lt;!--镜像名称 project.name 和 project.version 都是maven的变量 --&gt;
                           &lt;imageName&gt;仓库地址/${project.name}:v${project.version}&lt;/imageName&gt;
                           &lt;!--依赖镜像--&gt;
                           &lt;baseImage&gt;openjdk:8u252-jre&lt;/baseImage&gt;
+                          &lt;!--工作目录--&gt;
                           &lt;workdir&gt;/code&lt;/workdir&gt;
                           &lt;!--编译完后自动将镜像推送到仓库--&gt;
                           &lt;pushImage&gt;true&lt;/pushImage&gt;
@@ -279,7 +283,7 @@ I/O exception (java.io.IOException) caught when processing request to {}-&gt;uni
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-11-12
+        2021-11-15
         
     </span>
   </p>

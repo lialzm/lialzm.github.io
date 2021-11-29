@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据库 on lialzm的博客</title>
+    <link>https://lialzm.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <description>Recent content in 数据库 on lialzm的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 29 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>postgre主从模式基于docker</title>
+      <link>https://lialzm.github.io/post/postgre%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F%E5%9F%BA%E4%BA%8Edocker/</link>
+      <pubDate>Mon, 29 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/postgre%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F%E5%9F%BA%E4%BA%8Edocker/</guid>
+      <description>具体操作的时候注意ip的替换以及max_connections参数的变更 环境 docker postgres 10.14 详细步骤 环境准备 1 2 3 4 5 6 docker network create --driver bridge --subnet=172.18.12.0/16 --gateway=172.18.12.1 mynet docker run --name pgsmaster -p 5432:5432 --network=mynet</description>
+    </item>
+    
+  </channel>
+</rss>

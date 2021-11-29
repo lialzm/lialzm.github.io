@@ -2,6 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lialzm.github.io/categories/</loc>
+    <lastmod>2021-11-29T19:38:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/</loc>
+    <lastmod>2021-11-29T19:38:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/tags/postgre/</loc>
+    <lastmod>2021-11-29T19:38:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/post/postgre%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F%E5%9F%BA%E4%BA%8Edocker/</loc>
+    <lastmod>2021-11-29T19:38:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/post/</loc>
+    <lastmod>2021-11-29T19:38:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/tags/</loc>
+    <lastmod>2021-11-29T19:38:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2021-11-29T19:38:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lialzm.github.io/tags/docker/</loc>
     <lastmod>2021-11-15T10:01:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -16,28 +65,7 @@
   </url>
   
   <url>
-    <loc>https://lialzm.github.io/</loc>
-    <lastmod>2021-11-15T10:01:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lialzm.github.io/tags/maven/</loc>
-    <lastmod>2021-11-15T10:01:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lialzm.github.io/post/</loc>
-    <lastmod>2021-11-15T10:01:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lialzm.github.io/tags/</loc>
     <lastmod>2021-11-15T10:01:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -234,12 +262,6 @@
   
   <url>
     <loc>https://lialzm.github.io/post/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lialzm.github.io/categories/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

@@ -6,7 +6,16 @@
     <description>Recent content on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 29 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>docker编译node-sass失败</title>
+      <link>https://lialzm.github.io/post/docker%E7%BC%96%E8%AF%91node-sass%E5%A4%B1%E8%B4%A5/</link>
+      <pubDate>Fri, 03 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/docker%E7%BC%96%E8%AF%91node-sass%E5%A4%B1%E8%B4%A5/</guid>
+      <description>最近尝试将前端项目编译成docker方便管理,但是遇到当项目里依赖于node-sass报如下错误 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22</description>
+    </item>
+    
     <item>
       <title>postgre主从模式基于docker</title>
       <link>https://lialzm.github.io/post/postgre%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F%E5%9F%BA%E4%BA%8Edocker/</link>

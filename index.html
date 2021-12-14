@@ -122,6 +122,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/mybatis3%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%98%A0%E5%B0%84/">mybatis3源码阅读-查询结果映射</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-12-14 </span>
+      <div class="post-category">
+          <a href="/categories/mybatis3%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"> mybatis3源码阅读 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      关键类: DefaultResultSetHandler 关键方法: DefaultResultSetHandler#handleResultSets 简单映射流程图 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 public List&lt;Object&gt; handleResultSets(Statement stmt) throws SQLException { ErrorContext.instance().activity(&#34;handling results&#34;).object(mappedStatement.getId()); final List&lt;Object&gt; multipleResults =
+    </div>
+    <div class="read-more">
+      <a href="/post/mybatis3%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%98%A0%E5%B0%84/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/java%E8%B0%83%E8%AF%95%E5%88%A9%E5%99%A8-arthas%E6%9E%81%E7%AE%80%E5%85%A5%E9%97%A8/">java调试利器-arthas极简入门</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2021-12-09 </span>
@@ -196,27 +217,6 @@
     </div>
     <div class="read-more">
       <a href="/post/docker%E7%BC%96%E8%AF%91node-sass%E5%A4%B1%E8%B4%A5/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/postgre%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F%E5%9F%BA%E4%BA%8Edocker/">postgre主从模式基于docker</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-11-29 </span>
-      <div class="post-category">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      具体操作的时候注意ip的替换以及max_connections参数的变更 环境 docker postgres 10.14 详细步骤 环境准备 1 2 3 4 5 6 docker network create --driver bridge --subnet=172.18.12.0/16 --gateway=172.18.12.1 mynet docker run --name pgsmaster -p 5432:5432 --network=mynet
-    </div>
-    <div class="read-more">
-      <a href="/post/postgre%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F%E5%9F%BA%E4%BA%8Edocker/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

@@ -6,7 +6,16 @@
     <description>Recent content on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 14 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nomad介绍</title>
+      <link>https://lialzm.github.io/post/nomad%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/nomad%E5%AE%89%E8%A3%85/</guid>
+      <description>nomad是一个轻量级的工作编排工具,可以管理容器和非容器化的应用程序 官网 基础概念 架构图 agent 基础模块,每个运行nomad进程称为一个agent</description>
+    </item>
+    
     <item>
       <title>mybatis3源码阅读-查询结果映射</title>
       <link>https://lialzm.github.io/post/mybatis3%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%98%A0%E5%B0%84/</link>

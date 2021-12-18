@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nomad手册 on lialzm的博客</title>
+    <link>https://lialzm.github.io/categories/nomad%E6%89%8B%E5%86%8C/</link>
+    <description>Recent content in nomad手册 on lialzm的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 18 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/categories/nomad%E6%89%8B%E5%86%8C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nomad介绍</title>
+      <link>https://lialzm.github.io/post/nomad%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/nomad%E5%AE%89%E8%A3%85/</guid>
+      <description>nomad是一个轻量级的工作编排工具,可以管理容器和非容器化的应用程序 官网 基础概念 架构图 agent 基础模块,每个运行nomad进程称为一个agent</description>
+    </item>
+    
+  </channel>
+</rss>

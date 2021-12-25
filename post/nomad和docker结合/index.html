@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>nomad介绍 - lialzm的博客</title>
+  <title>nomad和docker结合 - lialzm的博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="lialzm" /><meta name="description" content="nomad是一个轻量级的工作编排工具,可以管理容器和非容器化的应用程序 官网 基础概念 架构图 agent 基础模块,每个运行nomad进程称为一个agent" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="lialzm" /><meta name="description" content="nomad支持调度多种drive,比如docker,java,podman等,比较常用的是和docker的结合 要求版本 1.8.2和 1.9 一个简单" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
-<link rel="canonical" href="https://lialzm.github.io/post/nomad%E5%AE%89%E8%A3%85/" />
+<link rel="canonical" href="https://lialzm.github.io/post/nomad%E5%92%8Cdocker%E7%BB%93%E5%90%88/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,20 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="nomad介绍" />
-<meta property="og:description" content="nomad是一个轻量级的工作编排工具,可以管理容器和非容器化的应用程序 官网 基础概念 架构图 agent 基础模块,每个运行nomad进程称为一个agent" />
+<meta property="og:title" content="nomad和docker结合" />
+<meta property="og:description" content="nomad支持调度多种drive,比如docker,java,podman等,比较常用的是和docker的结合 要求版本 1.8.2和 1.9 一个简单" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lialzm.github.io/post/nomad%E5%AE%89%E8%A3%85/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://lialzm.github.io/post/nomad%E5%92%8Cdocker%E7%BB%93%E5%90%88/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-12-18T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-12-18T20:43:31+08:00" />
+<meta property="article:modified_time" content="2021-12-25T12:46:15+08:00" />
 
-<meta itemprop="name" content="nomad介绍">
-<meta itemprop="description" content="nomad是一个轻量级的工作编排工具,可以管理容器和非容器化的应用程序 官网 基础概念 架构图 agent 基础模块,每个运行nomad进程称为一个agent"><meta itemprop="datePublished" content="2021-12-18T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-12-18T20:43:31+08:00" />
-<meta itemprop="wordCount" content="591">
+<meta itemprop="name" content="nomad和docker结合">
+<meta itemprop="description" content="nomad支持调度多种drive,比如docker,java,podman等,比较常用的是和docker的结合 要求版本 1.8.2和 1.9 一个简单"><meta itemprop="datePublished" content="2021-12-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-12-25T12:46:15+08:00" />
+<meta itemprop="wordCount" content="474">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="nomad介绍"/>
-<meta name="twitter:description" content="nomad是一个轻量级的工作编排工具,可以管理容器和非容器化的应用程序 官网 基础概念 架构图 agent 基础模块,每个运行nomad进程称为一个agent"/>
+<meta name="twitter:title" content="nomad和docker结合"/>
+<meta name="twitter:description" content="nomad支持调度多种drive,比如docker,java,podman等,比较常用的是和docker的结合 要求版本 1.8.2和 1.9 一个简单"/>
 
 
 <script type="application/javascript">
@@ -140,7 +140,7 @@ if (!doNotTrack) {
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">nomad介绍</h1>
+      <h1 class="post-title">nomad和docker结合</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2021-12-18 </span>
@@ -158,10 +158,12 @@ if (!doNotTrack) {
   <ul>
     <li>
       <ul>
-        <li><a href="#基础概念">基础概念</a></li>
-        <li><a href="#安装">安装</a></li>
-        <li><a href="#常用命令行">常用命令行</a></li>
-        <li><a href="#和k8s对比">和k8s对比</a></li>
+        <li><a href="#使用私有镜像">使用私有镜像</a></li>
+        <li><a href="#环境变量配置">环境变量配置</a></li>
+        <li><a href="#端口开放">端口开放</a></li>
+        <li><a href="#磁盘挂载">磁盘挂载</a></li>
+        <li><a href="#镜像相关的配置">镜像相关的配置</a></li>
+        <li><a href="#参考资料">参考资料</a></li>
       </ul>
     </li>
   </ul>
@@ -169,91 +171,60 @@ if (!doNotTrack) {
   </div>
 </div>
     <div class="post-content">
-      <p>nomad是一个轻量级的工作编排工具,可以管理容器和非容器化的应用程序</p>
-<p><a href="https://www.nomadproject.io/">官网</a></p>
-<h2 id="基础概念">基础概念</h2>
-<p>架构图
-<img src="/ox-hugo/2021-03-26_11-19-05_nomad-architecture-region.png" alt=""></p>
-<ul>
-<li>
-<p>agent</p>
-<p>基础模块,每个运行nomad进程称为一个agent</p>
-</li>
-<li>
-<p>dev agent</p>
-<p>用于测试的特殊agent,同时充当server和client,并且不会将集群状态持久化到磁盘</p>
-</li>
-<li>
-<p>leader</p>
-<p>管理整个集群</p>
-</li>
-<li>
-<p>follower</p>
-<p>非leader的server,复制创建调度计划,并将其提交给leader</p>
-</li>
-<li>
-<p>server</p>
-<p>在服务器状态下运行的agent,负责管理所有作业和客户端,进行任务分配.服务器之间相互复制数据并选举leader,已确保高可用</p>
-</li>
-<li>
-<p>client</p>
-<p>在客户端下运行的agent</p>
-</li>
-<li>
-<p>job</p>
-<p>job定义一个或者多个任务组,其中包含多个任务</p>
-</li>
-<li>
-<p>task</p>
-<p>nomad中的最小工作单元</p>
-</li>
-<li>
-<p>evaluation</p>
-<p>评估状态,当集群发生变化时,判断是否需要采取措施</p>
-</li>
-</ul>
-<p><a href="https://learn.hashicorp.com/tutorials/nomad/get-started-vocab?in=nomad/get-started">Nomad Vocabulary | Nomad - HashiCorp Learn</a></p>
-<p><a href="https://www.nomadproject.io/docs/internals/architecture">Architecture | Nomad by HashiCorp</a></p>
-<h2 id="安装">安装</h2>
-<p>安装很简单,只需要下载一个二进制文件或者直接使用软件安装工具既可</p>
-<p><a href="https://learn.hashicorp.com/tutorials/nomad/get-started-install">Install Nomad | Nomad - HashiCorp Learn</a></p>
-<p>centos</p>
+      <p>nomad支持调度多种drive,比如docker,java,podman等,比较常用的是和docker的结合</p>
+<p>要求版本 1.8.2和 1.9</p>
+<p>一个简单的例子</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">    yum install -y yum-utils
-    yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
-    yum -y install nomad
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">task &#34;webservice&#34; {
+  driver = &#34;docker&#34;
+
+  config {
+    image = &#34;redis:3.2&#34;
+  }
+}
+
 </code></pre></td></tr></table>
 </div>
-</div><p>debian/ubuntu</p>
+</div><h2 id="使用私有镜像">使用私有镜像</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">curl -fsSL https://apt.releases.hashicorp.com/gpg <span class="p">|</span> sudo apt-key add -
-sudo apt-add-repository <span class="s2">&#34;deb [arch=amd64] https://apt.releases.hashicorp.com </span><span class="k">$(</span>lsb_release -cs<span class="k">)</span><span class="s2"> main&#34;</span>
-sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install nomad
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">    task &#34;test&#34; {
+      driver = &#34;docker&#34;
+      config {
+        image = &#34;私有镜像地址&#34;
+        auth {
+                username = &#34;&#34;
+                password = &#34;&#34;
+        }
+      }
+    }
 </code></pre></td></tr></table>
 </div>
-</div><p>本地运行</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">  nomad agent -dev -bind 0.0.0.0 -log-level INFO
-</code></pre></td></tr></table>
-</div>
-</div><p>查看ui <a href="http://127.0.0.1:4646/ui">http://127.0.0.1:4646/ui</a></p>
-<h2 id="常用命令行">常用命令行</h2>
+</div><h2 id="环境变量配置">环境变量配置</h2>
+<p>一些镜像需要设置环境变量,在nomad可以使用env属性设置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -280,37 +251,142 @@ sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install nomad
 </span><span class="lnt">22
 </span><span class="lnt">23
 </span><span class="lnt">24
+</span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">  # 运行dev模式agent
-  nomad agent -dev -bind 0.0.0.0 -log-level INFO
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">    task &#34;es&#34; {
+      driver = &#34;docker&#34;
 
-  # 初始化一个示例配置文件
-  nomad init
+        env = {
+          &#34;cluster.name&#34;          = &#34;zjc-es-cluster&#34;
+          &#34;node.name&#34;             = &#34;es7_01&#34;
+          &#34;bootstrap.memory_lock&#34; = true
+          &#34;ES_JAVA_OPTS&#34;          = &#34;-Xms512m -Xmx512m&#34;
+          &#34;discovery.seed_hosts&#34;  = &#34;localhost&#34;
+          &#34;cluster.initial_master_nodes&#34;=&#34;es7_01&#34;
+        }
 
-  # 运行/更新一个job
-  nomad job run &lt;example.nomad&gt;
+      config {
+        image = &#34;docker.elastic.co/elasticsearch/elasticsearch:7.1.0&#34;
+        ulimit {
+          memlock = &#34;-1&#34;
+          nofile = &#34;65536&#34;
+          nproc = &#34;8192&#34;
+        }
+      }
+    }
 
-  # 查看job状态
-  nomad job status &lt;example&gt;
 
 
-  # 比较更改
-  nomad plan &lt;nomad_file&gt;
 
-  # 停止job
-  nomad stop &lt;nomad_file&gt;
-
-  # 查看状态
-  nomad status &lt;nomad_file&gt;
-
-  # 列出server
-  nomad server members
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="和k8s对比">和k8s对比</h2>
-<p>个人感觉比k8s容易维护,入门也简单,适合中小团队使用,</p>
-<p>官网比较<a href="https://nomad-git-nqwebtestimonial-component-hashicorp.vercel.app/docs/nomad-vs-kubernetes">Nomad vs. Kubernetes | Nomad by HashiCorp</a></p>
+</div><h2 id="端口开放">端口开放</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">group &#34;web&#34;{
+
+    network {
+      port &#34;web&#34; {
+        to = 80
+      }
+    }
+
+    service {
+      name = &#34;web&#34;
+      port=&#34;web&#34;
+    }
+
+    task &#34;test&#34; {
+      driver = &#34;docker&#34;
+
+      config {
+        image = &#34;nginx:latest&#34;
+        ports = [&#34;web&#34;]
+      }
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="磁盘挂载">磁盘挂载</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">config {
+  volumes = [
+    # 使用绝对路径挂载
+    &#34;/path/on/host:/path/in/container&#34;,
+
+    # 挂载到allocation dir下
+    &#34;relative/to/task:/also/in/container&#34;
+  ]
+}
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="镜像相关的配置">镜像相关的配置</h2>
+<p>client属性可以配置docker相关的属性,常用的有volume和privileged</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">client {
+  enabled = true
+  options = {
+    &#34;driver.allowlist&#34;       = &#34;docker&#34;
+    &#34;docker.volumes.enabled&#34; = true # 开启支持docker volumes
+    &#34;docker.privileged.enabled&#34; = true # 开启 privileged 模式
+  }
+}
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="参考资料">参考资料</h2>
+<p><a href="https://www.nomadproject.io/docs/drivers/docker">Drivers: Docker | Nomad by HashiCorp</a></p>
 
     </div>
 
@@ -322,7 +398,7 @@ sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install nomad
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-12-18
+        2021-12-25
         
     </span>
   </p>
@@ -332,9 +408,13 @@ sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install nomad
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
-        <a class="next" href="/post/nomad%E5%92%8Cdocker%E7%BB%93%E5%90%88/">
-            <span class="next-text nav-default">nomad和docker结合</span>
+        <a class="prev" href="/post/nomad%E5%AE%89%E8%A3%85/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">nomad介绍</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/nomad%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/">
+            <span class="next-text nav-default">nomad配置文件介绍</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

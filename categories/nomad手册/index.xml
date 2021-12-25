@@ -16,5 +16,23 @@
       <description>nomad是一个轻量级的工作编排工具,可以管理容器和非容器化的应用程序 官网 基础概念 架构图 agent 基础模块,每个运行nomad进程称为一个agent</description>
     </item>
     
+    <item>
+      <title>nomad和docker结合</title>
+      <link>https://lialzm.github.io/post/nomad%E5%92%8Cdocker%E7%BB%93%E5%90%88/</link>
+      <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/nomad%E5%92%8Cdocker%E7%BB%93%E5%90%88/</guid>
+      <description>nomad支持调度多种drive,比如docker,java,podman等,比较常用的是和docker的结合 要求版本 1.8.2和 1.9 一个简单</description>
+    </item>
+    
+    <item>
+      <title>nomad配置文件介绍</title>
+      <link>https://lialzm.github.io/post/nomad%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/nomad%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/</guid>
+      <description>nomad的配置文件语法使用的是hashicorp自己开发的dsl,详细语法: GitHub - hashicorp/hcl: HCL is the HashiCorp configuration language. 下面是一个配置文件的介绍 1 2 3 4 5 6 7 8 9 10</description>
+    </item>
+    
   </channel>
 </rss>

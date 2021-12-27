@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>spring源码解析-Bean的实例化 - lialzm的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="lialzm" /><meta name="description" content="在上一章我们已经获取到了 BeanDefinition ,现在就可以开始对Bean进行实例化的操作了 Bean的实例化分为两种情况延迟加载和非延迟加载 这里只分析非延迟加载的" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+<meta name="google-site-verification" content="FIIaKlY_x-KycUQdEiprgoRI4KDltuH0LL5oAWTp__o" />
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://lialzm.github.io/post/spring%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-bean%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="spring源码解析-Bean的实例化" />
+<meta property="og:description" content="在上一章我们已经获取到了 BeanDefinition ,现在就可以开始对Bean进行实例化的操作了 Bean的实例化分为两种情况延迟加载和非延迟加载 这里只分析非延迟加载的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lialzm.github.io/post/spring%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-bean%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-12-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-12-27T16:48:16+08:00" />
+
+<meta itemprop="name" content="spring源码解析-Bean的实例化">
+<meta itemprop="description" content="在上一章我们已经获取到了 BeanDefinition ,现在就可以开始对Bean进行实例化的操作了 Bean的实例化分为两种情况延迟加载和非延迟加载 这里只分析非延迟加载的"><meta itemprop="datePublished" content="2018-12-27T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-12-27T16:48:16+08:00" />
+<meta itemprop="wordCount" content="2062">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="spring源码解析-Bean的实例化"/>
+<meta name="twitter:description" content="在上一章我们已经获取到了 BeanDefinition ,现在就可以开始对Bean进行实例化的操作了 Bean的实例化分为两种情况延迟加载和非延迟加载 这里只分析非延迟加载的"/>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-2ZMLCV11NP', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">lialzm的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">lialzm的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">spring源码解析-Bean的实例化</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-12-27 </span>
+        <div class="post-category">
+            <a href="/categories/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"> spring源码阅读 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在上一章我们已经获取到了 <code>BeanDefinition</code> ,现在就可以开始对Bean进行实例化的操作了</p>
+<p>Bean的实例化分为两种情况延迟加载和非延迟加载</p>
+<p><strong><strong>这里只分析非延迟加载的情况</strong></strong></p>
+<p>Bean的实例化操作是在 <code>AbstractApplicationContext#refresh</code> 中的 <code>finishBeanFactoryInitialization</code> 方法中进行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">finishBeanFactoryInitialization</span><span class="o">(</span><span class="n">ConfigurableListableBeanFactory</span> <span class="n">beanFactory</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// 设置转换器
+</span><span class="c1"></span>		<span class="k">if</span> <span class="o">(</span><span class="n">beanFactory</span><span class="o">.</span><span class="na">containsBean</span><span class="o">(</span><span class="n">CONVERSION_SERVICE_BEAN_NAME</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
+				<span class="n">beanFactory</span><span class="o">.</span><span class="na">isTypeMatch</span><span class="o">(</span><span class="n">CONVERSION_SERVICE_BEAN_NAME</span><span class="o">,</span> <span class="n">ConversionService</span><span class="o">.</span><span class="na">class</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">beanFactory</span><span class="o">.</span><span class="na">setConversionService</span><span class="o">(</span>
+					<span class="n">beanFactory</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="n">CONVERSION_SERVICE_BEAN_NAME</span><span class="o">,</span> <span class="n">ConversionService</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+		<span class="o">}</span>
+
+        <span class="c1">//省略部份代码
+</span><span class="c1"></span>
+				<span class="c1">// 处理代码织入
+</span><span class="c1"></span>				<span class="n">String</span><span class="o">[]</span> <span class="n">weaverAwareNames</span> <span class="o">=</span> <span class="n">beanFactory</span><span class="o">.</span><span class="na">getBeanNamesForType</span><span class="o">(</span><span class="n">LoadTimeWeaverAware</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+		<span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">weaverAwareName</span> <span class="o">:</span> <span class="n">weaverAwareNames</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">getBean</span><span class="o">(</span><span class="n">weaverAwareName</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="c1">// 准备初始化非懒加载Bean
+</span><span class="c1"></span>		<span class="n">beanFactory</span><span class="o">.</span><span class="na">preInstantiateSingletons</span><span class="o">();</span>
+	<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看出其中关键方法为 <code>preInstantiateSingletons</code></p>
+<p>Bean实例化时序图</p>
+<figure><img src="/ox-hugo/2021-12-27_16-43-45_2018-03-09-100625.jpg"/>
+</figure>
+
+<p>可以看出核心是 <code>instantiateBean</code> 和 <code>applyPropertyValues</code> 方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">protected</span> <span class="n">BeanWrapper</span> <span class="nf">instantiateBean</span><span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">beanName</span><span class="o">,</span> <span class="kd">final</span> <span class="n">RootBeanDefinition</span> <span class="n">mbd</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">Object</span> <span class="n">beanInstance</span><span class="o">;</span>
+			<span class="kd">final</span> <span class="n">BeanFactory</span> <span class="n">parent</span> <span class="o">=</span> <span class="k">this</span><span class="o">;</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">getSecurityManager</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">beanInstance</span> <span class="o">=</span> <span class="n">AccessController</span><span class="o">.</span><span class="na">doPrivileged</span><span class="o">(</span><span class="k">new</span> <span class="n">PrivilegedAction</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;()</span> <span class="o">{</span>
+					<span class="nd">@Override</span>
+					<span class="kd">public</span> <span class="n">Object</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+					<span class="c1">//策略模式默认调用CglibSubclassingInstantiationStrategy
+</span><span class="c1"></span>						<span class="k">return</span> <span class="n">getInstantiationStrategy</span><span class="o">().</span><span class="na">instantiate</span><span class="o">(</span><span class="n">mbd</span><span class="o">,</span> <span class="n">beanName</span><span class="o">,</span> <span class="n">parent</span><span class="o">);</span>
+					<span class="o">}</span>
+				<span class="o">},</span> <span class="n">getAccessControlContext</span><span class="o">());</span>
+			<span class="o">}</span>
+			<span class="k">else</span> <span class="o">{</span>
+				<span class="n">beanInstance</span> <span class="o">=</span> <span class="n">getInstantiationStrategy</span><span class="o">().</span><span class="na">instantiate</span><span class="o">(</span><span class="n">mbd</span><span class="o">,</span> <span class="n">beanName</span><span class="o">,</span> <span class="n">parent</span><span class="o">);</span>
+			<span class="o">}</span>
+			<span class="c1">//BeanWrapper是实例Bean的再次包装
+</span><span class="c1"></span>			<span class="n">BeanWrapper</span> <span class="n">bw</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BeanWrapperImpl</span><span class="o">(</span><span class="n">beanInstance</span><span class="o">);</span>
+			<span class="n">initBeanWrapper</span><span class="o">(</span><span class="n">bw</span><span class="o">);</span>
+			<span class="k">return</span> <span class="n">bw</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="n">BeanCreationException</span><span class="o">(</span><span class="n">mbd</span><span class="o">.</span><span class="na">getResourceDescription</span><span class="o">(),</span> <span class="n">beanName</span><span class="o">,</span> <span class="s">&#34;Instantiation of bean failed&#34;</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>再看 <code>SimpleInstantiationStrategy#instantiate(RootBeanDefinition, String,BeanFactory)</code> 方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Object</span> <span class="nf">instantiate</span><span class="o">(</span><span class="n">RootBeanDefinition</span> <span class="n">bd</span><span class="o">,</span> <span class="n">String</span> <span class="n">beanName</span><span class="o">,</span> <span class="n">BeanFactory</span> <span class="n">owner</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// Don&#39;t override the class with CGLIB if no overrides.
+</span><span class="c1"></span>		<span class="k">if</span> <span class="o">(</span><span class="n">bd</span><span class="o">.</span><span class="na">getMethodOverrides</span><span class="o">().</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+			<span class="n">Constructor</span><span class="o">&lt;?&gt;</span> <span class="n">constructorToUse</span><span class="o">;</span>
+			<span class="kd">synchronized</span> <span class="o">(</span><span class="n">bd</span><span class="o">.</span><span class="na">constructorArgumentLock</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">//获取构造方法或者工厂方法
+</span><span class="c1"></span>				<span class="n">constructorToUse</span> <span class="o">=</span> <span class="o">(</span><span class="n">Constructor</span><span class="o">&lt;?&gt;)</span> <span class="n">bd</span><span class="o">.</span><span class="na">resolvedConstructorOrFactoryMethod</span><span class="o">;</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">constructorToUse</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+					<span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="na">getBeanClass</span><span class="o">();</span>
+					<span class="k">if</span> <span class="o">(</span><span class="n">clazz</span><span class="o">.</span><span class="na">isInterface</span><span class="o">())</span> <span class="o">{</span>
+						<span class="k">throw</span> <span class="k">new</span> <span class="n">BeanInstantiationException</span><span class="o">(</span><span class="n">clazz</span><span class="o">,</span> <span class="s">&#34;Specified class is an interface&#34;</span><span class="o">);</span>
+					<span class="o">}</span>
+					<span class="k">try</span> <span class="o">{</span>
+						<span class="k">if</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">getSecurityManager</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+							<span class="n">constructorToUse</span> <span class="o">=</span> <span class="n">AccessController</span><span class="o">.</span><span class="na">doPrivileged</span><span class="o">(</span><span class="k">new</span> <span class="n">PrivilegedExceptionAction</span><span class="o">&lt;</span><span class="n">Constructor</span><span class="o">&lt;?&gt;&gt;()</span> <span class="o">{</span>
+								<span class="nd">@Override</span>
+								<span class="kd">public</span> <span class="n">Constructor</span><span class="o">&lt;?&gt;</span> <span class="n">run</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+									<span class="k">return</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">((</span><span class="n">Class</span><span class="o">[])</span> <span class="kc">null</span><span class="o">);</span>
+								<span class="o">}</span>
+							<span class="o">});</span>
+						<span class="o">}</span>
+						<span class="k">else</span> <span class="o">{</span>
+							<span class="n">constructorToUse</span> <span class="o">=</span>	<span class="n">clazz</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">((</span><span class="n">Class</span><span class="o">[])</span> <span class="kc">null</span><span class="o">);</span>
+						<span class="o">}</span>
+						<span class="n">bd</span><span class="o">.</span><span class="na">resolvedConstructorOrFactoryMethod</span> <span class="o">=</span> <span class="n">constructorToUse</span><span class="o">;</span>
+					<span class="o">}</span>
+					<span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+						<span class="k">throw</span> <span class="k">new</span> <span class="n">BeanInstantiationException</span><span class="o">(</span><span class="n">clazz</span><span class="o">,</span> <span class="s">&#34;No default constructor found&#34;</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+					<span class="o">}</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+			<span class="c1">//使用BeanUtils实例化,里面调用的是构造方法实例化
+</span><span class="c1"></span>			<span class="k">return</span> <span class="n">BeanUtils</span><span class="o">.</span><span class="na">instantiateClass</span><span class="o">(</span><span class="n">constructorToUse</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">else</span> <span class="o">{</span>
+		<span class="c1">//CglibSubclassingInstantiationStrategy重写了该方法,使用cglib实例化
+</span><span class="c1"></span>			<span class="k">return</span> <span class="n">instantiateWithMethodInjection</span><span class="o">(</span><span class="n">bd</span><span class="o">,</span> <span class="n">beanName</span><span class="o">,</span> <span class="n">owner</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>具体的cglib方法就不展开了,对象实例化之后还需要将其属性填充进去,并完成依赖关系的处理,这个过程叫依赖注入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">applyPropertyValues</span><span class="o">(</span><span class="n">String</span> <span class="n">beanName</span><span class="o">,</span> <span class="n">BeanDefinition</span> <span class="n">mbd</span><span class="o">,</span> <span class="n">BeanWrapper</span> <span class="n">bw</span><span class="o">,</span> <span class="n">PropertyValues</span> <span class="n">pvs</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">pvs</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">pvs</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+			<span class="k">return</span><span class="o">;</span>
+		<span class="o">}</span>
+
+		<span class="n">MutablePropertyValues</span> <span class="n">mpvs</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="n">List</span><span class="o">&lt;</span><span class="n">PropertyValue</span><span class="o">&gt;</span> <span class="n">original</span><span class="o">;</span>
+
+		<span class="k">if</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">getSecurityManager</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">bw</span> <span class="k">instanceof</span> <span class="n">BeanWrapperImpl</span><span class="o">)</span> <span class="o">{</span>
+				<span class="o">((</span><span class="n">BeanWrapperImpl</span><span class="o">)</span> <span class="n">bw</span><span class="o">).</span><span class="na">setSecurityContext</span><span class="o">(</span><span class="n">getAccessControlContext</span><span class="o">());</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+
+		<span class="k">if</span> <span class="o">(</span><span class="n">pvs</span> <span class="k">instanceof</span> <span class="n">MutablePropertyValues</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">mpvs</span> <span class="o">=</span> <span class="o">(</span><span class="n">MutablePropertyValues</span><span class="o">)</span> <span class="n">pvs</span><span class="o">;</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">mpvs</span><span class="o">.</span><span class="na">isConverted</span><span class="o">())</span> <span class="o">{</span>
+				<span class="c1">// Shortcut: use the pre-converted values as-is.
+</span><span class="c1"></span>				<span class="k">try</span> <span class="o">{</span>
+					<span class="n">bw</span><span class="o">.</span><span class="na">setPropertyValues</span><span class="o">(</span><span class="n">mpvs</span><span class="o">);</span>
+					<span class="k">return</span><span class="o">;</span>
+				<span class="o">}</span>
+				<span class="k">catch</span> <span class="o">(</span><span class="n">BeansException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+					<span class="k">throw</span> <span class="k">new</span> <span class="n">BeanCreationException</span><span class="o">(</span>
+							<span class="n">mbd</span><span class="o">.</span><span class="na">getResourceDescription</span><span class="o">(),</span> <span class="n">beanName</span><span class="o">,</span> <span class="s">&#34;Error setting property values&#34;</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+			<span class="n">original</span> <span class="o">=</span> <span class="n">mpvs</span><span class="o">.</span><span class="na">getPropertyValueList</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="k">else</span> <span class="o">{</span>
+			<span class="n">original</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">pvs</span><span class="o">.</span><span class="na">getPropertyValues</span><span class="o">());</span>
+		<span class="o">}</span>
+<span class="c1">//自定义类型转换器
+</span><span class="c1"></span>		<span class="n">TypeConverter</span> <span class="n">converter</span> <span class="o">=</span> <span class="n">getCustomTypeConverter</span><span class="o">();</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">converter</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">converter</span> <span class="o">=</span> <span class="n">bw</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="n">BeanDefinitionValueResolver</span> <span class="n">valueResolver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BeanDefinitionValueResolver</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">beanName</span><span class="o">,</span> <span class="n">mbd</span><span class="o">,</span> <span class="n">converter</span><span class="o">);</span>
+
+		<span class="c1">//创建副本用于转换及注入到Bean中
+</span><span class="c1"></span>		<span class="n">List</span><span class="o">&lt;</span><span class="n">PropertyValue</span><span class="o">&gt;</span> <span class="n">deepCopy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">PropertyValue</span><span class="o">&gt;(</span><span class="n">original</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
+		<span class="kt">boolean</span> <span class="n">resolveNecessary</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+		<span class="k">for</span> <span class="o">(</span><span class="n">PropertyValue</span> <span class="n">pv</span> <span class="o">:</span> <span class="n">original</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">pv</span><span class="o">.</span><span class="na">isConverted</span><span class="o">())</span> <span class="o">{</span>
+				<span class="n">deepCopy</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">pv</span><span class="o">);</span>
+			<span class="o">}</span>
+			<span class="k">else</span> <span class="o">{</span>
+				<span class="n">String</span> <span class="n">propertyName</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+				<span class="n">Object</span> <span class="n">originalValue</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
+				<span class="c1">//通过属性获取值,并处理依赖关系
+</span><span class="c1"></span>				<span class="n">Object</span> <span class="n">resolvedValue</span> <span class="o">=</span> <span class="n">valueResolver</span><span class="o">.</span><span class="na">resolveValueIfNecessary</span><span class="o">(</span><span class="n">pv</span><span class="o">,</span> <span class="n">originalValue</span><span class="o">);</span>
+				<span class="n">Object</span> <span class="n">convertedValue</span> <span class="o">=</span> <span class="n">resolvedValue</span><span class="o">;</span>
+				<span class="kt">boolean</span> <span class="n">convertible</span> <span class="o">=</span> <span class="n">bw</span><span class="o">.</span><span class="na">isWritableProperty</span><span class="o">(</span><span class="n">propertyName</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
+						<span class="o">!</span><span class="n">PropertyAccessorUtils</span><span class="o">.</span><span class="na">isNestedOrIndexedProperty</span><span class="o">(</span><span class="n">propertyName</span><span class="o">);</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">convertible</span><span class="o">)</span> <span class="o">{</span>
+					<span class="n">convertedValue</span> <span class="o">=</span> <span class="n">convertForProperty</span><span class="o">(</span><span class="n">resolvedValue</span><span class="o">,</span> <span class="n">propertyName</span><span class="o">,</span> <span class="n">bw</span><span class="o">,</span> <span class="n">converter</span><span class="o">);</span>
+				<span class="o">}</span>
+				<span class="c1">// Possibly store converted value in merged bean definition,
+</span><span class="c1"></span>				<span class="c1">// in order to avoid re-conversion for every created bean instance.
+</span><span class="c1"></span>				<span class="k">if</span> <span class="o">(</span><span class="n">resolvedValue</span> <span class="o">==</span> <span class="n">originalValue</span><span class="o">)</span> <span class="o">{</span>
+					<span class="k">if</span> <span class="o">(</span><span class="n">convertible</span><span class="o">)</span> <span class="o">{</span>
+						<span class="n">pv</span><span class="o">.</span><span class="na">setConvertedValue</span><span class="o">(</span><span class="n">convertedValue</span><span class="o">);</span>
+					<span class="o">}</span>
+					<span class="n">deepCopy</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">pv</span><span class="o">);</span>
+				<span class="o">}</span>
+				<span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">convertible</span> <span class="o">&amp;&amp;</span> <span class="n">originalValue</span> <span class="k">instanceof</span> <span class="n">TypedStringValue</span> <span class="o">&amp;&amp;</span>
+						<span class="o">!((</span><span class="n">TypedStringValue</span><span class="o">)</span> <span class="n">originalValue</span><span class="o">).</span><span class="na">isDynamic</span><span class="o">()</span> <span class="o">&amp;&amp;</span>
+						<span class="o">!(</span><span class="n">convertedValue</span> <span class="k">instanceof</span> <span class="n">Collection</span> <span class="o">||</span> <span class="n">ObjectUtils</span><span class="o">.</span><span class="na">isArray</span><span class="o">(</span><span class="n">convertedValue</span><span class="o">)))</span> <span class="o">{</span>
+					<span class="n">pv</span><span class="o">.</span><span class="na">setConvertedValue</span><span class="o">(</span><span class="n">convertedValue</span><span class="o">);</span>
+					<span class="n">deepCopy</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">pv</span><span class="o">);</span>
+				<span class="o">}</span>
+				<span class="k">else</span> <span class="o">{</span>
+					<span class="n">resolveNecessary</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+					<span class="n">deepCopy</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">PropertyValue</span><span class="o">(</span><span class="n">pv</span><span class="o">,</span> <span class="n">convertedValue</span><span class="o">));</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">mpvs</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">resolveNecessary</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">mpvs</span><span class="o">.</span><span class="na">setConverted</span><span class="o">();</span>
+		<span class="o">}</span>
+
+		<span class="c1">// 参数注入的地方
+</span><span class="c1"></span>		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">bw</span><span class="o">.</span><span class="na">setPropertyValues</span><span class="o">(</span><span class="k">new</span> <span class="n">MutablePropertyValues</span><span class="o">(</span><span class="n">deepCopy</span><span class="o">));</span>
+		<span class="o">}</span>
+		<span class="k">catch</span> <span class="o">(</span><span class="n">BeansException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="n">BeanCreationException</span><span class="o">(</span>
+					<span class="n">mbd</span><span class="o">.</span><span class="na">getResourceDescription</span><span class="o">(),</span> <span class="n">beanName</span><span class="o">,</span> <span class="s">&#34;Error setting property values&#34;</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>处理依赖关系的方法 <code>BeanDefinitionValueResolver#resolveValueIfNecessary</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Object</span> <span class="nf">resolveValueIfNecessary</span><span class="o">(</span><span class="n">Object</span> <span class="n">argName</span><span class="o">,</span> <span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">//如果该Bean被其它对象依赖时
+</span><span class="c1"></span>		<span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="k">instanceof</span> <span class="n">RuntimeBeanReference</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">RuntimeBeanReference</span> <span class="n">ref</span> <span class="o">=</span> <span class="o">(</span><span class="n">RuntimeBeanReference</span><span class="o">)</span> <span class="n">value</span><span class="o">;</span>
+			<span class="k">return</span> <span class="n">resolveReference</span><span class="o">(</span><span class="n">argName</span><span class="o">,</span> <span class="n">ref</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="k">instanceof</span> <span class="n">RuntimeBeanNameReference</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">//省略源码
+</span><span class="c1"></span>		<span class="o">}</span>
+		<span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="k">instanceof</span> <span class="n">BeanDefinitionHolder</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// Resolve BeanDefinitionHolder: contains BeanDefinition with name and aliases.
+</span><span class="c1"></span>			<span class="n">BeanDefinitionHolder</span> <span class="n">bdHolder</span> <span class="o">=</span> <span class="o">(</span><span class="n">BeanDefinitionHolder</span><span class="o">)</span> <span class="n">value</span><span class="o">;</span>
+			<span class="k">return</span> <span class="n">resolveInnerBean</span><span class="o">(</span><span class="n">argName</span><span class="o">,</span> <span class="n">bdHolder</span><span class="o">.</span><span class="na">getBeanName</span><span class="o">(),</span> <span class="n">bdHolder</span><span class="o">.</span><span class="na">getBeanDefinition</span><span class="o">());</span>
+		<span class="o">}</span>
+		<span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="k">instanceof</span> <span class="n">BeanDefinition</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">//省略源码
+</span><span class="c1"></span>			<span class="k">return</span> <span class="n">resolveInnerBean</span><span class="o">(</span><span class="n">argName</span><span class="o">,</span> <span class="n">innerBeanName</span><span class="o">,</span> <span class="n">bd</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="k">instanceof</span> <span class="n">ManagedArray</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">//省略源码
+</span><span class="c1"></span>			<span class="k">return</span> <span class="n">resolveManagedArray</span><span class="o">(</span><span class="n">argName</span><span class="o">,</span> <span class="o">(</span><span class="n">List</span><span class="o">&lt;?&gt;)</span> <span class="n">value</span><span class="o">,</span> <span class="n">elementType</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="k">instanceof</span> <span class="n">ManagedList</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// May need to resolve contained runtime references.
+</span><span class="c1"></span>			<span class="k">return</span> <span class="n">resolveManagedList</span><span class="o">(</span><span class="n">argName</span><span class="o">,</span> <span class="o">(</span><span class="n">List</span><span class="o">&lt;?&gt;)</span> <span class="n">value</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="k">instanceof</span> <span class="n">ManagedSet</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// May need to resolve contained runtime references.
+</span><span class="c1"></span>			<span class="k">return</span> <span class="n">resolveManagedSet</span><span class="o">(</span><span class="n">argName</span><span class="o">,</span> <span class="o">(</span><span class="n">Set</span><span class="o">&lt;?&gt;)</span> <span class="n">value</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="k">instanceof</span> <span class="n">ManagedMap</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// May need to resolve contained runtime references.
+</span><span class="c1"></span>			<span class="k">return</span> <span class="n">resolveManagedMap</span><span class="o">(</span><span class="n">argName</span><span class="o">,</span> <span class="o">(</span><span class="n">Map</span><span class="o">&lt;?,</span> <span class="o">?&gt;)</span> <span class="n">value</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="k">instanceof</span> <span class="n">ManagedProperties</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">//省略源码
+</span><span class="c1"></span>			<span class="k">return</span> <span class="n">copy</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="k">instanceof</span> <span class="n">TypedStringValue</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">//省略源码
+</span><span class="c1"></span>		<span class="o">}</span>
+		<span class="k">else</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="n">evaluate</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="n">Object</span> <span class="nf">resolveInnerBean</span><span class="o">(</span><span class="n">Object</span> <span class="n">argName</span><span class="o">,</span> <span class="n">String</span> <span class="n">innerBeanName</span><span class="o">,</span> <span class="n">BeanDefinition</span> <span class="n">innerBd</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">RootBeanDefinition</span> <span class="n">mbd</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">mbd</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">beanFactory</span><span class="o">.</span><span class="na">getMergedBeanDefinition</span><span class="o">(</span><span class="n">innerBeanName</span><span class="o">,</span> <span class="n">innerBd</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">beanDefinition</span><span class="o">);</span>
+			<span class="c1">// Check given bean name whether it is unique. If not already unique,
+</span><span class="c1"></span>			<span class="c1">// add counter - increasing the counter until the name is unique.
+</span><span class="c1"></span>			<span class="n">String</span> <span class="n">actualInnerBeanName</span> <span class="o">=</span> <span class="n">innerBeanName</span><span class="o">;</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">mbd</span><span class="o">.</span><span class="na">isSingleton</span><span class="o">())</span> <span class="o">{</span>
+				<span class="n">actualInnerBeanName</span> <span class="o">=</span> <span class="n">adaptInnerBeanName</span><span class="o">(</span><span class="n">innerBeanName</span><span class="o">);</span>
+			<span class="o">}</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">beanFactory</span><span class="o">.</span><span class="na">registerContainedBean</span><span class="o">(</span><span class="n">actualInnerBeanName</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">beanName</span><span class="o">);</span>
+			<span class="c1">// 确保依赖的Bean已经被实例化
+</span><span class="c1"></span>			<span class="n">String</span><span class="o">[]</span> <span class="n">dependsOn</span> <span class="o">=</span> <span class="n">mbd</span><span class="o">.</span><span class="na">getDependsOn</span><span class="o">();</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">dependsOn</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="c1">// 获取依赖的Bean,如果没有被创建该方法会自动创建
+</span><span class="c1"></span>				<span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">dependsOnBean</span> <span class="o">:</span> <span class="n">dependsOn</span><span class="o">)</span> <span class="o">{</span>
+					<span class="k">this</span><span class="o">.</span><span class="na">beanFactory</span><span class="o">.</span><span class="na">registerDependentBean</span><span class="o">(</span><span class="n">dependsOnBean</span><span class="o">,</span> <span class="n">actualInnerBeanName</span><span class="o">);</span>
+					<span class="k">this</span><span class="o">.</span><span class="na">beanFactory</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="n">dependsOnBean</span><span class="o">);</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+			<span class="c1">//开始实例化Bean
+</span><span class="c1"></span>			<span class="n">Object</span> <span class="n">innerBean</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">beanFactory</span><span class="o">.</span><span class="na">createBean</span><span class="o">(</span><span class="n">actualInnerBeanName</span><span class="o">,</span> <span class="n">mbd</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">innerBean</span> <span class="k">instanceof</span> <span class="n">FactoryBean</span><span class="o">)</span> <span class="o">{</span>
+				<span class="kt">boolean</span> <span class="n">synthetic</span> <span class="o">=</span> <span class="n">mbd</span><span class="o">.</span><span class="na">isSynthetic</span><span class="o">();</span>
+				<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">beanFactory</span><span class="o">.</span><span class="na">getObjectFromFactoryBean</span><span class="o">(</span>
+						<span class="o">(</span><span class="n">FactoryBean</span><span class="o">&lt;?&gt;)</span> <span class="n">innerBean</span><span class="o">,</span> <span class="n">actualInnerBeanName</span><span class="o">,</span> <span class="o">!</span><span class="n">synthetic</span><span class="o">);</span>
+			<span class="o">}</span>
+			<span class="k">else</span> <span class="o">{</span>
+				<span class="k">return</span> <span class="n">innerBean</span><span class="o">;</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+		<span class="k">catch</span> <span class="o">(</span><span class="n">BeansException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="n">BeanCreationException</span><span class="o">(</span>
+					<span class="k">this</span><span class="o">.</span><span class="na">beanDefinition</span><span class="o">.</span><span class="na">getResourceDescription</span><span class="o">(),</span> <span class="k">this</span><span class="o">.</span><span class="na">beanName</span><span class="o">,</span>
+					<span class="s">&#34;Cannot create inner bean &#39;&#34;</span> <span class="o">+</span> <span class="n">innerBeanName</span> <span class="o">+</span> <span class="s">&#34;&#39; &#34;</span> <span class="o">+</span>
+					<span class="o">(</span><span class="n">mbd</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">mbd</span><span class="o">.</span><span class="na">getBeanClassName</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="s">&#34;of type [&#34;</span> <span class="o">+</span> <span class="n">mbd</span><span class="o">.</span><span class="na">getBeanClassName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;] &#34;</span> <span class="o">:</span> <span class="s">&#34;&#34;</span><span class="o">)</span> <span class="o">+</span>
+					<span class="s">&#34;while setting &#34;</span> <span class="o">+</span> <span class="n">argName</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>参数注入
+<code>AbstractNestablePropertyAccessor#setPropertyValue(AbstractNestablePropertyAccessor.PropertyTokenHolder, PropertyValue)</code>
+方法比较长,就不贴了,主要是对集合类和非集合类的注入</p>
+<p>对集合类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">//如果是list类型
+</span><span class="c1"></span><span class="k">if</span> <span class="o">(</span><span class="n">propValue</span> <span class="k">instanceof</span> <span class="n">List</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">PropertyHandler</span> <span class="n">ph</span> <span class="o">=</span> <span class="n">getPropertyHandler</span><span class="o">(</span><span class="n">actualName</span><span class="o">);</span>
+				<span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">requiredType</span> <span class="o">=</span> <span class="n">ph</span><span class="o">.</span><span class="na">getCollectionType</span><span class="o">(</span><span class="n">tokens</span><span class="o">.</span><span class="na">keys</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+				<span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;)</span> <span class="n">propValue</span><span class="o">;</span>
+				<span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
+				<span class="n">Object</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">isExtractOldValueForEditor</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">())</span> <span class="o">{</span>
+					<span class="n">oldValue</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+				<span class="o">}</span>
+				<span class="c1">//如果有对应参数转换器则将原值转换
+</span><span class="c1"></span>				<span class="n">Object</span> <span class="n">convertedValue</span> <span class="o">=</span> <span class="n">convertIfNecessary</span><span class="o">(</span><span class="n">propertyName</span><span class="o">,</span> <span class="n">oldValue</span><span class="o">,</span> <span class="n">pv</span><span class="o">.</span><span class="na">getValue</span><span class="o">(),</span>
+						<span class="n">requiredType</span><span class="o">,</span> <span class="n">ph</span><span class="o">.</span><span class="na">nested</span><span class="o">(</span><span class="n">tokens</span><span class="o">.</span><span class="na">keys</span><span class="o">.</span><span class="na">length</span><span class="o">));</span>
+				<span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">size</span> <span class="o">&amp;&amp;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">.</span><span class="na">autoGrowCollectionLimit</span><span class="o">)</span> <span class="o">{</span>
+					<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">index</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+						<span class="k">try</span> <span class="o">{</span>
+							<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+						<span class="o">}</span>
+						<span class="k">catch</span> <span class="o">(</span><span class="n">NullPointerException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+							<span class="k">throw</span> <span class="k">new</span> <span class="n">InvalidPropertyException</span><span class="o">(</span><span class="n">getRootClass</span><span class="o">(),</span> <span class="k">this</span><span class="o">.</span><span class="na">nestedPath</span> <span class="o">+</span> <span class="n">propertyName</span><span class="o">,</span>
+									<span class="s">&#34;Cannot set element with index &#34;</span> <span class="o">+</span> <span class="n">index</span> <span class="o">+</span> <span class="s">&#34; in List of size &#34;</span> <span class="o">+</span>
+									<span class="n">size</span> <span class="o">+</span> <span class="s">&#34;, accessed using property path &#39;&#34;</span> <span class="o">+</span> <span class="n">propertyName</span> <span class="o">+</span>
+									<span class="s">&#34;&#39;: List does not support filling up gaps with null elements&#34;</span><span class="o">);</span>
+						<span class="o">}</span>
+					<span class="o">}</span>
+					<span class="c1">//如果超出原有长度,则新增数据
+</span><span class="c1"></span>					<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">convertedValue</span><span class="o">);</span>
+				<span class="o">}</span>
+				<span class="k">else</span> <span class="o">{</span>
+				<span class="c1">//替换原有值
+</span><span class="c1"></span>					<span class="k">try</span> <span class="o">{</span>
+						<span class="n">list</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">index</span><span class="o">,</span> <span class="n">convertedValue</span><span class="o">);</span>
+					<span class="o">}</span>
+					<span class="k">catch</span> <span class="o">(</span><span class="n">IndexOutOfBoundsException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+						<span class="k">throw</span> <span class="k">new</span> <span class="n">InvalidPropertyException</span><span class="o">(</span><span class="n">getRootClass</span><span class="o">(),</span> <span class="k">this</span><span class="o">.</span><span class="na">nestedPath</span> <span class="o">+</span> <span class="n">propertyName</span><span class="o">,</span>
+								<span class="s">&#34;Invalid list index in property path &#39;&#34;</span> <span class="o">+</span> <span class="n">propertyName</span> <span class="o">+</span> <span class="s">&#34;&#39;&#34;</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+					<span class="o">}</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>对非集合类 <code>org.springframework.beans.BeanWrapperImpl.BeanPropertyHandler#setValue</code> 方法使用反射注入参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setValue</span><span class="o">(</span><span class="kd">final</span> <span class="n">Object</span> <span class="n">object</span><span class="o">,</span> <span class="n">Object</span> <span class="n">valueToApply</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+			<span class="kd">final</span> <span class="n">Method</span> <span class="n">writeMethod</span> <span class="o">=</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">pd</span> <span class="k">instanceof</span> <span class="n">GenericTypeAwarePropertyDescriptor</span> <span class="o">?</span>
+					<span class="o">((</span><span class="n">GenericTypeAwarePropertyDescriptor</span><span class="o">)</span> <span class="k">this</span><span class="o">.</span><span class="na">pd</span><span class="o">).</span><span class="na">getWriteMethodForActualAccess</span><span class="o">()</span> <span class="o">:</span>
+					<span class="k">this</span><span class="o">.</span><span class="na">pd</span><span class="o">.</span><span class="na">getWriteMethod</span><span class="o">());</span>
+			<span class="k">if</span> <span class="o">(!</span><span class="n">Modifier</span><span class="o">.</span><span class="na">isPublic</span><span class="o">(</span><span class="n">writeMethod</span><span class="o">.</span><span class="na">getDeclaringClass</span><span class="o">().</span><span class="na">getModifiers</span><span class="o">())</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">writeMethod</span><span class="o">.</span><span class="na">isAccessible</span><span class="o">())</span> <span class="o">{</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">getSecurityManager</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+					<span class="n">AccessController</span><span class="o">.</span><span class="na">doPrivileged</span><span class="o">(</span><span class="k">new</span> <span class="n">PrivilegedAction</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;()</span> <span class="o">{</span>
+						<span class="nd">@Override</span>
+						<span class="kd">public</span> <span class="n">Object</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+							<span class="n">writeMethod</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+							<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+						<span class="o">}</span>
+					<span class="o">});</span>
+				<span class="o">}</span>
+				<span class="k">else</span> <span class="o">{</span>
+					<span class="n">writeMethod</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+			<span class="kd">final</span> <span class="n">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">valueToApply</span><span class="o">;</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">getSecurityManager</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="k">try</span> <span class="o">{</span>
+					<span class="n">AccessController</span><span class="o">.</span><span class="na">doPrivileged</span><span class="o">(</span><span class="k">new</span> <span class="n">PrivilegedExceptionAction</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;()</span> <span class="o">{</span>
+						<span class="nd">@Override</span>
+						<span class="kd">public</span> <span class="n">Object</span> <span class="nf">run</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+							<span class="n">writeMethod</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">object</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
+							<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+						<span class="o">}</span>
+					<span class="o">},</span> <span class="n">acc</span><span class="o">);</span>
+				<span class="o">}</span>
+				<span class="k">catch</span> <span class="o">(</span><span class="n">PrivilegedActionException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+					<span class="k">throw</span> <span class="n">ex</span><span class="o">.</span><span class="na">getException</span><span class="o">();</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+			<span class="k">else</span> <span class="o">{</span>
+				<span class="n">writeMethod</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">getWrappedInstance</span><span class="o">(),</span> <span class="n">value</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>到这一步Bean的实例化就结束了</p>
+<p>bean实例化相关结构</p>
+<figure><img src="/ox-hugo/123.png"/>
+</figure>
+
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">lialzm</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-12-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/hexo%E4%BD%BF%E7%94%A8%E7%BB%8F%E9%AA%8C/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">使用hexo在github上搭建博客</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/elasticsearch%E5%BB%BA%E6%A8%A1/">
+            <span class="next-text nav-default">Elasticsearch建模</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://lialzm.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>lialzm</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "en".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-2ZMLCV11NP', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

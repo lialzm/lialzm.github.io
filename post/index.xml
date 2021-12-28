@@ -6,7 +6,16 @@
     <description>Recent content in Posts on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 18 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>redis和数据库双写一致性</title>
+      <link>https://lialzm.github.io/post/redis%E5%A6%82%E4%BD%95%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4/</link>
+      <pubDate>Tue, 28 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/redis%E5%A6%82%E4%BD%95%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4/</guid>
+      <description>有如下四个假设方案 先更新数据库,再更新缓存 先删除缓存,再更新数据库 先更新数据库,再删除缓存 先更新缓存,再更新数据库 方案一 先更新数据库,再更新</description>
+    </item>
+    
     <item>
       <title>nomad介绍</title>
       <link>https://lialzm.github.io/post/nomad%E5%AE%89%E8%A3%85/</link>

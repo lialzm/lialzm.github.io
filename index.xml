@@ -6,7 +6,16 @@
     <description>Recent content on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 28 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>jenkins pipeline使用</title>
+      <link>https://lialzm.github.io/post/jenkins_pipeline%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Wed, 29 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/jenkins_pipeline%E4%BD%BF%E7%94%A8/</guid>
+      <description>Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高,</description>
+    </item>
+    
     <item>
       <title>redis和数据库双写一致性</title>
       <link>https://lialzm.github.io/post/redis%E5%A6%82%E4%BD%95%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4/</link>

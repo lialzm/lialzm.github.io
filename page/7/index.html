@@ -137,101 +137,19 @@ if (!doNotTrack) {
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/jenkins_pipeline%E4%BD%BF%E7%94%A8/">jenkins pipeline使用</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/">数据仓库概念介绍</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2021-12-29 </span>
+      <span class="post-time"> 0001-01-01 </span>
       
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高,
+      为什么需要数据仓库 如果直接从业务数据库取数据会有如下几个问题 结构复杂 数据杂乱（不同的数据库针对相同的业务可能会有不同的命名，处理方式） 理解困
     </div>
     <div class="read-more">
-      <a href="/post/jenkins_pipeline%E4%BD%BF%E7%94%A8/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/redis%E5%A6%82%E4%BD%95%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4/">redis和数据库双写一致性</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-12-28 </span>
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      有如下四个假设方案 先更新数据库,再更新缓存 先删除缓存,再更新数据库 先更新数据库,再删除缓存 先更新缓存,再更新数据库 方案一 先更新数据库,再更新
-    </div>
-    <div class="read-more">
-      <a href="/post/redis%E5%A6%82%E4%BD%95%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/nomad%E5%AE%89%E8%A3%85/">nomad介绍</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-12-18 </span>
-      <div class="post-category">
-          <a href="/categories/nomad%E6%89%8B%E5%86%8C/"> nomad手册 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      nomad是一个轻量级的工作编排工具,可以管理容器和非容器化的应用程序 官网 基础概念 架构图 agent 基础模块,每个运行nomad进程称为一个agent
-    </div>
-    <div class="read-more">
-      <a href="/post/nomad%E5%AE%89%E8%A3%85/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/nomad%E5%92%8Cdocker%E7%BB%93%E5%90%88/">nomad和docker结合</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-12-18 </span>
-      <div class="post-category">
-          <a href="/categories/nomad%E6%89%8B%E5%86%8C/"> nomad手册 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      nomad支持调度多种drive,比如docker,java,podman等,比较常用的是和docker的结合 要求版本 1.8.2和 1.9 一个简单
-    </div>
-    <div class="read-more">
-      <a href="/post/nomad%E5%92%8Cdocker%E7%BB%93%E5%90%88/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/nomad%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/">nomad配置文件介绍</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-12-18 </span>
-      <div class="post-category">
-          <a href="/categories/nomad%E6%89%8B%E5%86%8C/"> nomad手册 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      nomad的配置文件语法使用的是hashicorp自己开发的dsl,详细语法: GitHub - hashicorp/hcl: HCL is the HashiCorp configuration language. 下面是一个配置文件的介绍 1 2 3 4 5 6 7 8 9 10
-    </div>
-    <div class="read-more">
-      <a href="/post/nomad%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/" class="read-more-link">阅读更多</a>
+      <a href="/post/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -239,11 +157,11 @@ if (!doNotTrack) {
     </section>
   
   <nav class="pagination">
-    
-    <a class="next" href="/page/2/">
-        <span class="next-text">下一页</span>
-        <i class="iconfont icon-right"></i>
+    <a class="prev" href="/page/6/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">上一页</span>
       </a>
+    
   </nav>
         </div>
         

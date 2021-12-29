@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>redis和数据库双写一致性 - lialzm的博客</title>
+  <title>jenkins pipeline使用 - lialzm的博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="lialzm" /><meta name="description" content="有如下四个假设方案 先更新数据库,再更新缓存 先删除缓存,再更新数据库 先更新数据库,再删除缓存 先更新缓存,再更新数据库 方案一 先更新数据库,再更新" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="lialzm" /><meta name="description" content="Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高," /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
-<link rel="canonical" href="https://lialzm.github.io/post/redis%E5%A6%82%E4%BD%95%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4/" />
+<link rel="canonical" href="https://lialzm.github.io/post/jenkins_pipeline%E4%BD%BF%E7%94%A8/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,20 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="redis和数据库双写一致性" />
-<meta property="og:description" content="有如下四个假设方案 先更新数据库,再更新缓存 先删除缓存,再更新数据库 先更新数据库,再删除缓存 先更新缓存,再更新数据库 方案一 先更新数据库,再更新" />
+<meta property="og:title" content="jenkins pipeline使用" />
+<meta property="og:description" content="Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高," />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lialzm.github.io/post/redis%E5%A6%82%E4%BD%95%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-12-28T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-12-28T22:15:09+08:00" />
+<meta property="og:url" content="https://lialzm.github.io/post/jenkins_pipeline%E4%BD%BF%E7%94%A8/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-12-29T12:28:33+08:00" />
 
-<meta itemprop="name" content="redis和数据库双写一致性">
-<meta itemprop="description" content="有如下四个假设方案 先更新数据库,再更新缓存 先删除缓存,再更新数据库 先更新数据库,再删除缓存 先更新缓存,再更新数据库 方案一 先更新数据库,再更新"><meta itemprop="datePublished" content="2021-12-28T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-12-28T22:15:09+08:00" />
-<meta itemprop="wordCount" content="379">
-<meta itemprop="keywords" content="redis," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="redis和数据库双写一致性"/>
-<meta name="twitter:description" content="有如下四个假设方案 先更新数据库,再更新缓存 先删除缓存,再更新数据库 先更新数据库,再删除缓存 先更新缓存,再更新数据库 方案一 先更新数据库,再更新"/>
+<meta itemprop="name" content="jenkins pipeline使用">
+<meta itemprop="description" content="Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高,"><meta itemprop="datePublished" content="2021-12-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-12-29T12:28:33+08:00" />
+<meta itemprop="wordCount" content="400">
+<meta itemprop="keywords" content="jenkins," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="jenkins pipeline使用"/>
+<meta name="twitter:description" content="Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高,"/>
 
 
 <script type="application/javascript">
@@ -140,10 +140,10 @@ if (!doNotTrack) {
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">redis和数据库双写一致性</h1>
+      <h1 class="post-title">jenkins pipeline使用</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-12-28 </span>
+        <span class="post-time"> 2021-12-29 </span>
         
         
       </div>
@@ -156,11 +156,10 @@ if (!doNotTrack) {
   <ul>
     <li>
       <ul>
-        <li><a href="#方案一">方案一</a></li>
-        <li><a href="#方案二">方案二</a></li>
-        <li><a href="#方案三">方案三</a></li>
-        <li><a href="#方案四">方案四</a></li>
-        <li><a href="#总结">总结</a></li>
+        <li><a href="#声明式基础语法">声明式基础语法</a></li>
+        <li><a href="#从git获取代码">从git获取代码</a></li>
+        <li><a href="#逻辑控制">逻辑控制</a></li>
+        <li><a href="#在jenkins页面上的配置">在jenkins页面上的配置</a></li>
         <li><a href="#参考资料">参考资料</a></li>
       </ul>
     </li>
@@ -169,26 +168,39 @@ if (!doNotTrack) {
   </div>
 </div>
     <div class="post-content">
-      <p>有如下四个假设方案</p>
-<ol>
-<li>先更新数据库,再更新缓存</li>
-<li>先删除缓存,再更新数据库</li>
-<li>先更新数据库,再删除缓存</li>
-<li>先更新缓存,再更新数据库</li>
-</ol>
-<h2 id="方案一">方案一</h2>
-<p>先更新数据库,再更新缓存</p>
-<p>问题: 多线程场景可能会出现缓存是旧的情况</p>
-<figure><img src="/ox-hugo/2021-12-28-aa.png"/>
-</figure>
-
-<h2 id="方案二">方案二</h2>
-<p>先删除缓存,再更新数据库</p>
-<p>可能会出现不一致的情况,如下图这种情况在第三步和第四步之间就会出现不一致的情况</p>
-<figure><img src="/ox-hugo/2021-12-28-a2.png"/>
-</figure>
-
-<p>解决方案: 延时双删策略</p>
+      <p>Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高,官方现在主推Declarative</p>
+<h2 id="声明式基础语法">声明式基础语法</h2>
+<p>声明式的语法基本遵从 <code>pipeline-&gt;stages-&gt;stage-&gt;steps</code> 结构,下面是一个简单的例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy">    <span class="n">pipeline</span> <span class="o">{</span>
+        <span class="n">agent</span> <span class="n">any</span>
+        <span class="n">stages</span> <span class="o">{</span>
+            <span class="n">stage</span><span class="o">(</span><span class="s1">&#39;Build&#39;</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">steps</span> <span class="o">{</span>
+                    <span class="n">sh</span> <span class="s1">&#39;./gradlew clean build&#39;</span>
+                    <span class="n">archiveArtifacts</span> <span class="nl">artifacts:</span> <span class="s1">&#39;**/target/*.jar&#39;</span><span class="o">,</span> <span class="nl">fingerprint:</span> <span class="kc">true</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="从git获取代码">从git获取代码</h2>
+<p>jenkins内置了 git函数可以在pipeline里直接调用</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -197,32 +209,74 @@ if (!doNotTrack) {
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
-</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">,</span><span class="n">Object</span> <span class="n">data</span><span class="o">){</span>
-        <span class="n">redis</span><span class="o">.</span><span class="na">delKey</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
-        <span class="n">db</span><span class="o">.</span><span class="na">updateData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-        <span class="c1">// 这个时间可以根据自己的业务调整
-</span><span class="c1"></span>        <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">1000</span><span class="o">);</span>
-        <span class="n">redis</span><span class="o">.</span><span class="na">delKey</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
-    <span class="o">}</span>
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">   steps{
+       echo &#39;start&#39;
+       git branch: &#39;&lt;所在分支名称&gt;&#39;,
+               credentialsId: &#39;&lt;系统配置的密钥名称&gt;&#39;,
+               url: &#39;项目地址&#39;
+   }
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="方案三">方案三</h2>
-<p>先更新数据库,再删除缓存</p>
-<p>有专门的名称: <a href="https://docs.microsoft.com/en-us/azure/architecture/patterns/cache-aside">Cache-Aside pattern</a></p>
-<p>失效：应用程序先从cache取数据，没有得到，则从数据库中取数据，成功后，放到缓存中命中：应用程序从cache中取数据，取到后返回更新：先把数据存到数据库中，成功后，再让缓存失效。</p>
-<h2 id="方案四">方案四</h2>
-<p>先更新缓存,再更新数据库</p>
-<p>和方案1类似的问题</p>
-<figure><img src="/ox-hugo/2021-12-28-a3.png"/>
+</div><h2 id="逻辑控制">逻辑控制</h2>
+<p>使用场景: 不同的分支做不同的操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">   pipeline {
+      agent none
+      stages {
+          stage(&#39;Example Build&#39;) {
+              steps {
+                  echo &#39;Hello World&#39;
+              }
+          }
+          stage(&#39;Example Deploy&#39;) {
+              agent {
+                  label &#34;some-label&#34;
+              }
+              when {
+                  beforeAgent true //设置先对条件进行判断，符合预期才进入steps
+                  branch &#39;production&#39;
+              }
+              steps {
+                  echo &#39;Deploying&#39;
+              }
+          }
+      }
+  }
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="在jenkins页面上的配置">在jenkins页面上的配置</h2>
+<figure><img src="/ox-hugo/2021-12-29_12-26-04_screenshot.png"/>
 </figure>
 
-<h2 id="总结">总结</h2>
-<p>出现双写问题的本质原因是多线程写入顺序不可控</p>
 <h2 id="参考资料">参考资料</h2>
-<p><a href="https://zhuanlan.zhihu.com/p/59167071#(2)%E5%85%88%E5%88%A0%E7%BC%93%E5%AD%98%EF%BC%8C%E5%86%8D%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93">Redis与Mysql双写一致性方案解析 - 知乎</a></p>
+<p><a href="https://www.jenkins.io/doc/book/pipeline/">官方文档</a></p>
 
     </div>
 
@@ -234,7 +288,7 @@ if (!doNotTrack) {
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-12-28
+        2021-12-29
         
     </span>
   </p>
@@ -243,16 +297,12 @@ if (!doNotTrack) {
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/redis/">redis</a>
+          <a href="/tags/jenkins/">jenkins</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/jenkins_pipeline%E4%BD%BF%E7%94%A8/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">jenkins pipeline使用</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/nomad%E5%AE%89%E8%A3%85/">
-            <span class="next-text nav-default">nomad介绍</span>
+        
+        <a class="next" href="/post/redis%E5%A6%82%E4%BD%95%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4/">
+            <span class="next-text nav-default">redis和数据库双写一致性</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jenkins on lialzm的博客</title>
+    <link>https://lialzm.github.io/tags/jenkins/</link>
+    <description>Recent content in jenkins on lialzm的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 29 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>jenkins pipeline使用</title>
+      <link>https://lialzm.github.io/post/jenkins_pipeline%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Wed, 29 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/jenkins_pipeline%E4%BD%BF%E7%94%A8/</guid>
+      <description>Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高,</description>
+    </item>
+    
+  </channel>
+</rss>

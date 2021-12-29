@@ -6,7 +6,16 @@
     <description>Recent content in Tags on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 28 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>jenkins</title>
+      <link>https://lialzm.github.io/tags/jenkins/</link>
+      <pubDate>Wed, 29 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/tags/jenkins/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>redis</title>
       <link>https://lialzm.github.io/tags/redis/</link>

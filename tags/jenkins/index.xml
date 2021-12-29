@@ -16,5 +16,14 @@
       <description>Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高,</description>
     </item>
     
+    <item>
+      <title>jenkins pipeline结合docker实战</title>
+      <link>https://lialzm.github.io/post/jenkins_pipeline%E7%BB%93%E5%90%88docker%E5%AE%9E%E6%88%98/</link>
+      <pubDate>Wed, 29 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/jenkins_pipeline%E7%BB%93%E5%90%88docker%E5%AE%9E%E6%88%98/</guid>
+      <description>下面是一个示例配置文件,包含了常用的步骤,基本每一个步骤都有注解 其中docker打包借助了maven的插件maven插件 1 2 3 4 5 6 7 8 9 10</description>
+    </item>
+    
   </channel>
 </rss>

@@ -55,16 +55,16 @@
 <meta name="twitter:description" content="具体操作的时候注意ip的替换以及max_connections参数的变更 环境 docker postgres 10.14 详细步骤 环境准备 1 2 3 4 5 6 docker network create --driver bridge --subnet=172.18.12.0/16 --gateway=172.18.12.1 mynet docker run --name pgsmaster -p 5432:5432 --network=mynet"/>
 
 
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZMLCV11NP"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'G-2ZMLCV11NP', 'auto');
-	ga('set', 'anonymizeIp', true);
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-2ZMLCV11NP', { 'anonymize_ip': true });
 }
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 
 

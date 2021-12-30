@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lialzm.github.io/</loc>
+    <lastmod>2021-12-30T22:50:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/tags/mysql/</loc>
+    <lastmod>2021-12-30T22:50:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/post/mysql%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%92%8C%E6%97%A5%E5%BF%97%E4%B8%80%E8%87%B4%E6%80%A7/</loc>
+    <lastmod>2021-12-30T22:50:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/post/</loc>
+    <lastmod>2021-12-30T22:50:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/tags/</loc>
+    <lastmod>2021-12-30T22:50:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lialzm.github.io/tags/jenkins/</loc>
     <lastmod>2021-12-29T13:58:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -23,20 +58,6 @@
   </url>
   
   <url>
-    <loc>https://lialzm.github.io/</loc>
-    <lastmod>2021-12-29T20:48:40+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lialzm.github.io/post/</loc>
-    <lastmod>2021-12-29T20:48:40+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://lialzm.github.io/tags/redis/</loc>
     <lastmod>2021-12-29T20:48:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -45,13 +66,6 @@
   
   <url>
     <loc>https://lialzm.github.io/post/redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F_%E9%9B%AA%E5%B4%A9%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
-    <lastmod>2021-12-29T20:48:40+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lialzm.github.io/tags/</loc>
     <lastmod>2021-12-29T20:48:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -144,13 +158,6 @@
   <url>
     <loc>https://lialzm.github.io/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</loc>
     <lastmod>2021-12-08T18:23:42+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lialzm.github.io/tags/mysql/</loc>
-    <lastmod>2021-12-07T11:17:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

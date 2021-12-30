@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>jenkins pipeline使用 - lialzm的博客</title>
+  <title>mysql两阶段提交和日志一致性 - lialzm的博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="lialzm" /><meta name="description" content="Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高," /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="lialzm" /><meta name="description" content="redo log 当有一条记录要更新时，InnoDB 引擎就会先把记录写到 redo log（并更新内存），这个时候更新就算完成了。在适当的时候，将这个操作记录更新到" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
-<link rel="canonical" href="https://lialzm.github.io/post/jenkins_pipeline%E4%BD%BF%E7%94%A8/" />
+<link rel="canonical" href="https://lialzm.github.io/post/mysql%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%92%8C%E6%97%A5%E5%BF%97%E4%B8%80%E8%87%B4%E6%80%A7/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,20 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="jenkins pipeline使用" />
-<meta property="og:description" content="Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高," />
+<meta property="og:title" content="mysql两阶段提交和日志一致性" />
+<meta property="og:description" content="redo log 当有一条记录要更新时，InnoDB 引擎就会先把记录写到 redo log（并更新内存），这个时候更新就算完成了。在适当的时候，将这个操作记录更新到" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lialzm.github.io/post/jenkins_pipeline%E4%BD%BF%E7%94%A8/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-12-29T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-12-29T12:28:33+08:00" />
+<meta property="og:url" content="https://lialzm.github.io/post/mysql%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%92%8C%E6%97%A5%E5%BF%97%E4%B8%80%E8%87%B4%E6%80%A7/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-12-30T22:50:54+08:00" />
 
-<meta itemprop="name" content="jenkins pipeline使用">
-<meta itemprop="description" content="Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高,"><meta itemprop="datePublished" content="2021-12-29T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-12-29T12:28:33+08:00" />
-<meta itemprop="wordCount" content="400">
-<meta itemprop="keywords" content="jenkins," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="jenkins pipeline使用"/>
-<meta name="twitter:description" content="Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高,"/>
+<meta itemprop="name" content="mysql两阶段提交和日志一致性">
+<meta itemprop="description" content="redo log 当有一条记录要更新时，InnoDB 引擎就会先把记录写到 redo log（并更新内存），这个时候更新就算完成了。在适当的时候，将这个操作记录更新到"><meta itemprop="datePublished" content="2021-12-30T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-12-30T22:50:54+08:00" />
+<meta itemprop="wordCount" content="1232">
+<meta itemprop="keywords" content="mysql," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="mysql两阶段提交和日志一致性"/>
+<meta name="twitter:description" content="redo log 当有一条记录要更新时，InnoDB 引擎就会先把记录写到 redo log（并更新内存），这个时候更新就算完成了。在适当的时候，将这个操作记录更新到"/>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZMLCV11NP"></script>
@@ -140,13 +140,13 @@ if (!doNotTrack) {
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">jenkins pipeline使用</h1>
+      <h1 class="post-title">mysql两阶段提交和日志一致性</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-12-29 </span>
+        <span class="post-time"> 2021-12-30 </span>
         
-          <span class="more-meta"> 约 400 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 1232 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
     </header>
@@ -158,11 +158,13 @@ if (!doNotTrack) {
   <ul>
     <li>
       <ul>
-        <li><a href="#声明式基础语法">声明式基础语法</a></li>
-        <li><a href="#从git获取代码">从git获取代码</a></li>
-        <li><a href="#逻辑控制">逻辑控制</a></li>
-        <li><a href="#在jenkins页面上的配置">在jenkins页面上的配置</a></li>
-        <li><a href="#参考资料">参考资料</a></li>
+        <li><a href="#redo-log">redo log</a>
+          <ul>
+            <li><a href="#redo-log和binlog的区别">redo log和binlog的区别</a></li>
+          </ul>
+        </li>
+        <li><a href="#两阶段提交">两阶段提交</a></li>
+        <li><a href="#如何完成崩溃恢复">如何完成崩溃恢复</a></li>
       </ul>
     </li>
   </ul>
@@ -170,115 +172,59 @@ if (!doNotTrack) {
   </div>
 </div>
     <div class="post-content">
-      <p>Jenkins Pipeline 的语法分為两类,Declarative Pipeline(声明式) 和 Scripted Pipeline, Scripted类型基于groovy比较灵活,但是上手难度比较高,官方现在主推Declarative</p>
-<h2 id="声明式基础语法">声明式基础语法</h2>
-<p>声明式的语法基本遵从 <code>pipeline-&gt;stages-&gt;stage-&gt;steps</code> 结构,下面是一个简单的例子</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-groovy" data-lang="groovy">    <span class="n">pipeline</span> <span class="o">{</span>
-        <span class="n">agent</span> <span class="n">any</span>
-        <span class="n">stages</span> <span class="o">{</span>
-            <span class="n">stage</span><span class="o">(</span><span class="s1">&#39;Build&#39;</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">steps</span> <span class="o">{</span>
-                    <span class="n">sh</span> <span class="s1">&#39;./gradlew clean build&#39;</span>
-                    <span class="n">archiveArtifacts</span> <span class="nl">artifacts:</span> <span class="s1">&#39;**/target/*.jar&#39;</span><span class="o">,</span> <span class="nl">fingerprint:</span> <span class="kc">true</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="从git获取代码">从git获取代码</h2>
-<p>jenkins内置了 git函数可以在pipeline里直接调用</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">   steps{
-       echo &#39;start&#39;
-       git branch: &#39;&lt;所在分支名称&gt;&#39;,
-               credentialsId: &#39;&lt;系统配置的密钥名称&gt;&#39;,
-               url: &#39;项目地址&#39;
-   }
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="逻辑控制">逻辑控制</h2>
-<p>使用场景: 不同的分支做不同的操作</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">   pipeline {
-      agent none
-      stages {
-          stage(&#39;Example Build&#39;) {
-              steps {
-                  echo &#39;Hello World&#39;
-              }
-          }
-          stage(&#39;Example Deploy&#39;) {
-              agent {
-                  label &#34;some-label&#34;
-              }
-              when {
-                  beforeAgent true //设置先对条件进行判断，符合预期才进入steps
-                  branch &#39;production&#39;
-              }
-              steps {
-                  echo &#39;Deploying&#39;
-              }
-          }
-      }
-  }
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="在jenkins页面上的配置">在jenkins页面上的配置</h2>
-<figure><img src="/ox-hugo/2021-12-29_12-26-04_screenshot.png"/>
+      <h2 id="redo-log">redo log</h2>
+<blockquote>
+<p>当有一条记录要更新时，InnoDB 引擎就会先把记录写到 redo log（并更新内存），这个时候更新就算完成了。在适当的时候，将这个操作记录更新到磁盘里面</p>
+</blockquote>
+<ul>
+<li>
+<p>为什么需要redo log</p>
+<p>假设没有redo log,可以看到当数据库crash后,在内存中的数据就会丢失</p>
+</li>
+</ul>
+<figure><img src="/ox-hugo/acc.png"/>
 </figure>
 
-<h2 id="参考资料">参考资料</h2>
-<p><a href="https://www.jenkins.io/doc/book/pipeline/">官方文档</a></p>
+<ul>
+<li>
+<p>写入redo log失败怎么办</p>
+<p>借助undo log将数据恢复到事务开始前</p>
+</li>
+</ul>
+<h3 id="redo-log和binlog的区别">redo log和binlog的区别</h3>
+<ol>
+<li>binlog只有innodb才有</li>
+<li>binlog记录的是一种逻辑日志，即通过SQL语句的方式来记录数据库的修改；而InnoDB层产生的redo log是一种物理格式日志，其记录的是对于磁盘中每一个数据页的修改</li>
+<li>记录的时间点不同,binlog在事务提交完成后写入一次,redolog在事务过程中不断被写入,redo log不会随着事务的提交顺序进行写入</li>
+</ol>
+<h2 id="两阶段提交">两阶段提交</h2>
+<blockquote>
+<p>XA-2PC (two phase commit, 两阶段提交 )</p>
+<p>XA是由X/Open组织提出的分布式事务的规范。XA规范主要定义了(全局)事务管理器(TM: Transaction Manager)和(局部)资源管理器(RM: Resource Manager)之间的接口</p>
+<p>XA为了实现分布式事务，将事务的提交分成了两个阶段：也就是2PC (tow phase commit)，XA协议就是通过将事务的提交分为两个阶段来实现分布式事务</p>
+</blockquote>
+<p>prepare 阶段：第一阶段，事务管理器向所有涉及到的数据库服务器发出prepare&quot;准备提交&quot;请求，数据库收到请求后执行数据修改和日志记录等处理，处理完成后只是把事务的状态改成&quot;可以提交&quot;,然后把结果返回给事务管理器.</p>
+<p>commit阶段：事务管理器收到回应后进入第二阶段，如果在第一阶段内有任何一个数据库的操作发生了错误，或者事务管理器收不到某个数据库的回应，则认为事务失败，回撤所有数据库的事务。数据库服务器收不到第二阶段的确认提交请求，也会把&quot;可以提交&quot;的事务回撤。如果第一阶段中所有数据库都提交成功，那么事务管理器向数据库服务器发出&quot;确认提交&quot;请求，数据库服务器把事务的&quot;可以提交&quot;状态改为&quot;提交完成&quot;状态，然后返回应答</p>
+<figure><img src="/ox-hugo/a33.png"/>
+</figure>
+
+<ul>
+<li>
+<p>为什么需要两阶段提交</p>
+<p>因为mysql 数据恢复主要依靠redo log,假设没有两阶段提交会是什么样,流程变为下面这样</p>
+</li>
+</ul>
+<figure><img src="/ox-hugo/a33.png"/>
+</figure>
+
+<p>如果在写入binlog的时候,数据库crash了,恢复后基于redo log恢复数据的时候,因为binlog没有相关记录,这时候如果有从库的话,从库的记录和主库就不一致了</p>
+<h2 id="如何完成崩溃恢复">如何完成崩溃恢复</h2>
+<p>在做Crash recovery时，分为以下3种情况：</p>
+<ol>
+<li>binlog有记录，redolog状态commit：正常完成的事务，不需要恢复；</li>
+<li>binlog有记录，redolog状态prepare：在binlog写完提交事务之前的crash，恢复操作：提交事务。（因为之前没有提交）</li>
+<li>binlog无记录，redolog状态prepare：在binlog写完之前的crash，恢复操作：回滚事务（因为crash时并没有成功写入数据库）</li>
+</ol>
 
     </div>
 
@@ -290,7 +236,7 @@ if (!doNotTrack) {
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-12-29
+        2021-12-30
         
     </span>
   </p>
@@ -299,16 +245,12 @@ if (!doNotTrack) {
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/jenkins/">jenkins</a>
+          <a href="/tags/mysql/">mysql</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/mysql%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%92%8C%E6%97%A5%E5%BF%97%E4%B8%80%E8%87%B4%E6%80%A7/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">mysql两阶段提交和日志一致性</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/jenkins_pipeline%E7%BB%93%E5%90%88docker%E5%AE%9E%E6%88%98/">
-            <span class="next-text nav-default">jenkins pipeline结合docker实战</span>
+        
+        <a class="next" href="/post/jenkins_pipeline%E4%BD%BF%E7%94%A8/">
+            <span class="next-text nav-default">jenkins pipeline使用</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

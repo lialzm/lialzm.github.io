@@ -16,5 +16,14 @@
       <description>定义 锁(Lock)和synchronized同步块一样，是一种线程同步机制 Lock 接口及其主要实现类都位于java.util.concurrent</description>
     </item>
     
+    <item>
+      <title>java线程的使用</title>
+      <link>https://lialzm.github.io/post/java%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 29 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/java%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>线程的创建 java创建线程有两种方法 创建Thread的子类 1 2 3 4 5 6 7 public class MyThread extends Thread { public void run(){ System.out.println(&amp;#34;MyThread running&amp;#34;); } } ​MyThread myThread = new MyThread(); myTread.start(); 实现Runna</description>
+    </item>
+    
   </channel>
 </rss>

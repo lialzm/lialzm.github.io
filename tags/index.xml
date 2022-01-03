@@ -6,7 +6,16 @@
     <description>Recent content in Tags on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 30 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 03 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>java并发编程</title>
+      <link>https://lialzm.github.io/tags/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/tags/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>mysql</title>
       <link>https://lialzm.github.io/tags/mysql/</link>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>java中的锁-显性锁 - lialzm的博客</title>
+  <title>java中的锁 - lialzm的博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -39,19 +39,19 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="java中的锁-显性锁" />
+<meta property="og:title" content="java中的锁" />
 <meta property="og:description" content="定义 锁(Lock)和synchronized同步块一样，是一种线程同步机制 Lock 接口及其主要实现类都位于java.util.concurrent" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lialzm.github.io/post/java%E4%B8%AD%E7%9A%84%E9%94%81/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-04-06T22:30:00+00:00" />
-<meta property="article:modified_time" content="2018-04-06T22:30:00+00:00" />
+<meta property="article:published_time" content="2022-01-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-03T11:08:22+08:00" />
 
-<meta itemprop="name" content="java中的锁-显性锁">
-<meta itemprop="description" content="定义 锁(Lock)和synchronized同步块一样，是一种线程同步机制 Lock 接口及其主要实现类都位于java.util.concurrent"><meta itemprop="datePublished" content="2018-04-06T22:30:00+00:00" />
-<meta itemprop="dateModified" content="2018-04-06T22:30:00+00:00" />
-<meta itemprop="wordCount" content="2871">
-<meta itemprop="keywords" content="java,并发," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="java中的锁-显性锁"/>
+<meta itemprop="name" content="java中的锁">
+<meta itemprop="description" content="定义 锁(Lock)和synchronized同步块一样，是一种线程同步机制 Lock 接口及其主要实现类都位于java.util.concurrent"><meta itemprop="datePublished" content="2022-01-03T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-01-03T11:08:22+08:00" />
+<meta itemprop="wordCount" content="2874">
+<meta itemprop="keywords" content="java并发编程," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="java中的锁"/>
 <meta name="twitter:description" content="定义 锁(Lock)和synchronized同步块一样，是一种线程同步机制 Lock 接口及其主要实现类都位于java.util.concurrent"/>
 
 
@@ -140,12 +140,12 @@ if (!doNotTrack) {
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">java中的锁-显性锁</h1>
+      <h1 class="post-title">java中的锁</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2018-04-06 </span>
+        <span class="post-time"> 2022-01-03 </span>
         
-          <span class="more-meta"> 约 2871 字 </span>
+          <span class="more-meta"> 约 2874 字 </span>
           <span class="more-meta"> 预计阅读 6 分钟 </span>
         
       </div>
@@ -174,33 +174,54 @@ if (!doNotTrack) {
 </nav>
   </div>
 </div>
-  <div class="post-outdated">
-    <div class="warn">
-      <p>【注意】最后更新于 <span class="timeago" datetime="2018-04-06T22:30:00" title="April 6, 2018">April 6, 2018</span>，文中内容可能已过时，请谨慎使用。</p>
-    </div>
-  </div>
     <div class="post-content">
       <h2 id="定义">定义</h2>
+<blockquote>
 <p>锁(Lock)和synchronized同步块一样，是一种线程同步机制</p>
+</blockquote>
 <p>Lock 接口及其主要实现类都位于java.util.concurrent.locks包下</p>
-<p><strong>我们这里的显性锁主要指locks包下的</strong></p>
+<p><strong>我们这里的锁主要指locks包下的,synchronized有时候也被叫做内置锁</strong></p>
 <h2 id="java常用锁">java常用锁</h2>
-<p><img src="http://7fvicu.com1.z0.glb.clouddn.com/2018-04-21-084134.png" alt=""></p>
+<figure><img src="/ox-hugo/2022-01-03_11-02-14_1004772-996aba68bf1ab379.png.png"/>
+</figure>
+
 <h2 id="锁的种类">锁的种类</h2>
 <blockquote>
-<p>对于 Java 锁的分类没有严格意义的规则，我们常说的分类一般都是依据锁的特性、锁的设计、锁的状态等进行归纳整理的</p>
+<p>对于 Java
+锁的分类没有严格意义的规则，我们常说的分类一般都是依据锁的特性、锁的设计、锁的状态等进行归纳整理的</p>
 </blockquote>
-<p>公平锁、非公平锁：公平锁指多个线程按照申请锁的顺序来获取锁，非公平锁就是没有顺序完全随机，所以能会造成优先级反转或者饥饿现象；synchronized 就是非公平锁，ReentrantLock（使用 CAS 和 AQS 实现） 通过构造参数可以决定是非公平锁还是公平锁，默认构造是非公平锁；非公平锁的吞吐量性能比公平锁大好。</p>
-<p>可重入锁：又名递归锁，指在同一个线程在外层方法获取锁的时候在进入内层方法会自动获取锁，synchronized 和 ReentrantLock 都是可重入锁，可重入锁可以在一定程度避免死锁。</p>
-<p>独享锁、共享锁：独享锁是指该锁一次只能被一个线程持有，共享锁指该锁可以被多个线程持有；synchronized 和 ReentrantLock 都是独享锁，ReadWriteLock 的读锁是共享锁，写锁是独占锁；ReentrantLock 的独享锁和共享锁也是通过 AQS 来实现的。</p>
-<p>互斥锁、读写锁：其实就是独享锁、共享锁的具体说法；互斥锁实质就是 ReentrantLock，读写锁实质就是 ReadWriteLock。</p>
-<p>乐观锁、悲观锁：这个分类不是具体锁的分类，而是看待并发同步的角度；悲观锁认为对于同一个数据的并发操作一定是会发生修改的（哪怕实质没修改也认为会修改），因此对于同一个数据的并发操作悲观锁采取加锁的形式，因为悲观锁认为不加锁的操作一定有问题；乐观锁则认为对于同一个数据的并发操作是不会发生修改的，在更新数据的时候会采用不断的尝试更新，乐观锁认为不加锁的并发操作是没事的；由此可以看出悲观锁适合写操作非常多的场景，乐观锁适合读操作非常多的场景，不加锁会带来大量的性能提升，悲观锁在 java 中很常见，乐观锁其实就是基于 CAS 的无锁编程，譬如 java 的原子类就是通过 CAS 自旋实现的。</p>
-<p>分段锁：实质是一种锁的设计策略，不是具体的锁，对于 ConcurrentHashMap 而言其并发的实现就是通过分段锁的形式来实现高效并发操作；当要 put 元素时并不是对整个 hashmap 加锁，而是先通过 hashcode 知道它要放在哪个分段，然后对分段进行加锁，所以多线程 put 元素时只要放在的不是同一个分段就做到了真正的并行插入，但是统计 size 时就需要获取所有的分段锁才能统计；分段锁的设计是为了细化锁的粒度。</p>
-<p>偏向锁、轻量级锁、重量级锁：这种分类是按照锁状态来归纳的，并且是针对 synchronized 的，java 1.6 为了减少获取锁和释放锁带来的性能问题而引入的一种状态，其状态会随着竞争情况逐渐升级，锁可以升级但不能降级，意味着偏向锁升级成轻量级锁后无法降为偏向锁，这种升级无法降级的策略目的就是为了提高获得锁和释放锁的效率。</p>
-<p>自旋锁：其实是相对于互斥锁的概念，互斥锁线程会进入 WAITING 状态和 RUNNABLE 状态的切换，涉及上下文切换、cpu 抢占等开销，自旋锁的线程一直是 RUNNABLE 状态的，一直在那循环检测锁标志位，机制不重复，但是自旋锁加锁全程消耗 cpu，起始开销虽然低于互斥锁，但随着持锁时间加锁开销是线性增长。</p>
-<p>可中断锁：synchronized 是不可中断的，Lock 是可中断的，这里的可中断建立在阻塞等待中断，运行中是无法中断的。</p>
+<p>公平锁、非公平锁：公平锁指多个线程按照申请锁的顺序来获取锁，非公平锁就是没有顺序完全随机，所以能会造成优先级反转或者饥饿现象；synchronized
+就是非公平锁，ReentrantLock（使用 CAS 和 AQS 实现）通过构造参数可以决定是非公平锁还是公平锁，默认构造是非公平锁；非公平锁的吞吐量性能比公平锁大好。</p>
+<p>可重入锁：又名递归锁，指在同一个线程在外层方法获取锁的时候在进入内层方法会自动获取锁，synchronized
+和 ReentrantLock 都是可重入锁，可重入锁可以在一定程度避免死锁。</p>
+<p>独享锁、共享锁：独享锁是指该锁一次只能被一个线程持有，共享锁指该锁可以被多个线程持有；synchronized
+和 ReentrantLock 都是独享锁，ReadWriteLock
+的读锁是共享锁，写锁是独占锁；ReentrantLock 的独享锁和共享锁也是通过 AQS
+来实现的。</p>
+<p>互斥锁、读写锁：其实就是独享锁、共享锁的具体说法；互斥锁实质就是
+ReentrantLock，读写锁实质就是 ReadWriteLock。</p>
+<p>乐观锁、悲观锁：这个分类不是具体锁的分类，而是看待并发同步的角度；</p>
+<p>悲观锁认为对于同一个数据的并发操作一定是会发生修改的（哪怕实质没修改也认为会修改），因此对于同一个数据的并发操作悲观锁采取加锁的形式，因为悲观锁认为不加锁的操作一定有问题；</p>
+<p>乐观锁则认为对于同一个数据的并发操作是不会发生修改的，在更新数据的时候会采用不断的尝试更新，乐观锁认为不加锁的并发操作是没事的；由此可以看出悲观锁适合写操作非常多的场景，乐观锁适合读操作非常多的场景，不加锁会带来大量的性能提升，悲观锁在java 中很常见如 synchronized</p>
+<p>乐观锁其实就是基于 CAS 的无锁编程，譬如 java的原子类就是通过 CAS 自旋实现的。</p>
+<p>分段锁：实质是一种锁的设计策略，不是具体的锁，对于 ConcurrentHashMap
+而言其并发的实现就是通过分段锁的形式来实现高效并发操作；当要 put
+元素时并不是对整个 hashmap 加锁，而是先通过 hashcode
+知道它要放在哪个分段，然后对分段进行加锁，所以多线程 put
+元素时只要放在的不是同一个分段就做到了真正的并行插入，但是统计 size
+时就需要获取所有的分段锁才能统计；分段锁的设计是为了细化锁的粒度。</p>
+<p>偏向锁、轻量级锁、重量级锁：这种分类是按照锁状态来归纳的，并且是针对
+synchronized 的，java 1.6
+为了减少获取锁和释放锁带来的性能问题而引入的一种状态，其状态会随着竞争情况逐渐升级，锁可以升级但不能降级，意味着偏向锁升级成轻量级锁后无法降为偏向锁，这种升级无法降级的策略目的就是为了提高获得锁和释放锁的效率。</p>
+<p>自旋锁：其实是相对于互斥锁的概念，互斥锁线程会进入 WAITING 状态和
+RUNNABLE 状态的切换，涉及上下文切换、cpu 抢占等开销，自旋锁的线程一直是
+RUNNABLE
+状态的，一直在那循环检测锁标志位，机制不重复，但是自旋锁加锁全程消耗
+cpu，起始开销虽然低于互斥锁，但随着持锁时间加锁开销是线性增长。</p>
+<p>可中断锁：synchronized 是不可中断的，Lock
+是可中断的，这里的可中断建立在阻塞等待中断，运行中是无法中断的。</p>
 <p>参考资料</p>
-<p><a href="https://mp.weixin.qq.com/s/MPTGzjRV2lgJK4em4ZhN_Q">Java 常见的锁分类</a></p>
+<p><a href="https://mp.weixin.qq.com/s/MPTGzjRV2lgJK4em4ZhN%5FQ">Java 常见的锁分类</a></p>
 <h2 id="锁的可重入性">锁的可重入性</h2>
 <blockquote>
 <p>什么是可重入?
@@ -251,45 +272,41 @@ if (!doNotTrack) {
 </span><span class="lnt">28
 </span><span class="lnt">29
 </span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java">
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TheardTest013</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">AtomicReference</span><span class="o">&lt;</span><span class="n">Thread</span><span class="o">&gt;</span> <span class="n">reference</span><span class="o">=</span><span class="k">new</span> <span class="n">AtomicReference</span><span class="o">&lt;&gt;();</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">lock</span><span class="o">(){</span>
-        <span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;尝试获得锁&#34;</span><span class="o">);</span>
-        <span class="k">while</span> <span class="o">(!</span><span class="n">reference</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span><span class="n">thread</span><span class="o">)){</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java">    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TheardTest013</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">AtomicReference</span><span class="o">&lt;</span><span class="n">Thread</span><span class="o">&gt;</span> <span class="n">reference</span><span class="o">=</span><span class="k">new</span> <span class="n">AtomicReference</span><span class="o">&lt;&gt;();</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">lock</span><span class="o">(){</span>
+            <span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;尝试获得锁&#34;</span><span class="o">);</span>
+            <span class="k">while</span> <span class="o">(!</span><span class="n">reference</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span><span class="n">thread</span><span class="o">)){</span>
 
-        <span class="o">}</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;获得锁&#34;</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">unlock</span><span class="o">(){</span>
-       <span class="n">Thread</span> <span class="n">thread</span><span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
-       <span class="n">reference</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="n">thread</span><span class="o">,</span><span class="kc">null</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;释放锁&#34;</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">TheardTest013</span> <span class="n">theardTest013</span><span class="o">=</span><span class="k">new</span> <span class="n">TheardTest013</span><span class="o">();</span>
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
-            <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">theardTest013</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
-                <span class="n">theardTest013</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
-                <span class="n">theardTest013</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
-                <span class="n">theardTest013</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
             <span class="o">}</span>
-        <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;获得锁&#34;</span><span class="o">);</span>
+        <span class="o">}</span>
 
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">unlock</span><span class="o">(){</span>
+           <span class="n">Thread</span> <span class="n">thread</span><span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+           <span class="n">reference</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="n">thread</span><span class="o">,</span><span class="kc">null</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;释放锁&#34;</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">TheardTest013</span> <span class="n">theardTest013</span><span class="o">=</span><span class="k">new</span> <span class="n">TheardTest013</span><span class="o">();</span>
+            <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="n">theardTest013</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+                    <span class="n">theardTest013</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+                    <span class="n">theardTest013</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+                    <span class="n">theardTest013</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>在第二次执行<code>lock</code>方法时陷入死循环了</p>
+</div><p>在第二次执行 <code>lock</code> 方法时陷入死循环了</p>
 <p>一个可重入锁的实现</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -344,59 +361,59 @@ if (!doNotTrack) {
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TheardTest013</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">AtomicReference</span><span class="o">&lt;</span><span class="n">Thread</span><span class="o">&gt;</span> <span class="n">reference</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicReference</span><span class="o">&lt;&gt;();</span>
-    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">count</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java">    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TheardTest013</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">AtomicReference</span><span class="o">&lt;</span><span class="n">Thread</span><span class="o">&gt;</span> <span class="n">reference</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicReference</span><span class="o">&lt;&gt;();</span>
+        <span class="kd">private</span> <span class="n">Integer</span> <span class="n">count</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">lock</span><span class="o">(){</span>
-        <span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;尝试获得锁&#34;</span><span class="o">);</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">lock</span><span class="o">(){</span>
+            <span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;尝试获得锁&#34;</span><span class="o">);</span>
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">thread</span> <span class="o">==</span> <span class="n">reference</span><span class="o">.</span><span class="na">get</span><span class="o">())</span> <span class="o">{</span>
-            <span class="n">count</span><span class="o">++;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">thread</span> <span class="o">==</span> <span class="n">reference</span><span class="o">.</span><span class="na">get</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">count</span><span class="o">++;</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;获得锁&#34;</span><span class="o">);</span>
+                <span class="k">return</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">while</span> <span class="o">(!</span><span class="n">reference</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">thread</span><span class="o">)){}</span>
             <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;获得锁&#34;</span><span class="o">);</span>
-            <span class="k">return</span><span class="o">;</span>
         <span class="o">}</span>
-        <span class="k">while</span> <span class="o">(!</span><span class="n">reference</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">thread</span><span class="o">)){}</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;获得锁&#34;</span><span class="o">);</span>
-    <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">unlock</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">thread</span> <span class="o">==</span> <span class="n">reference</span><span class="o">.</span><span class="na">get</span><span class="o">())</span> <span class="o">{</span>
-            <span class="n">count</span><span class="o">--;</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">reference</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="n">thread</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;释放锁&#34;</span><span class="o">);</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">unlock</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">thread</span> <span class="o">==</span> <span class="n">reference</span><span class="o">.</span><span class="na">get</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">count</span><span class="o">--;</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">reference</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="n">thread</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;释放锁&#34;</span><span class="o">);</span>
+                <span class="o">}</span>
             <span class="o">}</span>
         <span class="o">}</span>
-    <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">TheardTest013</span> <span class="n">theardTest013</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TheardTest013</span><span class="o">();</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">2</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
-            <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
-                <span class="nd">@Override</span>
-                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                    <span class="k">try</span> <span class="o">{</span>
-                        <span class="n">theardTest013</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
-                        <span class="n">theardTest013</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
-                        <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">10</span><span class="o">);</span>
-                        <span class="n">theardTest013</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
-                        <span class="n">theardTest013</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
-                    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">TheardTest013</span> <span class="n">theardTest013</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TheardTest013</span><span class="o">();</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">2</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+                <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="nd">@Override</span>
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                        <span class="k">try</span> <span class="o">{</span>
+                            <span class="n">theardTest013</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+                            <span class="n">theardTest013</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+                            <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">10</span><span class="o">);</span>
+                            <span class="n">theardTest013</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+                            <span class="n">theardTest013</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+                        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                        <span class="o">}</span>
                     <span class="o">}</span>
-                <span class="o">}</span>
-            <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
-        <span class="o">}</span>
+                <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+            <span class="o">}</span>
 
+        <span class="o">}</span>
     <span class="o">}</span>
-<span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>参考资料</p>
-<p><a href="http://ifeve.com/java_lock_see4/">Java锁的种类以及辨析（四）：可重入锁</a></p>
+<p><a href="http://ifeve.com/java%5Flock%5Fsee4/">Java锁的种类以及辨析（四）：可重入锁</a></p>
 <h2 id="lock和synchronized的区别">lock和synchronized的区别</h2>
 <ul>
 <li>代码层面</li>
@@ -405,11 +422,13 @@ if (!doNotTrack) {
 <ul>
 <li>异常处理</li>
 </ul>
-<p>synchronized 在发生异常时会自动释放线程占用的锁，而 Lock 在发生异常时（不发生也一样）需要主动在 finally 中调用 unLock() 去释放锁</p>
+<p>synchronized 在发生异常时会自动释放线程占用的锁，而 Lock
+在发生异常时（不发生也一样）需要主动在 finally 中调用 unLock() 去释放锁</p>
 <ul>
 <li>是否可中断</li>
 </ul>
-<p>Lock 可以让等待锁的线程响应中断，而 synchronized 无法响应中断，会一直等待下去</p>
+<p>Lock 可以让等待锁的线程响应中断，而 synchronized
+无法响应中断，会一直等待下去</p>
 <ul>
 <li>可见性</li>
 </ul>
@@ -417,12 +436,17 @@ if (!doNotTrack) {
 <ul>
 <li>其它</li>
 </ul>
-<p>Lock 可以知道有没有成功获取到锁，而 synchronized 无法办到；Lock 可以提高多线程进行读操作的效率，而 synchronized 不可以；在性能上来说如果竞争资源不激烈则两者差距不大，如果竞争资源非常激烈（很多线程同时抢占）时 Lock 的性能远远好于 synchronized；不过要注意只能中断阻塞中的线程，一旦获取到锁进入运行状态就无法中断</p>
+<p>Lock 可以知道有没有成功获取到锁，而 synchronized 无法办到；Lock
+可以提高多线程进行读操作的效率，而 synchronized
+不可以；在性能上来说如果竞争资源不激烈则两者差距不大，如果竞争资源非常激烈（很多线程同时抢占）时
+Lock 的性能远远好于
+synchronized；不过要注意只能中断阻塞中的线程，一旦获取到锁进入运行状态就无法中断</p>
 <p>参考资料</p>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzI3ODc3NzQ4NQ==&amp;mid=2247484358&amp;idx=1&amp;sn=da0c7b7d10cab7d344d3d4f69a5cc2c8&amp;chksm=eb509824dc2711325a9ab0994d13e1bcd6dd6be94c177d3531204e3c1102a2f29890ce11d4a3&amp;scene=21#wechat_redirect">Java Lock 锁相关的技术</a></p>
+<p><a href="https://mp.weixin.qq.com/s?%5F%5Fbiz=MzI3ODc3NzQ4NQ==&amp;mid=2247484358&amp;idx=1&amp;sn=da0c7b7d10cab7d344d3d4f69a5cc2c8&amp;chksm=eb509824dc2711325a9ab0994d13e1bcd6dd6be94c177d3531204e3c1102a2f29890ce11d4a3&amp;scene=21#wechat%5Fredirect">Java
+Lock 锁相关的技术</a></p>
 <h2 id="reentrantlock">ReentrantLock</h2>
 <blockquote>
-<p>ReentrantLock是Lock接口的实现类,可以用来替代Synchronized，在需要同步的代码块加_上锁，最后一定要释放锁，否则其他线程永远进不来</p>
+<p>ReentrantLock是Lock接口的实现类,可以用来替代Synchronized，在需要同步的代码块加\_上锁，最后一定要释放锁，否则其他线程永远进不来</p>
 </blockquote>
 <h2 id="基础例子">基础例子</h2>
 <div class="highlight"><div class="chroma">
@@ -462,47 +486,47 @@ if (!doNotTrack) {
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TheardTest011</span> <span class="o">{</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java">    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TheardTest011</span> <span class="o">{</span>
 
-   <span class="kd">private</span> <span class="n">Lock</span> <span class="n">lock</span><span class="o">=</span><span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
+       <span class="kd">private</span> <span class="n">Lock</span> <span class="n">lock</span><span class="o">=</span><span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">TheardTest011</span> <span class="n">theardTest011</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TheardTest011</span><span class="o">();</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">2</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
-                <span class="nd">@Override</span>
-                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                    <span class="n">theardTest011</span><span class="o">.</span><span class="na">doing</span><span class="o">();</span>
-                <span class="o">}</span>
-            <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">TheardTest011</span> <span class="n">theardTest011</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TheardTest011</span><span class="o">();</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">2</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="nd">@Override</span>
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                        <span class="n">theardTest011</span><span class="o">.</span><span class="na">doing</span><span class="o">();</span>
+                    <span class="o">}</span>
+                <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+            <span class="o">}</span>
         <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doing</span><span class="o">(){</span>
+            <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;获取到锁&#34;</span><span class="o">);</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">1000</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+        <span class="c1">// 释放锁
+</span><span class="c1"></span>         <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+          <span class="o">}</span>
+
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;释放锁&#34;</span><span class="o">);</span>
+        <span class="o">}</span>
+
+
     <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doing</span><span class="o">(){</span>
-        <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;获取到锁&#34;</span><span class="o">);</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">1000</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-        <span class="o">}</span><span class="k">finally</span> <span class="o">{</span>  
-    <span class="c1">// 释放锁  
-</span><span class="c1"></span>     <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span> 
-      <span class="o">}</span>  
-       
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;释放锁&#34;</span><span class="o">);</span>
-    <span class="o">}</span>
-
-
-<span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="公平性">公平性</h2>
 <p>默认是非公平锁,但是可以在构造方法中强制指定使用公平锁</p>
 <h2 id="替代synchronized">替代Synchronized</h2>
-<p><code>ReentrantLock</code>和<code>Synchronized</code>相同,都是可重入的独占锁</p>
+<p><code>ReentrantLock</code> 和 <code>Synchronized</code> 相同,都是可重入的独占锁</p>
 <p>在Synchronized中实现线程间通讯使用到了Object.wait()和Object.notify()方法</p>
-<p>在ReentrantLock中使用<code>lock.newCondition()</code>替代</p>
+<p>在ReentrantLock中使用=lock.newCondition()=替代</p>
 <p>condition.await()相当于wait</p>
 <p>condition.signal()相当于notify</p>
 
@@ -516,7 +540,7 @@ if (!doNotTrack) {
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2018-04-06
+        2022-01-03
         
     </span>
   </p>
@@ -525,17 +549,12 @@ if (!doNotTrack) {
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/java/">java</a>
-          <a href="/tags/%E5%B9%B6%E5%8F%91/">并发</a>
+          <a href="/tags/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">java并发编程</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/java%E5%B9%B6%E5%8F%91synchronized%E5%85%B3%E9%94%AE%E5%AD%97/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">java并发(Synchronized关键字)</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-            <span class="next-text nav-default">Java内存模型学习笔记</span>
+        
+        <a class="next" href="/post/mysql%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%92%8C%E6%97%A5%E5%BF%97%E4%B8%80%E8%87%B4%E6%80%A7/">
+            <span class="next-text nav-default">mysql两阶段提交和日志一致性</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -582,7 +601,7 @@ if (!doNotTrack) {
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>lialzm</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>lialzm</span>
   </span>
 </div>
 

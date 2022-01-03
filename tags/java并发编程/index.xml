@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java并发编程 on lialzm的博客</title>
+    <link>https://lialzm.github.io/tags/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</link>
+    <description>Recent content in java并发编程 on lialzm的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 03 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/tags/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>java中的锁</title>
+      <link>https://lialzm.github.io/post/java%E4%B8%AD%E7%9A%84%E9%94%81/</link>
+      <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/java%E4%B8%AD%E7%9A%84%E9%94%81/</guid>
+      <description>定义 锁(Lock)和synchronized同步块一样，是一种线程同步机制 Lock 接口及其主要实现类都位于java.util.concurrent</description>
+    </item>
+    
+  </channel>
+</rss>

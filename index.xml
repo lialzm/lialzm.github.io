@@ -6,7 +6,16 @@
     <description>Recent content on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 30 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 03 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>java中的锁</title>
+      <link>https://lialzm.github.io/post/java%E4%B8%AD%E7%9A%84%E9%94%81/</link>
+      <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/java%E4%B8%AD%E7%9A%84%E9%94%81/</guid>
+      <description>定义 锁(Lock)和synchronized同步块一样，是一种线程同步机制 Lock 接口及其主要实现类都位于java.util.concurrent</description>
+    </item>
+    
     <item>
       <title>mysql两阶段提交和日志一致性</title>
       <link>https://lialzm.github.io/post/mysql%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%92%8C%E6%97%A5%E5%BF%97%E4%B8%80%E8%87%B4%E6%80%A7/</link>
@@ -257,15 +266,6 @@
       
       <guid>https://lialzm.github.io/post/java%E5%B9%B6%E5%8F%91synchronized%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
       <description>java中的同步块使用synchronized标记,所有同步在一个对象上的同步块在同时只能被一个线程进入并执行,可保证其内部的共享变量实现多</description>
-    </item>
-    
-    <item>
-      <title>java中的锁-显性锁</title>
-      <link>https://lialzm.github.io/post/java%E4%B8%AD%E7%9A%84%E9%94%81/</link>
-      <pubDate>Fri, 06 Apr 2018 22:30:00 +0000</pubDate>
-      
-      <guid>https://lialzm.github.io/post/java%E4%B8%AD%E7%9A%84%E9%94%81/</guid>
-      <description>定义 锁(Lock)和synchronized同步块一样，是一种线程同步机制 Lock 接口及其主要实现类都位于java.util.concurrent</description>
     </item>
     
     <item>

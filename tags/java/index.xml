@@ -35,15 +35,6 @@
     </item>
     
     <item>
-      <title>java中的锁-显性锁</title>
-      <link>https://lialzm.github.io/post/java%E4%B8%AD%E7%9A%84%E9%94%81/</link>
-      <pubDate>Fri, 06 Apr 2018 22:30:00 +0000</pubDate>
-      
-      <guid>https://lialzm.github.io/post/java%E4%B8%AD%E7%9A%84%E9%94%81/</guid>
-      <description>定义 锁(Lock)和synchronized同步块一样，是一种线程同步机制 Lock 接口及其主要实现类都位于java.util.concurrent</description>
-    </item>
-    
-    <item>
       <title>Java内存模型学习笔记</title>
       <link>https://lialzm.github.io/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Fri, 06 Apr 2018 22:30:00 +0000</pubDate>

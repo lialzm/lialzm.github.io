@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>lialzm的博客</title>
+  <title>jvm对内存的分配 - lialzm的博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="lialzm" /><meta name="description" content="Hugo theme even example site." /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="lialzm" /><meta name="description" content="相关参数 -Xms: JVM启动时申请的初始Heap值，默认为操作系统物理内存的1/64但小于1G,默认当空余堆内存大于70%时，JVM会减小heap的" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
-<link rel="canonical" href="https://lialzm.github.io/" />
-  <link href="https://lialzm.github.io/index.xml" rel="alternate" type="application/rss+xml" title="lialzm的博客" />
-  <link href="https://lialzm.github.io/index.xml" rel="feed" type="application/rss+xml" title="lialzm的博客" />
+<link rel="canonical" href="https://lialzm.github.io/post/jvm%E5%AF%B9%E5%86%85%E5%AD%98%E7%9A%84%E5%88%86%E9%85%8D/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,15 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="lialzm的博客" />
-<meta property="og:description" content="Hugo theme even example site." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://lialzm.github.io/" />
+<meta property="og:title" content="jvm对内存的分配" />
+<meta property="og:description" content="相关参数 -Xms: JVM启动时申请的初始Heap值，默认为操作系统物理内存的1/64但小于1G,默认当空余堆内存大于70%时，JVM会减小heap的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lialzm.github.io/post/jvm%E5%AF%B9%E5%86%85%E5%AD%98%E7%9A%84%E5%88%86%E9%85%8D/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-20T12:17:57+08:00" />
 
-<meta itemprop="name" content="lialzm的博客">
-<meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="lialzm的博客"/>
-<meta name="twitter:description" content="Hugo theme even example site."/>
+<meta itemprop="name" content="jvm对内存的分配">
+<meta itemprop="description" content="相关参数 -Xms: JVM启动时申请的初始Heap值，默认为操作系统物理内存的1/64但小于1G,默认当空余堆内存大于70%时，JVM会减小heap的"><meta itemprop="datePublished" content="2022-01-20T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-01-20T12:17:57+08:00" />
+<meta itemprop="wordCount" content="485">
+<meta itemprop="keywords" content="jvm," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="jvm对内存的分配"/>
+<meta name="twitter:description" content="相关参数 -Xms: JVM启动时申请的初始Heap值，默认为操作系统物理内存的1/64但小于1G,默认当空余堆内存大于70%时，JVM会减小heap的"/>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZMLCV11NP"></script>
@@ -134,123 +137,123 @@ if (!doNotTrack) {
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Java内存模型学习笔记</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-04-06 </span>
-      
-        <span class="more-meta"> 约 2879 字 </span>
-        <span class="more-meta"> 预计阅读 6 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      什么是JMM JMM(java内存模型)源于物理机器CPU架构的内存模型，最初用于解决MP(多处理器架构)系统中的缓存一致性问题 JMM可以分为
-    </div>
-    <div class="read-more">
-      <a href="/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E5%9B%BE%E5%BD%A2%E5%8E%BB%E5%88%86%E6%9E%90%E6%BA%90%E7%A0%81/">如何使用各种图形去分析源码</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-03-21 </span>
-      
-        <span class="more-meta"> 约 795 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      为什么要画图 直观 人脑的容量有限,使用图来抽象复杂的过程 流程图 使用markdown画流程图 语法规则: 定义变量 变量名=&gt;操作: 名称 常用操作
-    </div>
-    <div class="read-more">
-      <a href="/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%90%84%E7%A7%8D%E5%9B%BE%E5%BD%A2%E5%8E%BB%E5%88%86%E6%9E%90%E6%BA%90%E7%A0%81/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/spring%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-%E5%BC%80%E7%AF%87/">spring源码解析-开篇</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-03-19 </span>
-      
-        <span class="more-meta"> 约 594 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      做javaweb接触最多的框架莫过于spring了,随着对框架使用的逐渐熟练要再上一层的话,必须了解框架底层的实现原理,乃至自己做一个框架 s
-    </div>
-    <div class="read-more">
-      <a href="/post/spring%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-%E5%BC%80%E7%AF%87/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-        <span class="more-meta"> 约 0 字 </span>
-        <span class="more-meta"> 预计阅读 0 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      
-    </div>
-    <div class="read-more">
-      <a href="/post/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/">数据仓库概念介绍</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-        <span class="more-meta"> 约 1420 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      为什么需要数据仓库 如果直接从业务数据库取数据会有如下几个问题 结构复杂 数据杂乱（不同的数据库针对相同的业务可能会有不同的命名，处理方式） 理解困
-    </div>
-    <div class="read-more">
-      <a href="/post/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    </section>
-  
-  <nav class="pagination">
-    <a class="prev" href="/page/6/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">上一页</span>
-      </a>
+          <article class="post">
     
-  </nav>
+    <header class="post-header">
+      <h1 class="post-title">jvm对内存的分配</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-01-20 </span>
+        
+          <span class="more-meta"> 约 485 字 </span>
+          <span class="more-meta"> 预计阅读 1 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#相关参数">相关参数</a></li>
+        <li><a href="#内存的扩容和缩容">内存的扩容和缩容</a></li>
+        <li><a href="#查看相关内存使用情况">查看相关内存使用情况</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="相关参数">相关参数</h2>
+<p>-Xms: JVM启动时申请的初始Heap值，默认为操作系统物理内存的1/64但小于1G,默认当空余堆内存大于70%时，JVM会减小heap的大小到-Xms指定的大小，可通过 <code>-XX:MaxHeapFreeRation</code> 来指定这个比例</p>
+<p>-Xmx: 最大堆空间内存（默认为物理内存的1/4）,默认当空余堆内存小于40%时，JVM会增大Heap到-Xmx指定的大小，可通过 <code>-XX:MinHeapFreeRation</code> 来指定这个比列</p>
+<p>-Xmn: Young区大小</p>
+<h2 id="内存的扩容和缩容">内存的扩容和缩容</h2>
+<p>见上方 xms和xmx参数</p>
+<figure><img src="/ox-hugo/2022-01-20_12-13-17_20201210152203593.jpg.jpeg"/>
+</figure>
+
+<h2 id="查看相关内存使用情况">查看相关内存使用情况</h2>
+<p><code>jstat -gc &lt;pid&gt;</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"> S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT
+7680.0 23040.0 7552.3  0.0   606208.0 103310.5  408576.0   33910.0   66304.0 62509.5 9216.0 8476.0     10    0.059   3      0.147    0.206
+
+</code></pre></td></tr></table>
+</div>
+</div><p>S0C：第一个幸存区的大小
+S1C：第二个幸存区的大小
+S0U：第一个幸存区的已使用大小
+S1U：第二个幸存区的已使用大小
+EC：伊甸园区的大小
+EU：伊甸园区的已使用大小
+OC：老年代大小
+OU：老年代已使用大小
+MC：方法区（在java8叫做元数据）大小
+MU：方法区（在java8叫做元数据）已使用大小
+CCSC：压缩类空间大小
+CCSU：压缩类空间已使用大小
+YGC：年轻代垃圾回收次数
+YGCT：年轻代垃圾回收消耗时间
+FGC：老年代垃圾回收次数
+FGCT：老年代垃圾回收消耗时间
+GCT：垃圾回收消耗总时间</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">lialzm</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-20
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/jvm/">jvm</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/java%E4%B8%AD%E7%9A%84%E9%94%81/">
+            <span class="next-text nav-default">java中的锁</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="lialzm/lialzm.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
       </div>
     </main>

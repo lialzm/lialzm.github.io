@@ -161,6 +161,15 @@
     </item>
     
     <item>
+      <title>java线程池介绍</title>
+      <link>https://lialzm.github.io/post/java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Fri, 29 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BB%8B%E7%BB%8D/</guid>
+      <description>这是对以前线程池相关笔记的重新整理,基本上包含了线程池相关主要的知识点 为什么需要使用线程池 创建新的线程代价大 new Thread方式线程缺乏统一的</description>
+    </item>
+    
+    <item>
       <title>java线程的使用</title>
       <link>https://lialzm.github.io/post/java%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Fri, 29 Oct 2021 00:00:00 +0000</pubDate>

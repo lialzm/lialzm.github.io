@@ -17,21 +17,21 @@
   
   <url>
     <loc>https://lialzm.github.io/</loc>
-    <lastmod>2022-01-20T12:19:02+08:00</lastmod>
+    <lastmod>2022-01-22T20:20:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lialzm.github.io/post/</loc>
-    <lastmod>2022-01-20T12:19:02+08:00</lastmod>
+    <lastmod>2022-01-22T20:20:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lialzm.github.io/tags/</loc>
-    <lastmod>2022-01-20T12:19:02+08:00</lastmod>
+    <lastmod>2022-01-22T20:20:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -45,7 +45,7 @@
   
   <url>
     <loc>https://lialzm.github.io/tags/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2022-01-03T11:14:09+08:00</lastmod>
+    <lastmod>2022-01-22T20:20:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -242,6 +242,13 @@
   <url>
     <loc>https://lialzm.github.io/tags/maven/</loc>
     <lastmod>2021-11-15T10:01:37+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/post/java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BB%8B%E7%BB%8D/</loc>
+    <lastmod>2022-01-22T20:20:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

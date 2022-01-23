@@ -6,7 +6,16 @@
     <description>Recent content on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 20 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>linux配置vscode编辑latex</title>
+      <link>https://lialzm.github.io/post/vscode%E7%BC%96%E8%BE%91latex/</link>
+      <pubDate>Sun, 23 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/vscode%E7%BC%96%E8%BE%91latex/</guid>
+      <description>texlive安装 使用iso模式安装 Acquiring TeX Live as an ISO image - TeX Users Group 1 2 mount -t iso9660 -o ro,loop,noauto /your/texlive.iso /mnt sudo /mnt/install-tl 设置环境变量 在 ~/.bashrc 或者 ~/.profile 设置PATH 1 PATH=/usr/local/texlive/2021/bin/x86_64-linux:$PATH vscode配置 安装 LaTeX-Workshop</description>
+    </item>
+    
     <item>
       <title>jvm对内存的分配</title>
       <link>https://lialzm.github.io/post/jvm%E5%AF%B9%E5%86%85%E5%AD%98%E7%9A%84%E5%88%86%E9%85%8D/</link>

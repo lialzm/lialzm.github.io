@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>浏览器跨域知识点整理 - lialzm的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="lialzm" /><meta name="description" content="为什么会出现跨域问题 出于安全原因,浏览器制订了同源策略 同源的定义 如果两个 URL 的 protocol、port (如果有指定的话)和 host 都相同的话，则这" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+<meta name="google-site-verification" content="FIIaKlY_x-KycUQdEiprgoRI4KDltuH0LL5oAWTp__o" />
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://lialzm.github.io/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%B7%A8%E5%9F%9F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="浏览器跨域知识点整理" />
+<meta property="og:description" content="为什么会出现跨域问题 出于安全原因,浏览器制订了同源策略 同源的定义 如果两个 URL 的 protocol、port (如果有指定的话)和 host 都相同的话，则这" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lialzm.github.io/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%B7%A8%E5%9F%9F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-25T14:19:15+08:00" />
+
+<meta itemprop="name" content="浏览器跨域知识点整理">
+<meta itemprop="description" content="为什么会出现跨域问题 出于安全原因,浏览器制订了同源策略 同源的定义 如果两个 URL 的 protocol、port (如果有指定的话)和 host 都相同的话，则这"><meta itemprop="datePublished" content="2022-01-25T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-01-25T14:19:15+08:00" />
+<meta itemprop="wordCount" content="1452">
+<meta itemprop="keywords" content="浏览器,网络协议," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="浏览器跨域知识点整理"/>
+<meta name="twitter:description" content="为什么会出现跨域问题 出于安全原因,浏览器制订了同源策略 同源的定义 如果两个 URL 的 protocol、port (如果有指定的话)和 host 都相同的话，则这"/>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZMLCV11NP"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-2ZMLCV11NP', { 'anonymize_ip': true });
+}
+</script>
+
+
+
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">lialzm的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">lialzm的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">浏览器跨域知识点整理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-01-25 </span>
+        
+          <span class="more-meta"> 约 1452 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#为什么会出现跨域问题">为什么会出现跨域问题</a></li>
+        <li><a href="#什么时候会触发跨域">什么时候会触发跨域</a></li>
+        <li><a href="#解决方案">解决方案</a></li>
+        <li><a href="#cors跨域">CORS跨域</a>
+          <ul>
+            <li><a href="#简单请求">简单请求</a></li>
+            <li><a href="#预检请求">预检请求</a></li>
+          </ul>
+        </li>
+        <li><a href="#参考资料">参考资料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="为什么会出现跨域问题">为什么会出现跨域问题</h2>
+<p>出于安全原因,浏览器制订了同源策略</p>
+<p>同源的定义</p>
+<p>如果两个 URL 的 protocol、port (如果有指定的话)和 host 都相同的话，则这两个 URL 是同源。这个方案也被称为“协议/主机/端口元组”，或者直接是 “元组”。</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>结果</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://store.company.com/dir2/other.html">http://store.company.com/dir2/other.html</a></td>
+<td>同源</td>
+<td>只有路径不同</td>
+</tr>
+<tr>
+<td><a href="http://store.company.com/dir/inner/another.html">http://store.company.com/dir/inner/another.html</a></td>
+<td>同源</td>
+<td>只有路径不同</td>
+</tr>
+<tr>
+<td><a href="https://store.company.com/secure.html">https://store.company.com/secure.html</a></td>
+<td>失败</td>
+<td>协议不同</td>
+</tr>
+<tr>
+<td><a href="http://store.company.com:81/dir/etc.html">http://store.company.com:81/dir/etc.html</a></td>
+<td>失败</td>
+<td>端口不同 ( <a href="http://">http://</a> 默认端口是80)</td>
+</tr>
+<tr>
+<td><a href="http://news.company.com/dir/other.html">http://news.company.com/dir/other.html</a></td>
+<td>失败</td>
+<td>主机不同</td>
+</tr>
+</tbody>
+</table>
+<h2 id="什么时候会触发跨域">什么时候会触发跨域</h2>
+<p>同源策略控制不同源之间的交互，例如在使用XMLHttpRequest 或 <img> 标签时则会受到同源策略的约束。这些交互通常分为三类：</p>
+<p>跨域写操作（Cross-origin writes）一般是被允许的。例如链接（links），重定向以及表单提交。特定少数的HTTP请求需要添加 preflight。</p>
+<p>跨域资源嵌入（Cross-origin embedding）一般是被允许,比如 script脚本,link嵌入,img嵌入</p>
+<p>跨域读操作（Cross-origin reads）一般是不被允许的，但常可以通过内嵌资源来巧妙的进行读取访问。例如，你可以读取嵌入图片的高度和宽度，调用内嵌脚本的方法，或availability of an embedded resource.</p>
+<h2 id="解决方案">解决方案</h2>
+<p>jsonp和cors</p>
+<p>目前jsonp方案用的越来越少了,更多的是使用cors方案</p>
+<h2 id="cors跨域">CORS跨域</h2>
+<p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（预检请求）（not-so-simple request）</p>
+<h3 id="简单请求">简单请求</h3>
+<p>什么是简单请求</p>
+<ol>
+<li>
+<p>请求方法是以下三种方法之一：</p>
+<p>HEAD
+GET
+POST</p>
+</li>
+<li>
+<p>HTTP请求头信息不超出以下几种字段：</p>
+<p>Accept</p>
+<p>Accept-Language</p>
+<p>Content-Language</p>
+<p>Last-Event-ID</p>
+<p>Content-Type: 只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain</p>
+</li>
+</ol>
+<p>处理流程</p>
+<figure><img src="/ox-hugo/aa.png"/>
+</figure>
+
+<p>Access-Control-Allow-Origin</p>
+<p>必须字段,要么是请求时origin字段,要么返回 <code>*</code></p>
+<p>Access-Control-Expose-Headers</p>
+<p>可选字段,CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定</p>
+<p>Access-Control-Allow-Credentials</p>
+<p>可选字段,CORS请求默认不发送Cookie和HTTP认证信息。如果要把Cookie发到服务器，一方面要服务器同意，指定Access-Control-Allow-Credentials字段,另一方面,ajax里也需要设置withCredentials</p>
+<h3 id="预检请求">预检请求</h3>
+<p>非简单请求会在正式通讯前增加一次option请求,以确认当前跨域请求是否被服务器接受</p>
+<p>处理流程</p>
+<figure><img src="/ox-hugo/aaa.png"/>
+</figure>
+
+<p>Access-Control-Allow-Methods</p>
+<p>该字段必需，它的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法。注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法。这是为了避免多次&quot;预检&quot;请求</p>
+<p>Access-Control-Allow-Headers</p>
+<p>如果浏览器请求包括Access-Control-Request-Headers字段，则Access-Control-Allow-Headers字段是必需的。它也是一个逗号分隔的字符串，表明服务器支持的所有头信息字段，不限于浏览器在&quot;预检&quot;中请求的字段</p>
+<p>Access-Control-Max-Age</p>
+<p>该字段可选，用来指定本次预检请求的有效期，单位为秒。上面结果中，有效期是20天（1728000秒），即允许缓存该条回应1728000秒（即20天），在此期间，不用发出另一条预检请求</p>
+<h2 id="参考资料">参考资料</h2>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin%5Fpolicy">浏览器的同源策略</a></p>
+<p><a href="https://www.cnblogs.com/qiujianmei/p/11649905.html">彻底理解CORS跨域原理 - 喵小Q - 博客园</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">lialzm</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-25
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
+          <a href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/vscode%E7%BC%96%E8%BE%91latex/">
+            <span class="next-text nav-default">linux配置vscode编辑latex</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="lialzm/lialzm.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://lialzm.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>lialzm</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "en".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-2ZMLCV11NP', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

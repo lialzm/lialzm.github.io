@@ -6,7 +6,16 @@
     <description>Recent content on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 25 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>linux路由表详解</title>
+      <link>https://lialzm.github.io/post/linux%E8%B7%AF%E7%94%B1%E8%A1%A8%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/linux%E8%B7%AF%E7%94%B1%E8%A1%A8%E8%AF%A6%E8%A7%A3/</guid>
+      <description>下面几个命令都可以用来查看路由表 1 2 3 route -n netstat -rn ip route ls route -n 1 2 3 4 5 Kernel IP routing table Destination Gateway Genmask Flags Metric Ref Use Iface 0.0.0.0 192.168.79.2 0.0.0.0 UG 100 0 0 ens33 192.168.79.0 0.0.0.0 255.255.255.0 U 100 0 0 ens33 192.168.122.0 0.0.0.0 255.255.255.0 U 0 0 0 virbr0 输</description>
+    </item>
+    
     <item>
       <title>浏览器跨域知识点整理</title>
       <link>https://lialzm.github.io/post/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%B7%A8%E5%9F%9F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/</link>

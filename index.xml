@@ -6,7 +6,16 @@
     <description>Recent content on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 07 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tradingview极简demo</title>
+      <link>https://lialzm.github.io/post/tradingview%E6%9E%81%E7%AE%80demo/</link>
+      <pubDate>Thu, 17 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/tradingview%E6%9E%81%E7%AE%80demo/</guid>
+      <description>Tradingview是一个查看股票行情的js组件,支持接入自有数据源,功能完备 申请组件权限 Tradingview组件的github仓库需要</description>
+    </item>
+    
     <item>
       <title>linux路由表详解</title>
       <link>https://lialzm.github.io/post/linux%E8%B7%AF%E7%94%B1%E8%A1%A8%E8%AF%A6%E8%A7%A3/</link>

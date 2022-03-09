@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>pandas和sql对照 - lialzm的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="lialzm" /><meta name="description" content="本文参照了 Pandas与SQL对比 - 简书 数据集地址:chipotle.tsv 1 2 3 4 5 6 import pandas as pd file_path=&amp;#39;chipotle.tsv&amp;#39; df=pd.read_csv(file_path,sep=&amp;#39;\t&amp;#39;) print(df.head(5)) print(df.columns) select []获取列 1 df[[&amp;#39;order_id&amp;#39;,&amp;#39;quantity&amp;#39;]] loc获取行获取指定" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+<meta name="google-site-verification" content="FIIaKlY_x-KycUQdEiprgoRI4KDltuH0LL5oAWTp__o" />
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://lialzm.github.io/post/pandas%E5%92%8Csql%E5%AF%B9%E7%85%A7/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="pandas和sql对照" />
+<meta property="og:description" content="本文参照了 Pandas与SQL对比 - 简书 数据集地址:chipotle.tsv 1 2 3 4 5 6 import pandas as pd file_path=&#39;chipotle.tsv&#39; df=pd.read_csv(file_path,sep=&#39;\t&#39;) print(df.head(5)) print(df.columns) select []获取列 1 df[[&#39;order_id&#39;,&#39;quantity&#39;]] loc获取行获取指定" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lialzm.github.io/post/pandas%E5%92%8Csql%E5%AF%B9%E7%85%A7/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-03-09T15:45:49+08:00" />
+
+<meta itemprop="name" content="pandas和sql对照">
+<meta itemprop="description" content="本文参照了 Pandas与SQL对比 - 简书 数据集地址:chipotle.tsv 1 2 3 4 5 6 import pandas as pd file_path=&#39;chipotle.tsv&#39; df=pd.read_csv(file_path,sep=&#39;\t&#39;) print(df.head(5)) print(df.columns) select []获取列 1 df[[&#39;order_id&#39;,&#39;quantity&#39;]] loc获取行获取指定"><meta itemprop="datePublished" content="2022-03-09T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-03-09T15:45:49+08:00" />
+<meta itemprop="wordCount" content="1906">
+<meta itemprop="keywords" content="pandas," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="pandas和sql对照"/>
+<meta name="twitter:description" content="本文参照了 Pandas与SQL对比 - 简书 数据集地址:chipotle.tsv 1 2 3 4 5 6 import pandas as pd file_path=&#39;chipotle.tsv&#39; df=pd.read_csv(file_path,sep=&#39;\t&#39;) print(df.head(5)) print(df.columns) select []获取列 1 df[[&#39;order_id&#39;,&#39;quantity&#39;]] loc获取行获取指定"/>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZMLCV11NP"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-2ZMLCV11NP', { 'anonymize_ip': true });
+}
+</script>
+
+
+
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">lialzm的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">lialzm的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">pandas和sql对照</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-09 </span>
+        
+          <span class="more-meta"> 约 1906 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#select">select</a></li>
+        <li><a href="#where-distinct-limit">where,distinct,limit</a></li>
+        <li><a href="#order-by">order by</a></li>
+        <li><a href="#in和not-in">in和not in</a></li>
+        <li><a href="#group-by">group by</a></li>
+        <li><a href="#having">having</a></li>
+        <li><a href="#聚合函数">聚合函数</a></li>
+        <li><a href="#top-n">top N</a></li>
+        <li><a href="#union">union</a></li>
+        <li><a href="#join">join</a></li>
+        <li><a href="#insert">insert</a></li>
+        <li><a href="#update">update</a></li>
+        <li><a href="#delete">delete</a></li>
+        <li><a href="#汇总">汇总</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>本文参照了
+<a href="https://www.jianshu.com/p/c1e44c6f461b">Pandas与SQL对比 - 简书</a></p>
+<p>数据集地址:<a href="/ox-hugo/chipotle.tsv">chipotle.tsv</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    import pandas as pd
+    file_path=&#39;chipotle.tsv&#39;
+    df=pd.read_csv(file_path,sep=&#39;\t&#39;)
+    print(df.head(5))
+    print(df.columns)
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="select">select</h2>
+<ul>
+<li>
+<p>[]获取列</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      df[[&#39;order_id&#39;,&#39;quantity&#39;]]
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>loc获取行获取指定index值的行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      print(df)
+      df.loc[0]
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>iloc获取行获取指定行数的行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      print(df)
+      df.iloc[0]
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>loc获取列</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      print(df)
+      df.loc[:,[&#39;item_name&#39;]]
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>iloc获取列</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      print(df)
+      df.iloc[:,[0]]
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="where-distinct-limit">where,distinct,limit</h2>
+<ul>
+<li>
+<p>where</p>
+<p>select * from df where quantity&gt;1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      df[df[&#39;quantity&#39;]&gt;1]
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>distinct
+select distinct item_name from df</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      df[&#39;item_name&#39;].unique()
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>limit
+select item_name from df limit 3</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      df[&#39;item_name&#39;].head(3)
+</code></pre></td></tr></table>
+</div>
+</div><p>select distinct item_name from df limit 3</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      df[&#39;item_name&#39;].unique()[0:3]
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="order-by">order by</h2>
+<ul>
+<li>
+<p>sort_values</p>
+<p>select * from df order by quantity</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      df.sort_values(&#39;quantity&#39;)
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="in和not-in">in和not in</h2>
+<ul>
+<li>
+<p>isin</p>
+<p>select * from df where item_name in (&lsquo;Nantucket Nectar&rsquo;,&lsquo;Izze&rsquo;) limit 3</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    df[&#39;item_name&#39;].isin([&#39;Nantucket Nectar&#39;,&#39;Izze&#39;])
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      df[df[&#39;item_name&#39;].isin([&#39;Nantucket Nectar&#39;,&#39;Izze&#39;])].head(3)
+</code></pre></td></tr></table>
+</div>
+</div><p>select * from df where item_name not in (&lsquo;Nantucket Nectar&rsquo;,&lsquo;Izze&rsquo;) limit 3</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      df[~df[&#39;item_name&#39;].isin([&#39;Nantucket Nectar&#39;,&#39;Izze&#39;])].head(3)
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="group-by">group by</h2>
+<p>对应的是pandas groupby</p>
+<p>pandas.DataFrame.groupby(by, axis, level, as_index, sort, group_keys, squeeze, observed)</p>
+<ul>
+<li>
+<p>count</p>
+<p>select count(1) from df  group by choice_description</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      dd=df.groupby(&#39;choice_description&#39;).size()
+      dd.values
+      d2=
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      dd=df.groupby(&#39;choice_description&#39;).size()
+      dd
+</code></pre></td></tr></table>
+</div>
+</div><p>select choice_description,count(1) from df  group by choice_description order by count(choice_description)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      dd=df.groupby(&#39;choice_description&#39;).size().to_frame(&#39;size&#39;).reset_index().sort_values([&#39;size&#39;], ascending=[False])
+      dd
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="having">having</h2>
+<ul>
+<li>
+<p>使用[]过滤</p>
+<p>select choice_description,count(1) from df  group by choice_description  having count(1)&gt;300</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      dd=df.groupby(&#39;choice_description&#39;).size().to_frame(&#39;size&#39;).reset_index()
+      dd[dd[&#39;size&#39;]&gt;1]
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>filter</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      def p_group(grouped_df,p_size):
+          i=0
+          for key, item in grouped_df:
+            if i&gt;p_size:
+                break
+            print(grouped_df.get_group(key), &#34;\n\n&#34;)
+            i=i+1
+
+      dd=df.groupby(&#39;choice_description&#39;)
+      p_group(dd,3)
+      dd.filter(lambda g:g[&#39;quantity&#39;].count()&gt;1)
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="聚合函数">聚合函数</h2>
+<ul>
+<li>
+<p>max,min,mean</p>
+<p>select min(quantity),max(quantity),mean(quantity),median(quantity) from df</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      df.agg({&#39;quantity&#39;:[&#39;min&#39;,&#39;max&#39;,&#39;mean&#39;,&#39;median&#39;]})
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="top-n">top N</h2>
+<ul>
+<li>
+<p>head</p>
+<p>先排序再取值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      df.sort_values(&#39;quantity&#39;,ascending=False).head(3)
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<!--listend-->
+<ul>
+<li>
+<p>nlargest
+DataFrame.nlargest(n, columns, keep=&lsquo;first&rsquo;)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      df.nlargest(3,&#39;quantity&#39;)
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="union">union</h2>
+<ul>
+<li>concat</li>
+</ul>
+<!--listend-->
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    d1=df[&#39;item_name&#39;].to_frame(&#39;item_name&#39;).reset_index()
+    d2=df[&#39;quantity&#39;].to_frame(&#39;quantity&#39;).reset_index()
+    d3=pd.concat([d1,d2],axis=1)
+    d3
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="join">join</h2>
+<ul>
+<li>
+<p>merge</p>
+<p>pd.merge(left, right, how=&lsquo;inner&rsquo;, on=None, left_on=None, right_on=None,
+left_index=False, right_index=False, sort=True,
+suffixes=('_x', &lsquo;_y&rsquo;), copy=True, indicator=False,
+validate=None)</p>
+<p>参数说明:</p>
+<p>left: 拼接的左侧DataFrame对象</p>
+<p>right: 拼接的右侧DataFrame对象</p>
+<p>on: 要加入的列或索引级别名称。 必须在左侧和右侧DataFrame对象中找到。 如果未传递且left_index和right_index为False，则DataFrame中的列的交集将被推断为连接键。</p>
+<p>left_on:左侧DataFrame中的列或索引级别用作键。 可以是列名，索引级名称，也可以是长度等于DataFrame长度的数组。</p>
+<p>right_on: 左侧DataFrame中的列或索引级别用作键。 可以是列名，索引级名称，也可以是长度等于DataFrame长度的数组。</p>
+<p>left_index: 如果为True，则使用左侧DataFrame中的索引（行标签）作为其连接键。 对于具有MultiIndex（分层）的DataFrame，级别数必须与右侧DataFrame中的连接键数相匹配。</p>
+<p>right_index: 与left_index功能相似。</p>
+<p>how: One of ‘left’, ‘right’, ‘outer’, ‘inner’. 默认inner。inner是取交集，outer取并集。比如left：[‘A’,‘B’,‘C’];right[’&lsquo;A,‘C’,‘D’]；inner取交集的话，left中出现的A会和right中出现的买一个A进行匹配拼接，如果没有是B，在right中没有匹配到，则会丢失。&lsquo;outer’取并集，出现的A会进行一一匹配，没有同时出现的会将缺失的部分添加缺失值。</p>
+<p>sort: 按字典顺序通过连接键对结果DataFrame进行排序。 默认为True，设置为False将在很多情况下显着提高性能。</p>
+<p>suffixes: 用于重叠列的字符串后缀元组。 默认为（‘x’，’ y’）。</p>
+<p>copy: 始终从传递的DataFrame对象复制数据（默认为True），即使不需要重建索引也是如此。</p>
+<p>indicator:将一列添加到名为_merge的输出DataFrame，其中包含有关每行源的信息。 _merge是分类类型，并且对于其合并键仅出现在“左”DataFrame中的观察值，取得值为left_only，对于其合并键仅出现在“右”DataFrame中的观察值为right_only，并且如果在两者中都找到观察点的合并键，则为left_only</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      d1=pd.DataFrame({
+          &#39;name&#39;:[&#39;张三&#39;,&#39;李四&#39;],
+          &#39;sex&#39;:[1,0]
+      })
+
+      d2=pd.DataFrame({
+          &#39;name&#39;:[&#39;张三&#39;,&#39;王五&#39;],
+          &#39;age&#39;:[10,20]
+      })
+
+      pd.merge(d1,d2,how=&#39;left&#39;,on=&#39;name&#39;)
+
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="insert">insert</h2>
+<p>创建新的dataframe然后将两个合并达到类似的效果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    d1=pd.DataFrame({
+        &#39;name&#39;:[&#39;张三&#39;,&#39;李四&#39;],
+        &#39;sex&#39;:[1,0]
+    })
+
+    d2=pd.DataFrame({
+        &#39;name&#39;:[&#39;王五&#39;],
+        &#39;sex&#39;:[10]
+    })
+
+    d3=pd.concat([d1,d2]).reset_index()
+
+    d3
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="update">update</h2>
+<ul>
+<li>
+<p>使用loc</p>
+<p>更新指定值</p>
+<p>pandas.DataFrame.loc[condition, column_label] = new_value</p>
+<p>update d3 set sex=1 where name=&lsquo;王五&rsquo;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      print(d3)
+      d3.loc[d3[&#39;name&#39;]==&#39;王五&#39;,&#39;sex&#39;]=1
+      d3
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>使用iloc</p>
+<p>更新指定值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      print(d3)
+      d3.iloc[0,2]=100
+      d3
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>使用replace</p>
+<p>按列值更新</p>
+<p>df.replace([old_value], new_value)</p>
+<p>update d3 set sex=-1 where  sex=1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      print(d3)
+      d3[&#39;sex&#39;]=d3[&#39;sex&#39;].replace(1,-1)
+      d3
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="delete">delete</h2>
+<ul>
+<li>
+<p>drop</p>
+<p>删除行和列</p>
+<p>DataFrame.drop(labels=None,axis=0, index=None, columns=None, inplace=False)</p>
+<p>参数说明:</p>
+<p>labels 就是要删除的行列的名字，用列表给定</p>
+<p>axis 默认为0，指删除行，因此删除columns时要指定axis=1</p>
+<p>index 直接指定要删除的行</p>
+<p>columns 直接指定要删除的列</p>
+<p>inplace=False，默认该删除操作不改变原数据，而是返回一个执行删除操作后的新dataframe</p>
+<p>inplace=True，则会直接在原数据上进行删除操作，删除后无法返回</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      print(d3)
+      d3.drop(2)
+</code></pre></td></tr></table>
+</div>
+</div><!--listend-->
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">      print(d3)
+      d3.drop(&#39;index&#39;,axis=1)
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="汇总">汇总</h2>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>sql</th>
+<th>pandas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查前n行</td>
+<td>limit n</td>
+<td>head</td>
+</tr>
+<tr>
+<td>查指定列</td>
+<td>select 列名</td>
+<td>loc,iloc</td>
+</tr>
+<tr>
+<td>去重</td>
+<td>unique</td>
+<td>distinct</td>
+</tr>
+<tr>
+<td>条件</td>
+<td>[df[&lsquo;列名&rsquo;]&gt;1]</td>
+<td>where</td>
+</tr>
+<tr>
+<td>聚合</td>
+<td>group by</td>
+<td>groupby</td>
+</tr>
+<tr>
+<td>连接</td>
+<td>merge</td>
+<td>join</td>
+</tr>
+<tr>
+<td>重命名</td>
+<td>as</td>
+<td>rename</td>
+</tr>
+<tr>
+<td>合并</td>
+<td>union all</td>
+<td>concat</td>
+</tr>
+<tr>
+<td>排序</td>
+<td>order by</td>
+<td>sort_values</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">lialzm</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-03-09
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/pandas/">pandas</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/tradingview%E6%9E%81%E7%AE%80demo/">
+            <span class="next-text nav-default">Tradingview极简demo</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="lialzm/lialzm.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://lialzm.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>lialzm</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "en".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-2ZMLCV11NP', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

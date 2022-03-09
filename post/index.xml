@@ -6,7 +6,16 @@
     <description>Recent content in Posts on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 17 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 09 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pandas和sql对照</title>
+      <link>https://lialzm.github.io/post/pandas%E5%92%8Csql%E5%AF%B9%E7%85%A7/</link>
+      <pubDate>Wed, 09 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/pandas%E5%92%8Csql%E5%AF%B9%E7%85%A7/</guid>
+      <description>本文参照了 Pandas与SQL对比 - 简书 数据集地址:chipotle.tsv 1 2 3 4 5 6 import pandas as pd file_path=&amp;#39;chipotle.tsv&amp;#39; df=pd.read_csv(file_path,sep=&amp;#39;\t&amp;#39;) print(df.head(5)) print(df.columns) select []获取列 1 df[[&amp;#39;order_id&amp;#39;,&amp;#39;quantity&amp;#39;]] loc获取行获取指定</description>
+    </item>
+    
     <item>
       <title>Tradingview极简demo</title>
       <link>https://lialzm.github.io/post/tradingview%E6%9E%81%E7%AE%80demo/</link>

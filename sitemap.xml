@@ -2,8 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lialzm.github.io/post/docker-compose%E6%90%AD%E5%BB%BAldap/</loc>
+    <lastmod>2022-04-18T19:36:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/tags/ldap/</loc>
+    <lastmod>2022-04-18T19:36:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lialzm.github.io/</loc>
-    <lastmod>2022-03-09T15:45:49+08:00</lastmod>
+    <lastmod>2022-04-18T19:36:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/post/</loc>
+    <lastmod>2022-04-18T19:36:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/tags/</loc>
+    <lastmod>2022-04-18T19:36:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -17,20 +45,6 @@
   
   <url>
     <loc>https://lialzm.github.io/post/pandas%E5%92%8Csql%E5%AF%B9%E7%85%A7/</loc>
-    <lastmod>2022-03-09T15:45:49+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lialzm.github.io/post/</loc>
-    <lastmod>2022-03-09T15:45:49+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lialzm.github.io/tags/</loc>
     <lastmod>2022-03-09T15:45:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

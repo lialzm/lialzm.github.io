@@ -137,6 +137,27 @@ if (!doNotTrack) {
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/mysql%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%92%8C%E6%97%A5%E5%BF%97%E4%B8%80%E8%87%B4%E6%80%A7/">mysql两阶段提交和日志一致性</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-12-30 </span>
+      
+        <span class="more-meta"> 约 1232 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      redo log 当有一条记录要更新时，InnoDB 引擎就会先把记录写到 redo log（并更新内存），这个时候更新就算完成了。在适当的时候，将这个操作记录更新到
+    </div>
+    <div class="read-more">
+      <a href="/post/mysql%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%92%8C%E6%97%A5%E5%BF%97%E4%B8%80%E8%87%B4%E6%80%A7/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/jenkins_pipeline%E4%BD%BF%E7%94%A8/">jenkins pipeline使用</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2021-12-29 </span>
@@ -215,29 +236,6 @@ if (!doNotTrack) {
     </div>
     <div class="read-more">
       <a href="/post/redis%E5%A6%82%E4%BD%95%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/nomad%E5%AE%89%E8%A3%85/">nomad介绍</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-12-18 </span>
-      <div class="post-category">
-          <a href="/categories/nomad%E6%89%8B%E5%86%8C/"> nomad手册 </a>
-          </div>
-        <span class="more-meta"> 约 591 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      nomad是一个轻量级的工作编排工具,可以管理容器和非容器化的应用程序 官网 基础概念 架构图 agent 基础模块,每个运行nomad进程称为一个agent
-    </div>
-    <div class="read-more">
-      <a href="/post/nomad%E5%AE%89%E8%A3%85/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

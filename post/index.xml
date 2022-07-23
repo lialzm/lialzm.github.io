@@ -6,7 +6,16 @@
     <description>Recent content in Posts on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 21 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pandas日线数据转为周线</title>
+      <link>https://lialzm.github.io/post/pandas%E6%97%A5%E7%BA%BF%E6%95%B0%E6%8D%AE%E8%BD%AC%E4%B8%BA%E5%91%A8%E7%BA%BF/</link>
+      <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/pandas%E6%97%A5%E7%BA%BF%E6%95%B0%E6%8D%AE%E8%BD%AC%E4%B8%BA%E5%91%A8%E7%BA%BF/</guid>
+      <description>日常回测的时候有时会遇到只有日线没有周线的情况,这时候就需要将日线合成为周线 本文参考了【邢不行|量化小讲堂系列06-Python量化入门】极</description>
+    </item>
+    
     <item>
       <title>docker安装oracle</title>
       <link>https://lialzm.github.io/post/docker%E5%AE%89%E8%A3%85oracle/</link>

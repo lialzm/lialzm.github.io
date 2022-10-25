@@ -3,14 +3,35 @@
   
   <url>
     <loc>https://lialzm.github.io/</loc>
-    <lastmod>2022-09-11T17:29:03+08:00</lastmod>
+    <lastmod>2022-10-25T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lialzm.github.io/post/</loc>
-    <lastmod>2022-09-11T17:29:03+08:00</lastmod>
+    <lastmod>2022-10-25T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/post/sqlmap%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2022-10-25T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/tags/</loc>
+    <lastmod>2022-10-25T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2022-10-25T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -24,13 +45,6 @@
   
   <url>
     <loc>https://lialzm.github.io/post/pandas%E6%97%A5%E7%BA%BF%E6%95%B0%E6%8D%AE%E8%BD%AC%E4%B8%BA%E5%91%A8%E7%BA%BF/</loc>
-    <lastmod>2022-07-23T20:59:49+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lialzm.github.io/tags/</loc>
     <lastmod>2022-07-23T20:59:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

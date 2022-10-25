@@ -6,7 +6,16 @@
     <description>Recent content on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 11 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sqlmap实验笔记</title>
+      <link>https://lialzm.github.io/post/sqlmap%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Tue, 25 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/sqlmap%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/</guid>
+      <description>靶场准备 1 docker run -dt --name sqli-labs -p 8090:8090 tavenli/sqli-labs 浏览器打开 http://127.0.0.1:8090/ sqlmap安装 教程 官网(https://sqlmap.org/)下载后并解压 基本使用例子 1 python sqlmap.py -u &amp;#34;http://debiandev/sqlmap/mysql/get_int.php?id=1&amp;#34; --batch</description>
+    </item>
+    
     <item>
       <title>需求分析-钉画美模型</title>
       <link>https://lialzm.github.io/post/%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90-%E9%92%89%E7%94%BB%E7%BE%8E%E6%A8%A1%E5%9E%8B/</link>

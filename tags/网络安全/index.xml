@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网络安全 on lialzm的博客</title>
+    <link>https://lialzm.github.io/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</link>
+    <description>Recent content in 网络安全 on lialzm的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 25 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sqlmap实验笔记</title>
+      <link>https://lialzm.github.io/post/sqlmap%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Tue, 25 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/sqlmap%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/</guid>
+      <description>靶场准备 1 docker run -dt --name sqli-labs -p 8090:8090 tavenli/sqli-labs 浏览器打开 http://127.0.0.1:8090/ sqlmap安装 教程 官网(https://sqlmap.org/)下载后并解压 基本使用例子 1 python sqlmap.py -u &amp;#34;http://debiandev/sqlmap/mysql/get_int.php?id=1&amp;#34; --batch</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,7 +6,16 @@
     <description>Recent content in Posts on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 25 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 31 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dbt跑历史数据</title>
+      <link>https://lialzm.github.io/post/dbt%E8%B7%91%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Mon, 31 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/dbt%E8%B7%91%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE/</guid>
+      <description>在dbt处理数据的时候,经常遇到需要将时间变为一个变量,以供不同时间跑数 方案: dbt var参数+macros 定义变量 编辑 dbt_project.yml 1 2 vars: &amp;#34;start_date&amp;#34;: 20221030 定义函数 1 2</description>
+    </item>
+    
     <item>
       <title>sqlmap实验笔记</title>
       <link>https://lialzm.github.io/post/sqlmap%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/</link>

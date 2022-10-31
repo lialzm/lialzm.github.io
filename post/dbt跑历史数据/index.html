@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>centos7安装docker - lialzm的博客</title>
+  <title>dbt跑历史数据 - lialzm的博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="lialzm" /><meta name="description" content="使用daocloud的脚本安装docker 1 curl -sSL &amp;lt;https://get.daocloud.io/docker&amp;gt; | sh 安装成功的结果图 安装成功后遇到错误,无法使用命令 1 2 [root@cn2vps483 ~]# docker ps Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="lialzm" /><meta name="description" content="在dbt处理数据的时候,经常遇到需要将时间变为一个变量,以供不同时间跑数 方案: dbt var参数&#43;macros 定义变量 编辑 dbt_project.yml 1 2 vars: &amp;#34;start_date&amp;#34;: 20221030 定义函数 1 2" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
-<link rel="canonical" href="https://lialzm.github.io/post/centos%E5%AE%89%E8%A3%85docker/" />
+<link rel="canonical" href="https://lialzm.github.io/post/dbt%E8%B7%91%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,20 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="centos7安装docker" />
-<meta property="og:description" content="使用daocloud的脚本安装docker 1 curl -sSL &lt;https://get.daocloud.io/docker&gt; | sh 安装成功的结果图 安装成功后遇到错误,无法使用命令 1 2 [root@cn2vps483 ~]# docker ps Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?" />
+<meta property="og:title" content="dbt跑历史数据" />
+<meta property="og:description" content="在dbt处理数据的时候,经常遇到需要将时间变为一个变量,以供不同时间跑数 方案: dbt var参数&#43;macros 定义变量 编辑 dbt_project.yml 1 2 vars: &#34;start_date&#34;: 20221030 定义函数 1 2" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lialzm.github.io/post/centos%E5%AE%89%E8%A3%85docker/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-04-29T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-04-29T20:03:08+08:00" />
+<meta property="og:url" content="https://lialzm.github.io/post/dbt%E8%B7%91%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-31T17:30:30+08:00" />
 
-<meta itemprop="name" content="centos7安装docker">
-<meta itemprop="description" content="使用daocloud的脚本安装docker 1 curl -sSL &lt;https://get.daocloud.io/docker&gt; | sh 安装成功的结果图 安装成功后遇到错误,无法使用命令 1 2 [root@cn2vps483 ~]# docker ps Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?"><meta itemprop="datePublished" content="2022-04-29T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-04-29T20:03:08+08:00" />
-<meta itemprop="wordCount" content="427">
-<meta itemprop="keywords" content="docker," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="centos7安装docker"/>
-<meta name="twitter:description" content="使用daocloud的脚本安装docker 1 curl -sSL &lt;https://get.daocloud.io/docker&gt; | sh 安装成功的结果图 安装成功后遇到错误,无法使用命令 1 2 [root@cn2vps483 ~]# docker ps Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?"/>
+<meta itemprop="name" content="dbt跑历史数据">
+<meta itemprop="description" content="在dbt处理数据的时候,经常遇到需要将时间变为一个变量,以供不同时间跑数 方案: dbt var参数&#43;macros 定义变量 编辑 dbt_project.yml 1 2 vars: &#34;start_date&#34;: 20221030 定义函数 1 2"><meta itemprop="datePublished" content="2022-10-31T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-10-31T17:30:30+08:00" />
+<meta itemprop="wordCount" content="148">
+<meta itemprop="keywords" content="dbt," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="dbt跑历史数据"/>
+<meta name="twitter:description" content="在dbt处理数据的时候,经常遇到需要将时间变为一个变量,以供不同时间跑数 方案: dbt var参数&#43;macros 定义变量 编辑 dbt_project.yml 1 2 vars: &#34;start_date&#34;: 20221030 定义函数 1 2"/>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZMLCV11NP"></script>
@@ -140,12 +140,12 @@ if (!doNotTrack) {
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">centos7安装docker</h1>
+      <h1 class="post-title">dbt跑历史数据</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2022-04-29 </span>
+        <span class="post-time"> 2022-10-31 </span>
         
-          <span class="more-meta"> 约 427 字 </span>
+          <span class="more-meta"> 约 148 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         
       </div>
@@ -154,106 +154,90 @@ if (!doNotTrack) {
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#定义变量">定义变量</a></li>
+        <li><a href="#定义函数">定义函数</a></li>
+        <li><a href="#定义macros">定义macros</a></li>
+        <li><a href="#在脚本中使用">在脚本中使用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
   </div>
 </div>
-  <div class="post-outdated">
-    <div class="warn">
-      <p>【注意】最后更新于 <span class="timeago" datetime="2022-04-29T20:03:08" title="April 29, 2022">April 29, 2022</span>，文中内容可能已过时，请谨慎使用。</p>
-    </div>
-  </div>
     <div class="post-content">
-      <p>使用daocloud的脚本安装docker</p>
+      <p>在dbt处理数据的时候,经常遇到需要将时间变为一个变量,以供不同时间跑数</p>
+<p>方案: dbt var参数+macros</p>
+<h2 id="定义变量">定义变量</h2>
+<p>编辑 dbt_project.yml</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">vars:
+  &#34;start_date&#34;: 20221030
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="定义函数">定义函数</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">CREATE OR REPLACE FUNCTION f_start_date(in p_date int)
+RETURNS  date
+AS $$
+DECLARE
+    BEGIN
+        if p_date=-1 then
+          return current_date;
+        else
+          return to_date(p_date::varchar,&#39;yyyyMMdd&#39;);
+        end if;
+    END;
+$$ LANGUAGE plpgsql;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="定义macros">定义macros</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">{% macro start_date() %}
+{{target.schema}}.f_start_date({{var(&#34;start_date&#34;,-1)}})
+{% endmacro %}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="在脚本中使用">在脚本中使用</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">curl -sSL &lt;https://get.daocloud.io/docker&gt; | sh
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">  select {{start_date()}}
 </code></pre></td></tr></table>
 </div>
-</div><p>安装成功的结果图</p>
-<figure><img src="/ox-hugo/2022-04-29_19-47-58_screenshot.png"/>
-</figure>
+</div><p>运行命令 <code>dbt run</code> 或者 <code>dbt run --vars '{&quot;start_date&quot;: 20210101}'</code></p>
 
-<p>安装成功后遇到错误,无法使用命令</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">[root@cn2vps483 ~]# docker ps
-Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
-</code></pre></td></tr></table>
-</div>
-</div><p>使用dockerd前台方式启动dockerd,查看到如下错误日志</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">INFO[2022-04-29T06:35:31.667145087-04:00] Error while creating filesystem xfs on device docker-253:1-128804-base: exit status 1  storage-driver=devicemapper
-WARN[2022-04-29T06:35:31.667457115-04:00] Failed to deactivatePool: Device is Busy      storage-driver=devicemapper
-INFO[2022-04-29T06:35:31.668129310-04:00] stopping event stream following graceful shutdown  error=&#34;context canceled&#34; module=libcontainerd namespace=plugins.moby
-INFO[2022-04-29T06:35:31.668195278-04:00] stopping healthcheck following graceful shutdown  module=libcontainerd
-failed to start daemon: error initializing graphdriver: exit status 1
-</code></pre></td></tr></table>
-</div>
-</div><p>参考
-<a href="https://www.cnblogs.com/hanxiaomeng/p/12887262.html">CentOS7安装docker启动报错Error while creating filesystem xfs on device docker-253:0-1052028-base: exit status 1 storage-driver=devicemappe - 韩晓萌 - 博客园</a></p>
-<p>更新xfsprogs</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">yum update xfsprogs -y
-</code></pre></td></tr></table>
-</div>
-</div><p>依然无法启动docker,出现如下错误,初步判断是无法创建默认网桥</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">INFO[2022-04-29T06:36:45.668381529-04:00] Loading containers: start.
-INFO[2022-04-29T06:36:46.075724928-04:00] Default bridge (docker0) is assigned with an IP address 172.17.0.0/16. Daemon option --bip can be used to set a preferred IP address
-WARN[2022-04-29T06:36:46.213532023-04:00] unmountAndDeactivate: open /var/lib/docker/devicemapper/mnt: no such file or directory  storage-driver=devicemapper
-INFO[2022-04-29T06:36:46.239870956-04:00] stopping event stream following graceful shutdown  error=&#34;context canceled&#34; module=libcontainerd namespace=moby
-INFO[2022-04-29T06:36:46.239977339-04:00] stopping healthcheck following graceful shutdown  module=libcontainerd
-INFO[2022-04-29T06:36:46.240076150-04:00] stopping event stream following graceful shutdown  error=&#34;context canceled&#34; module=libcontainerd namespace=plugins.moby
-failed to start daemon: Error initializing network controller: Error creating default &#34;bridge&#34; network: Failed to program NAT chain: INVALID_ZONE: docker
-</code></pre></td></tr></table>
-</div>
-</div><p>使用 <code>journalctl -xe</code> 查看错误信息,创建默认网络转发失败,猜测可能是firewalld问题,使用 <code>systemctl stop firewalld.service</code> 关闭firewalld</p>
-<figure><img src="/ox-hugo/2022-04-29_19-53-18_screenshot.png"/>
-</figure>
-
-<p>启动docker成功</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">[root@cn2vps483 ~]# systemctl start docker
-[root@cn2vps483 ~]# docker ps
-CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
-</code></pre></td></tr></table>
-</div>
-</div>
     </div>
 
     <div class="post-copyright">
@@ -264,7 +248,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2022-04-29
+        2022-10-31
         
     </span>
   </p>
@@ -273,16 +257,12 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/docker/">docker</a>
+          <a href="/tags/dbt/">dbt</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/docker%E5%AE%89%E8%A3%85oracle/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">docker安装oracle</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/docker-compose%E6%90%AD%E5%BB%BAldap/">
-            <span class="next-text nav-default">docker-compose搭建ldap</span>
+        
+        <a class="next" href="/post/sqlmap%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/">
+            <span class="next-text nav-default">sqlmap实验笔记</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

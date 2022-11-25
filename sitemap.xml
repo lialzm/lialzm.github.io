@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lialzm.github.io/</loc>
+    <lastmod>2022-11-25T16:25:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/post/meltano%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%92%8C%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/</loc>
+    <lastmod>2022-11-25T16:25:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/post/</loc>
+    <lastmod>2022-11-25T16:25:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://lialzm.github.io/tags/dbt/</loc>
     <lastmod>2022-11-04T23:06:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -10,20 +31,6 @@
   
   <url>
     <loc>https://lialzm.github.io/post/dbt%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2022-11-04T23:06:55+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lialzm.github.io/</loc>
-    <lastmod>2022-11-04T23:06:55+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lialzm.github.io/post/</loc>
     <lastmod>2022-11-04T23:06:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

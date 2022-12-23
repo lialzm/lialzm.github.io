@@ -6,7 +6,16 @@
     <description>Recent content in Posts on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 25 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mysql实现邻接表</title>
+      <link>https://lialzm.github.io/post/%E9%82%BB%E6%8E%A5%E8%A1%A8/</link>
+      <pubDate>Fri, 23 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/%E9%82%BB%E6%8E%A5%E8%A1%A8/</guid>
+      <description>邻接表（Adjacency List） 常用场景: 多级菜单栏以及多级上下部门 使用mysql8 新增特性 CTES,可以很好的完成该功能 数据初始化 1 2</description>
+    </item>
+    
     <item>
       <title>meltano常见问题和处理方式</title>
       <link>https://lialzm.github.io/post/meltano%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%92%8C%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/</link>

@@ -137,107 +137,21 @@ if (!doNotTrack) {
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/postgre%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F%E5%9F%BA%E4%BA%8Edocker/">postgre主从模式基于docker</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/">数据仓库概念介绍</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2021-11-29 </span>
-      <div class="post-category">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
-          </div>
-        <span class="more-meta"> 约 444 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      具体操作的时候注意ip的替换以及max_connections参数的变更 环境 docker postgres 10.14 详细步骤 环境准备 1 2 3 4 5 6 docker network create --driver bridge --subnet=172.18.12.0/16 --gateway=172.18.12.1 mynet docker run --name pgsmaster -p 5432:5432 --network=mynet
-    </div>
-    <div class="read-more">
-      <a href="/post/postgre%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F%E5%9F%BA%E4%BA%8Edocker/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/docker-maven-plugin%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/">docker-maven-plugin使用介绍</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-11-12 </span>
+      <span class="post-time"> 0001-01-01 </span>
       
-        <span class="more-meta"> 约 515 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span class="more-meta"> 约 1420 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      介绍 使用maven命令将项目构建为docker镜像 优点 可以使用maven的变量 可以和maven指令结合提高部署效率 GitHub - spotify/docker-maven-plugin: INACTIVE: A maven plugin for Docker 配置 1 2
+      为什么需要数据仓库 如果直接从业务数据库取数据会有如下几个问题 结构复杂 数据杂乱（不同的数据库针对相同的业务可能会有不同的命名，处理方式） 理解困
     </div>
     <div class="read-more">
-      <a href="/post/docker-maven-plugin%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BB%8B%E7%BB%8D/">java线程池介绍</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-10-29 </span>
-      
-        <span class="more-meta"> 约 242 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      这是对以前线程池相关笔记的重新整理,基本上包含了线程池相关主要的知识点 为什么需要使用线程池 创建新的线程代价大 new Thread方式线程缺乏统一的
-    </div>
-    <div class="read-more">
-      <a href="/post/java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BB%8B%E7%BB%8D/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/">java线程的使用</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-10-29 </span>
-      
-        <span class="more-meta"> 约 3602 字 </span>
-        <span class="more-meta"> 预计阅读 8 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      线程的创建 java创建线程有两种方法 创建Thread的子类 1 2 3 4 5 6 7 public class MyThread extends Thread { public void run(){ System.out.println(&#34;MyThread running&#34;); } } ​MyThread myThread = new MyThread(); myTread.start(); 实现Runna
-    </div>
-    <div class="read-more">
-      <a href="/post/java%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BD%BF%E7%94%A8/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/nomad%E7%AE%A1%E7%90%86%E5%8F%AF%E5%8F%98%E9%95%9C%E5%83%8F/">nomad管理可变镜像</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-10-10 </span>
-      
-        <span class="more-meta"> 约 409 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      问题 以前一直使用的是docker-compose,现在切换到nomad,遇到的问题 原流程: build镜像后,使用docker kill 掉原有容器,并
-    </div>
-    <div class="read-more">
-      <a href="/post/nomad%E7%AE%A1%E7%90%86%E5%8F%AF%E5%8F%98%E9%95%9C%E5%83%8F/" class="read-more-link">阅读更多</a>
+      <a href="/post/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -245,14 +159,11 @@ if (!doNotTrack) {
     </section>
   
   <nav class="pagination">
-    <a class="prev" href="/page/6/">
+    <a class="prev" href="/page/10/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text">上一页</span>
       </a>
-    <a class="next" href="/page/8/">
-        <span class="next-text">下一页</span>
-        <i class="iconfont icon-right"></i>
-      </a>
+    
   </nav>
         </div>
         

@@ -137,6 +137,27 @@ if (!doNotTrack) {
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/spring%E5%BC%82%E5%B8%B8not_eligible_for_getting-processed_by_all_beanpostprocessors/">spring异常not eligible for getting processed by all BeanPostProcessors</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2022-12-26 </span>
+      
+        <span class="more-meta"> 约 271 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      起因 在使用AspectJ的时候发现注入不成功,查看控制台发现报了一连串warn not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 排查 这个log是在 org.springframework.context.support.PostProcessorRegistrationDelegate.BeanPostProcessorChecker#postProcessAfterInitialization 方法处提示的,
+    </div>
+    <div class="read-more">
+      <a href="/post/spring%E5%BC%82%E5%B8%B8not_eligible_for_getting-processed_by_all_beanpostprocessors/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/%E9%82%BB%E6%8E%A5%E8%A1%A8/">mysql实现邻接表</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2022-12-23 </span>
@@ -215,27 +236,6 @@ if (!doNotTrack) {
     </div>
     <div class="read-more">
       <a href="/post/dbt%E8%B7%91%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/sqlmap%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/">sqlmap实验笔记</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2022-10-25 </span>
-      
-        <span class="more-meta"> 约 2113 字 </span>
-        <span class="more-meta"> 预计阅读 5 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      靶场准备 1 docker run -dt --name sqli-labs -p 8090:8090 tavenli/sqli-labs 浏览器打开 http://127.0.0.1:8090/ sqlmap安装 教程 官网(https://sqlmap.org/)下载后并解压 基本使用例子 1 python sqlmap.py -u &#34;http://debiandev/sqlmap/mysql/get_int.php?id=1&#34; --batch
-    </div>
-    <div class="read-more">
-      <a href="/post/sqlmap%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

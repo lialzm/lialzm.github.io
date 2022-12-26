@@ -6,7 +6,16 @@
     <description>Recent content in Posts on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 23 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>spring异常not eligible for getting processed by all BeanPostProcessors</title>
+      <link>https://lialzm.github.io/post/spring%E5%BC%82%E5%B8%B8not_eligible_for_getting-processed_by_all_beanpostprocessors/</link>
+      <pubDate>Mon, 26 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/spring%E5%BC%82%E5%B8%B8not_eligible_for_getting-processed_by_all_beanpostprocessors/</guid>
+      <description>起因 在使用AspectJ的时候发现注入不成功,查看控制台发现报了一连串warn not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying) 排查 这个log是在 org.springframework.context.support.PostProcessorRegistrationDelegate.BeanPostProcessorChecker#postProcessAfterInitialization 方法处提示的,</description>
+    </item>
+    
     <item>
       <title>mysql实现邻接表</title>
       <link>https://lialzm.github.io/post/%E9%82%BB%E6%8E%A5%E8%A1%A8/</link>

@@ -6,7 +6,16 @@
     <description>Recent content on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 26 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>springboot请求阻塞问题</title>
+      <link>https://lialzm.github.io/post/springboot%E8%AF%B7%E6%B1%82%E9%98%BB%E5%A1%9E%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Tue, 26 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/springboot%E8%AF%B7%E6%B1%82%E9%98%BB%E5%A1%9E%E9%97%AE%E9%A2%98/</guid>
+      <description>结论: Content-Length 如果设置了，必须是正确的。如果不设置，浏览器或者其他客户端工具，会自动添加 如果header中存在Transfer-Encoding:</description>
+    </item>
+    
     <item>
       <title>spring异常not eligible for getting processed by all BeanPostProcessors</title>
       <link>https://lialzm.github.io/post/spring%E5%BC%82%E5%B8%B8not_eligible_for_getting-processed_by_all_beanpostprocessors/</link>

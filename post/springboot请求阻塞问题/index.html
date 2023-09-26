@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>dbt跑历史数据 - lialzm的博客</title>
+  <title>springboot请求阻塞问题 - lialzm的博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="lialzm" /><meta name="description" content="在dbt处理数据的时候,经常遇到需要将时间变为一个变量,以供不同时间跑数 方案: dbt var参数&#43;macros 定义变量 编辑 dbt_project.yml 1 2 vars: &amp;#34;start_date&amp;#34;: 20221030 定义函数 1 2" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="lialzm" /><meta name="description" content="结论: Content-Length 如果设置了，必须是正确的。如果不设置，浏览器或者其他客户端工具，会自动添加 如果header中存在Transfer-Encoding:" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
-<link rel="canonical" href="https://lialzm.github.io/post/dbt%E8%B7%91%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE/" />
+<link rel="canonical" href="https://lialzm.github.io/post/springboot%E8%AF%B7%E6%B1%82%E9%98%BB%E5%A1%9E%E9%97%AE%E9%A2%98/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,20 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="dbt跑历史数据" />
-<meta property="og:description" content="在dbt处理数据的时候,经常遇到需要将时间变为一个变量,以供不同时间跑数 方案: dbt var参数&#43;macros 定义变量 编辑 dbt_project.yml 1 2 vars: &#34;start_date&#34;: 20221030 定义函数 1 2" />
+<meta property="og:title" content="springboot请求阻塞问题" />
+<meta property="og:description" content="结论: Content-Length 如果设置了，必须是正确的。如果不设置，浏览器或者其他客户端工具，会自动添加 如果header中存在Transfer-Encoding:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lialzm.github.io/post/dbt%E8%B7%91%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-10-31T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-10-31T17:30:30+08:00" />
+<meta property="og:url" content="https://lialzm.github.io/post/springboot%E8%AF%B7%E6%B1%82%E9%98%BB%E5%A1%9E%E9%97%AE%E9%A2%98/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-09-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-26T18:28:55+08:00" />
 
-<meta itemprop="name" content="dbt跑历史数据">
-<meta itemprop="description" content="在dbt处理数据的时候,经常遇到需要将时间变为一个变量,以供不同时间跑数 方案: dbt var参数&#43;macros 定义变量 编辑 dbt_project.yml 1 2 vars: &#34;start_date&#34;: 20221030 定义函数 1 2"><meta itemprop="datePublished" content="2022-10-31T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-10-31T17:30:30+08:00" />
-<meta itemprop="wordCount" content="148">
-<meta itemprop="keywords" content="dbt," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="dbt跑历史数据"/>
-<meta name="twitter:description" content="在dbt处理数据的时候,经常遇到需要将时间变为一个变量,以供不同时间跑数 方案: dbt var参数&#43;macros 定义变量 编辑 dbt_project.yml 1 2 vars: &#34;start_date&#34;: 20221030 定义函数 1 2"/>
+<meta itemprop="name" content="springboot请求阻塞问题">
+<meta itemprop="description" content="结论: Content-Length 如果设置了，必须是正确的。如果不设置，浏览器或者其他客户端工具，会自动添加 如果header中存在Transfer-Encoding:"><meta itemprop="datePublished" content="2023-09-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-26T18:28:55+08:00" />
+<meta itemprop="wordCount" content="649">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="springboot请求阻塞问题"/>
+<meta name="twitter:description" content="结论: Content-Length 如果设置了，必须是正确的。如果不设置，浏览器或者其他客户端工具，会自动添加 如果header中存在Transfer-Encoding:"/>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZMLCV11NP"></script>
@@ -140,13 +140,13 @@ if (!doNotTrack) {
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">dbt跑历史数据</h1>
+      <h1 class="post-title">springboot请求阻塞问题</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2022-10-31 </span>
+        <span class="post-time"> 2023-09-26 </span>
         
-          <span class="more-meta"> 约 148 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 649 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
     </header>
@@ -158,90 +158,29 @@ if (!doNotTrack) {
   <ul>
     <li>
       <ul>
-        <li><a href="#定义变量">定义变量</a></li>
-        <li><a href="#定义函数">定义函数</a></li>
-        <li><a href="#定义macros">定义macros</a></li>
-        <li><a href="#在脚本中使用">在脚本中使用</a></li>
+        <li><a href="#参考文章">参考文章</a></li>
       </ul>
     </li>
   </ul>
 </nav>
   </div>
 </div>
-  <div class="post-outdated">
-    <div class="warn">
-      <p>【注意】最后更新于 <span class="timeago" datetime="2022-10-31T17:30:30" title="October 31, 2022">October 31, 2022</span>，文中内容可能已过时，请谨慎使用。</p>
-    </div>
-  </div>
     <div class="post-content">
-      <p>在dbt处理数据的时候,经常遇到需要将时间变为一个变量,以供不同时间跑数</p>
-<p>方案: dbt var参数+macros</p>
-<h2 id="定义变量">定义变量</h2>
-<p>编辑 dbt_project.yml</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">vars:
-  &#34;start_date&#34;: 20221030
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="定义函数">定义函数</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">CREATE OR REPLACE FUNCTION f_start_date(in p_date int)
-RETURNS  date
-AS $$
-DECLARE
-    BEGIN
-        if p_date=-1 then
-          return current_date;
-        else
-          return to_date(p_date::varchar,&#39;yyyyMMdd&#39;);
-        end if;
-    END;
-$$ LANGUAGE plpgsql;
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="定义macros">定义macros</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">{% macro start_date() %}
-{{target.schema}}.f_start_date({{var(&#34;start_date&#34;,-1)}})
-{% endmacro %}
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="在脚本中使用">在脚本中使用</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">  select {{start_date()}}
-</code></pre></td></tr></table>
-</div>
-</div><p>运行命令 <code>dbt run</code> 或者 <code>dbt run --vars '{&quot;start_date&quot;: 20210101}'</code></p>
+      <blockquote>
+<p>结论:</p>
+<p>Content-Length 如果设置了，必须是正确的。如果不设置，浏览器或者其他客户端工具，会自动添加</p>
+<p>如果header中存在Transfer-Encoding: chunked，Content-Length将被忽略。</p>
+<p>Transfer-Encoding：chunked主要应用在大数据量或动态数据传输上，主要用户服务端响应</p>
+</blockquote>
+<p>今天遇到一个请求一直阻塞,然后提示500,原来以为代码有什么问题,但是在 <code>DispatcherServlet</code> 打了断点,请求一直没有进入,后来发现是Content-Length的值过长导致tomcat层面一直在等待</p>
+<p>原理解析</p>
+<p>Content-Length头既可以用于客户端发起的请求（request），也可以用于服务器端返回的响应（response）</p>
+<p>用于request时，Content-Length表示request body的大小。request body可以简单理解为request header以外的数据，比如表单数据、上传的文件数据。</p>
+<p>用于response时，Content-Length表示response body的大小。response body可以简单理解为responset header以外的数据，比如html文本、下载的文件数据。</p>
+<p>如果Content-Length比实际长,则服务器会超时,如果比实际短则服务器会截断请求</p>
+<h2 id="参考文章">参考文章</h2>
+<p><a href="https://zhuanlan.zhihu.com/p/126759054">天天见之HTTP Header Content-Length 和 Transfer-Encoding，你真的了解吗？ - 知乎</a></p>
+<p><a href="https://blog.csdn.net/yy4545/article/details/107787463">content-length获取的大小与实际文件大小不一致的原因_contentlength和body大小不一致-CSDN博客</a></p>
 
     </div>
 
@@ -253,7 +192,7 @@ $$ LANGUAGE plpgsql;
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2022-10-31
+        2023-09-26
         
     </span>
   </p>
@@ -261,17 +200,11 @@ $$ LANGUAGE plpgsql;
   
 </div>
 <footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/dbt/">dbt</a>
-          </div>
+      
       <nav class="post-nav">
-        <a class="prev" href="/post/dbt%E5%85%A5%E9%97%A8/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">dbt入门</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/sqlmap%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/">
-            <span class="next-text nav-default">sqlmap实验笔记</span>
+        
+        <a class="next" href="/post/spring%E5%BC%82%E5%B8%B8not_eligible_for_getting-processed_by_all_beanpostprocessors/">
+            <span class="next-text nav-default">spring异常not eligible for getting processed by all BeanPostProcessors</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

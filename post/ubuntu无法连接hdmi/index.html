@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>lialzm的博客</title>
+  <title>ubuntu无法连接hdmi - lialzm的博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="lialzm" /><meta name="description" content="Hugo theme even example site." /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="lialzm" /><meta name="description" content="安装了几个第三方包重启系统后突然发现无法识别hdmi外接屏幕了 执行 sudo lshw -C video 显示如下信息,即没有分配显卡驱动 *-display UNCLAIMED description: VGA compatible controller 同时 nvidia-smi 显示如下信息 NVIDIA-SMI has" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.88.1 with theme even" />
 
 
-<link rel="canonical" href="https://lialzm.github.io/" />
-  <link href="https://lialzm.github.io/index.xml" rel="alternate" type="application/rss+xml" title="lialzm的博客" />
-  <link href="https://lialzm.github.io/index.xml" rel="feed" type="application/rss+xml" title="lialzm的博客" />
+<link rel="canonical" href="https://lialzm.github.io/post/ubuntu%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5hdmi/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,15 +39,20 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="lialzm的博客" />
-<meta property="og:description" content="Hugo theme even example site." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://lialzm.github.io/" />
+<meta property="og:title" content="ubuntu无法连接hdmi" />
+<meta property="og:description" content="安装了几个第三方包重启系统后突然发现无法识别hdmi外接屏幕了 执行 sudo lshw -C video 显示如下信息,即没有分配显卡驱动 *-display UNCLAIMED description: VGA compatible controller 同时 nvidia-smi 显示如下信息 NVIDIA-SMI has" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lialzm.github.io/post/ubuntu%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5hdmi/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-04-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-04-10T11:41:50+08:00" />
 
-<meta itemprop="name" content="lialzm的博客">
-<meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="lialzm的博客"/>
-<meta name="twitter:description" content="Hugo theme even example site."/>
+<meta itemprop="name" content="ubuntu无法连接hdmi">
+<meta itemprop="description" content="安装了几个第三方包重启系统后突然发现无法识别hdmi外接屏幕了 执行 sudo lshw -C video 显示如下信息,即没有分配显卡驱动 *-display UNCLAIMED description: VGA compatible controller 同时 nvidia-smi 显示如下信息 NVIDIA-SMI has"><meta itemprop="datePublished" content="2024-04-10T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2024-04-10T11:41:50+08:00" />
+<meta itemprop="wordCount" content="290">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ubuntu无法连接hdmi"/>
+<meta name="twitter:description" content="安装了几个第三方包重启系统后突然发现无法识别hdmi外接屏幕了 执行 sudo lshw -C video 显示如下信息,即没有分配显卡驱动 *-display UNCLAIMED description: VGA compatible controller 同时 nvidia-smi 显示如下信息 NVIDIA-SMI has"/>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZMLCV11NP"></script>
@@ -134,126 +137,92 @@ if (!doNotTrack) {
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/elasticsearch%E5%BB%BA%E6%A8%A1/">Elasticsearch建模</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-07-17 </span>
-      
-        <span class="more-meta"> 约 2857 字 </span>
-        <span class="more-meta"> 预计阅读 6 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      什么是数据建模 数据建模是一个用于定义和分析在组织的信息系统的范围内支持商业流程所需的数据要求的过程 数据类型 在索引的时候,如果字段第一次出现会
-    </div>
-    <div class="read-more">
-      <a href="/post/elasticsearch%E5%BB%BA%E6%A8%A1/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">ubuntu无法连接hdmi</h1>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/log4j%E9%85%8D%E7%BD%AE%E7%BB%8F%E9%AA%8C/">log4j配置经验</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-07-06 </span>
-      
-        <span class="more-meta"> 约 1074 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      log4j配置 根日志 log4j.rootLogger 格式 log4j.rootLogger = [ level ] , loggerName1 , loggerName2 第一个参数表示默认级别 日志级别从高到低分别为: FATAL,ERROR,WARN,INFO,DEBUG 一般线上使用INFO级别 log4j可以为不同的 Appender
-    </div>
-    <div class="read-more">
-      <a href="/post/log4j%E9%85%8D%E7%BD%AE%E7%BB%8F%E9%AA%8C/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+      <div class="post-meta">
+        <span class="post-time"> 2024-04-10 </span>
+        
+          <span class="more-meta"> 约 290 字 </span>
+          <span class="more-meta"> 预计阅读 1 分钟 </span>
+        
+      </div>
+    </header>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java%E5%A6%82%E4%BD%95%E6%8E%92%E6%9F%A5%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA/">java如何排查内存溢出</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-06-08 </span>
-      
-        <span class="more-meta"> 约 332 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      OOM前排查 使用jmap导出当前堆dump进行离线分析 测试代码 1 2 3 4 5 6 7 8 9 10 11 12 public class MyTest { private static List&lt;String&gt; list=new ArrayList&lt;&gt;(); public static void main(String[] args) throws InterruptedException { for (int i=0;i&lt;1000;i++){ list.add(&#34;111&#34;); } TimeUnit.SECONDS.sleep(60); } } 实时
-    </div>
-    <div class="read-more">
-      <a href="/post/java%E5%A6%82%E4%BD%95%E6%8E%92%E6%9F%A5%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA/" class="read-more-link">阅读更多</a>
-    </div>
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
   </div>
-</article>
+</div>
+    <div class="post-content">
+      <p>安装了几个第三方包重启系统后突然发现无法识别hdmi外接屏幕了</p>
+<p>执行 <code>sudo lshw -C video</code> 显示如下信息,即没有分配显卡驱动</p>
+<blockquote>
+<p>*-display UNCLAIMED
+description: VGA compatible controller</p>
+</blockquote>
+<p>同时 <code>nvidia-smi</code> 显示如下信息</p>
+<blockquote>
+<p>NVIDIA-SMI has failed because it couldn&rsquo;t communicate with the NVIDIA driver.
+Make sure that the latest NVIDIA driver is installed and running.</p>
+</blockquote>
+<p>可以确认是显卡没有配置好的问题</p>
+<p>回想起来,问题的应该是安装了新的包后需要执行 <code>perform mok managemnet</code> 相关步骤,当时忽略了导致显卡没有正常启动</p>
+<blockquote>
+<p>重启后出现蓝屏的perform mok managemnet 按照以下步骤进行：</p>
+<p>选择enroll mok（perform mok mangement界面）</p>
+<p>选择continue（enroll mok界面）</p>
+<p>选择yes（enroll the key界面）</p>
+<p>输入在安装时设定的密码</p>
+<p>选择Reboot（perform mok manageent界面）</p>
+</blockquote>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java%E5%B9%B6%E5%8F%91synchronized%E5%85%B3%E9%94%AE%E5%AD%97/">java并发(Synchronized关键字)</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-05-19 </span>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">lialzm</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2024-04-10
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
       
-        <span class="more-meta"> 约 1618 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      java中的同步块使用synchronized标记,所有同步在一个对象上的同步块在同时只能被一个线程进入并执行,可保证其内部的共享变量实现多
-    </div>
-    <div class="read-more">
-      <a href="/post/java%E5%B9%B6%E5%8F%91synchronized%E5%85%B3%E9%94%AE%E5%AD%97/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Java内存模型学习笔记</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-04-06 </span>
-      
-        <span class="more-meta"> 约 2879 字 </span>
-        <span class="more-meta"> 预计阅读 6 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      什么是JMM JMM(java内存模型)源于物理机器CPU架构的内存模型，最初用于解决MP(多处理器架构)系统中的缓存一致性问题 JMM可以分为
-    </div>
-    <div class="read-more">
-      <a href="/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    </section>
-  
-  <nav class="pagination">
-    <a class="prev" href="/page/9/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">上一页</span>
-      </a>
-    <a class="next" href="/page/11/">
-        <span class="next-text">下一页</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-  </nav>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/springboot%E8%AF%B7%E6%B1%82%E9%98%BB%E5%A1%9E%E9%97%AE%E9%A2%98/">
+            <span class="next-text nav-default">springboot请求阻塞问题</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="lialzm/lialzm.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
       </div>
     </main>

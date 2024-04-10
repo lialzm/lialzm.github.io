@@ -6,7 +6,16 @@
     <description>Recent content in Posts on lialzm的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 26 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://lialzm.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ubuntu无法连接hdmi</title>
+      <link>https://lialzm.github.io/post/ubuntu%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5hdmi/</link>
+      <pubDate>Wed, 10 Apr 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://lialzm.github.io/post/ubuntu%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5hdmi/</guid>
+      <description>安装了几个第三方包重启系统后突然发现无法识别hdmi外接屏幕了 执行 sudo lshw -C video 显示如下信息,即没有分配显卡驱动 *-display UNCLAIMED description: VGA compatible controller 同时 nvidia-smi 显示如下信息 NVIDIA-SMI has</description>
+    </item>
+    
     <item>
       <title>springboot请求阻塞问题</title>
       <link>https://lialzm.github.io/post/springboot%E8%AF%B7%E6%B1%82%E9%98%BB%E5%A1%9E%E9%97%AE%E9%A2%98/</link>

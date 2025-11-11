@@ -3,14 +3,35 @@
   
   <url>
     <loc>https://lialzm.github.io/</loc>
-    <lastmod>2024-04-10T11:41:50+08:00</lastmod>
+    <lastmod>2025-11-11T16:20:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://lialzm.github.io/post/</loc>
-    <lastmod>2024-04-10T11:41:50+08:00</lastmod>
+    <lastmod>2025-11-11T16:20:06+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/tags/</loc>
+    <lastmod>2025-11-11T16:20:06+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/tags/windows/</loc>
+    <lastmod>2025-11-11T16:20:06+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://lialzm.github.io/post/windows%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E8%93%9D%E5%B1%8F%E5%8D%A1%E5%9C%A8%E8%AF%B7%E7%A8%8D%E5%90%8E/</loc>
+    <lastmod>2025-11-11T16:20:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -38,13 +59,6 @@
   
   <url>
     <loc>https://lialzm.github.io/post/spring%E5%BC%82%E5%B8%B8not_eligible_for_getting-processed_by_all_beanpostprocessors/</loc>
-    <lastmod>2022-12-27T11:46:55+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://lialzm.github.io/tags/</loc>
     <lastmod>2022-12-27T11:46:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
